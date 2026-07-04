@@ -95,11 +95,11 @@ export function StartupProfile() {
                 return prevPosts.map((p) =>
                   p.id === record.id
                     ? {
-                        ...p,
-                        ...record,
-                        startups: record.startups ?? p.startups,
-                        mentorship_page: record.mentorship_page ?? p.mentorship_page,
-                      }
+                      ...p,
+                      ...record,
+                      startups: record.startups ?? p.startups,
+                      mentorship_page: record.mentorship_page ?? p.mentorship_page,
+                    }
                     : p
                 );
               case 'DELETE':
@@ -285,11 +285,11 @@ export function StartupProfile() {
 
       <main className="max-w-6xl mx-auto pt-16 pb-20">
         {/* Banner Image */}
-        <div className="relative w-full h-48 md:h-64 bg-linear-to-br from-blue-500 via-indigo-500 to-purple-600">
+        <div className="relative w-full h-48 md:h-64 bg-linear-to-br from-gray-500 via-gray-700 to-gray-900">
           <img
             src={getImageUrl(startup?.cover_image) || 'https://user-images.githubusercontent.com/237508/90246627-ecbda400-de2c-11ea-8bfb-b4307bfb975d.png'}
             alt={`${startup?.name} banner`}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover opacity-80"
           />
         </div>
 
