@@ -118,7 +118,7 @@ export function EditStartup() {
     }
 
     if (formData.display_image) {
-      const updatedDisplayImage = await imageHandlerService.uploadImage(
+      const updatedDisplayImage = await imageHandlerService.cloudinaryImageUploader(
         formData.display_image,
         FOLDER.STARTUP_PROFILE,
         currentUser?.id || '',
@@ -135,7 +135,7 @@ export function EditStartup() {
     }
 
     if (formData.cover_image) {
-      const updatedCoverImage = await imageHandlerService.uploadImage(
+      const updatedCoverImage = await imageHandlerService.cloudinaryImageUploader(
         formData.cover_image,
         FOLDER.STARTUP_BANNER,
         currentUser?.id || '',

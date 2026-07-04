@@ -82,7 +82,7 @@ export default function EditMentorship() {
     }
 
     if (formData.imageUrl) {
-      const updatedDisplayImage = await imageHandlerService.uploadImage(
+      const updatedDisplayImage = await imageHandlerService.cloudinaryImageUploader(
         formData.imageUrl,
         FOLDER.MENTORSHIP_BANNER,
         currentUser?.id || '',

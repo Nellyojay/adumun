@@ -1,6 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useState } from "react";
 import supabase from "../supabaseClient";
 import { useUserData } from "./userDataContext";
+import { cloudinaryDelete, extractPublicIdFromUrl, getCloudinaryConfig } from "../constants/cloudinaryFileAPI";
 
 
 export type Post = {
@@ -102,6 +103,7 @@ export const StartupProvider = ({ children }: { children: React.ReactNode }) => 
     }
   };
 
+  // DELETE POST FUNCTION
   const handleDeletePost = async (postId: number) => {
     const confirmDelete = window.confirm("Are you sure you want to delete this post?");
     if (!confirmDelete) return;
@@ -112,12 +114,17 @@ export const StartupProvider = ({ children }: { children: React.ReactNode }) => 
       .eq('id', postId)
       .single();
 
-    if (data) {
-      const { error } = await supabase.storage
-        .from("images")
-        .remove([data.image_url]);
+    if (data && data.image_url) {
+      const publicId = extractPublicIdFromUrl(data.image_url);
+      if (publicId) {
+        const config = getCloudinaryConfig();
+        const deleteResult = await cloudinaryDelete(publicId, config.API_KEY, config.API_SECRET);
 
-      if (error) return;
+        if (!deleteResult) {
+          alert("Failed to delete image from cloud storage.");
+          return;
+        }
+      }
     }
 
     const { error } = await supabase
