@@ -1,5 +1,6 @@
 import imageCompression from "browser-image-compression";
 import supabase from "../supabaseClient";
+import { cloudinaryUpload, cloudinaryDelete, extractPublicIdFromUrl, getCloudinaryConfig } from "./cloudinaryFileAPI";
 
 export const FOLDER = {
   USER_PROFILE: "user_profile_image",
@@ -117,6 +118,7 @@ export const imageHandlerService = {
             .remove([oldImage]);
 
           if (error) {
+            console.log("Error deleting old image:", error);
             return null;
           }
           console.log("Deleted old image successfully")
@@ -178,6 +180,9 @@ export const imageHandlerService = {
 
       /* UPLOAD IMAGE */
 
+      console.log("Uploading image:", filePath);
+      console.log("Compressed image:", compressedUploadImage);
+
       const { error: uploadError } = await supabase.storage
         .from("images")
         .upload(filePath, compressedUploadImage, {
@@ -186,6 +191,7 @@ export const imageHandlerService = {
         });
 
       if (uploadError) {
+        console.log("Error uploading image:", uploadError);
         return null;
       }
 
@@ -214,6 +220,7 @@ export const imageHandlerService = {
       const { error: updateError } = await query;
 
       if (updateError) {
+        console.log("Error updating database:", updateError);
         return null;
       }
 
@@ -223,15 +230,137 @@ export const imageHandlerService = {
       return null;
     }
   },
+  cloudinaryImageUploader: async (
+    file: File | null,
+    folder: FolderType,
+    userId: string,
+    startupId?: string,
+    postId?: string,
+    mentorshipId?: string
+  ): Promise<string | null> => {
+    if (!file) return null;
+
+    let folderPath = "";
+    const { table, column } = TABLE_MAP[folder];
+
+    const timestamp = Date.now();
+
+    switch (folder) {
+      case FOLDER.USER_PROFILE:
+        folderPath = `${folder}/${userId}/profile_${timestamp}.jpg`;
+        break;
+      case FOLDER.STARTUP_PROFILE:
+        folderPath = `${folder}/${startupId}/profile_${timestamp}.jpg`;
+        break;
+      case FOLDER.STARTUP_BANNER:
+        folderPath = `${folder}/${startupId}/banner_${timestamp}.jpg`;
+        break;
+      case FOLDER.POST:
+        folderPath = `${folder}/${startupId ? startupId : mentorshipId}/${postId}/image_${timestamp}.jpg`;
+        break;
+      case FOLDER.MENTORSHIP_BANNER:
+        folderPath = `${folder}/${mentorshipId}/banner_${timestamp}.jpg`;
+        break;
+    }
+
+    try {
+      // Determine max file size based on folder type
+      let maxFileSize = 1;
+      if (folder === FOLDER.USER_PROFILE || folder === FOLDER.STARTUP_PROFILE) {
+        maxFileSize = 0.5;
+      } else if (folder === FOLDER.STARTUP_BANNER || folder === FOLDER.MENTORSHIP_BANNER) {
+        maxFileSize = 1;
+      } else if (folder === FOLDER.POST) {
+        maxFileSize = 2;
+      }
+
+      // DELETE OLD IMAGE ONLY FOR PROFILE OR BANNER TYPES
+      if (
+        folder === FOLDER.USER_PROFILE ||
+        folder === FOLDER.STARTUP_PROFILE ||
+        folder === FOLDER.STARTUP_BANNER ||
+        folder === FOLDER.MENTORSHIP_BANNER
+      ) {
+        const { data: existing, error: existingError } = await supabase
+          .from(table)
+          .select(column)
+          .eq('id', folder === FOLDER.USER_PROFILE ? userId : folder === FOLDER.STARTUP_PROFILE || folder === FOLDER.STARTUP_BANNER ? startupId : mentorshipId)
+          .single();
+
+        if (!existingError && existing) {
+          const oldImageUrl = existing[column as any] as string | null;
+
+          if (oldImageUrl) {
+            const publicId = extractPublicIdFromUrl(oldImageUrl);
+            if (publicId) {
+              const config = getCloudinaryConfig();
+              await cloudinaryDelete(publicId, config.API_KEY, config.API_SECRET);
+              console.log("Deleted old image:", publicId);
+            }
+          }
+        }
+      }
+
+      // Compress image before upload
+      const compressedImage = await compressImage(file, maxFileSize);
+
+      // Upload to Cloudinary using reusable API with folder option
+      const uploadResponse = await cloudinaryUpload(compressedImage, {
+        folder: folderPath
+      });
+
+      if (!uploadResponse) {
+        console.log("Error uploading to Cloudinary");
+        return null;
+      }
+      const imageUrl = uploadResponse.secure_url;
+      console.log("Uploaded cloudinary image URL:", imageUrl);
+
+      /* UPDATE DATABASE */
+
+      let query = supabase
+        .from(table)
+        .update({ [column]: imageUrl });
+
+      if (folder === FOLDER.USER_PROFILE) {
+        query = query.eq("id", userId);
+      }
+
+      if (folder === FOLDER.STARTUP_PROFILE || folder === FOLDER.STARTUP_BANNER) {
+        query = query.eq("id", startupId).eq("user_id", userId);
+      }
+
+      if (folder === FOLDER.POST) {
+        query = query.eq("id", postId).eq("user_id", userId);
+      }
+
+      if (folder === FOLDER.MENTORSHIP_BANNER) {
+        query = query.eq("id", mentorshipId).eq("user_id", userId);
+      }
+
+      const { error: updateError } = await query;
+
+      if (updateError) {
+        console.log("Error updating database:", updateError);
+        return null;
+      }
+      console.log("Database updated successfully with new image URL:", imageUrl);
+
+      return imageUrl;
+    } catch (err) {
+      console.log("Error uploading image:", err);
+      return null;
+    }
+  },
 };
 
 export const getImageUrl = (filePath: string | undefined | null): string | null => {
   if (!filePath) return null;
 
-  const { data } = supabase
-    .storage
-    .from("images")
-    .getPublicUrl(filePath);
+  // const { data } = supabase
+  //   .storage
+  //   .from("images")
+  //   .getPublicUrl(filePath);
 
-  return data.publicUrl || null;
+  return filePath || null;
 };

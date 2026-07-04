@@ -82,11 +82,11 @@ export function EditProfile() {
     }
 
     if (profileImage) {
-      const insertProfileImage = await imageHandlerService.uploadImage(
+      const insertProfileImage = await imageHandlerService.cloudinaryImageUploader(
         profileImage,
         FOLDER.USER_PROFILE,
         profileId
-      )
+      );
 
       if (!insertProfileImage) {
         setError('Profile updated but failed to upload image. Please try again.');

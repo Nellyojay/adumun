@@ -92,7 +92,7 @@ export function AddPost() {
     }
 
     if (imageFile) {
-      const insertImage = await imageHandlerService.uploadImage(
+      const insertImage = await imageHandlerService.cloudinaryImageUploader(
         imageFile,
         FOLDER.POST,
         currentUser?.id || '',
