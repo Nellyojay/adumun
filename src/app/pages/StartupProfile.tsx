@@ -287,7 +287,7 @@ export function StartupProfile() {
         {/* Banner Image */}
         <div className="relative w-full h-48 md:h-64 bg-linear-to-br from-gray-500 via-gray-700 to-gray-900">
           <img
-            src={startup?.cover_image || 'https://user-images.githubusercontent.com/237508/90246627-ecbda400-de2c-11ea-8bfb-b4307bfb975d.png'}
+            src={getImageUrl(startup?.cover_image) || 'https://user-images.githubusercontent.com/237508/90246627-ecbda400-de2c-11ea-8bfb-b4307bfb975d.png'}
             alt={`${startup?.name} banner`}
             className="w-full h-full object-cover opacity-80"
           />
@@ -300,7 +300,7 @@ export function StartupProfile() {
             <div className="w-28 h-28 rounded-full shadow-xl -mt-14 bg-gray-200 flex items-center justify-center border border-gray-300">
               {startup?.display_image ? (
                 <img
-                  src={startup.display_image || 'https://user-images.githubusercontent.com/237508/90246627-ecbda400-de2c-11ea-8bfb-b4307bfb975d.png'}
+                  src={getImageUrl(startup?.display_image) || 'https://user-images.githubusercontent.com/237508/90246627-ecbda400-de2c-11ea-8bfb-b4307bfb975d.png'}
                   alt=""
                   className="object-cover w-28 h-28 rounded-full bg-linear-to-br from-blue-500 to-indigo-600 shrink-0 flex items-center justify-center shadow-xl border-4 border-white"
                 />

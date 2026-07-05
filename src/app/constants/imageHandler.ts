@@ -357,5 +357,11 @@ export const imageHandlerService = {
 export const getImageUrl = (filePath: string | undefined | null): string | null => {
   if (!filePath) return null;
 
+  if (filePath.includes("https://iptqeqjsqmwkitknstuc.supabase.co/storage/v1/object/public/images/")) {
+    filePath = filePath.replace("https://iptqeqjsqmwkitknstuc.supabase.co/storage/v1/object/public/images/", "");
+
+    return filePath || null;
+  }
+
   return filePath || null;
 };
