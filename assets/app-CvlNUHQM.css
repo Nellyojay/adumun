@@ -1,0 +1,1 @@
+.gallery-grid{grid-template-columns:repeat(auto-fit,minmax(240px,1fr));grid-auto-rows:max-content;align-items:start;gap:1rem;display:grid}.gallery-grid>*{align-self:start;height:fit-content}.gallery-card{-moz-column-break-inside:avoid;break-inside:avoid;align-self:start;width:100%;height:fit-content}@media (width<=640px){.gallery-grid{grid-template-columns:1fr}}
