@@ -182,7 +182,7 @@ export function PostCard({ post, deletePost }: PostCardProps) {
   }, [showCommentModal, startupId]);
 
   return (
-    <div className="bg-white border border-gray-300 rounded-sm shadow-sm overflow-hidden">
+    <div className="gallery-card bg-white border border-gray-300 rounded-sm shadow-sm overflow-hidden">
 
       {/* Post Image */}
       {post.image_url && (
@@ -196,7 +196,7 @@ export function PostCard({ post, deletePost }: PostCardProps) {
       {/* Post Content */}
       <div className="p-4">
         {/* Action Buttons */}
-        <div className={`flex items-center justify-between ${post.image_url && '-mt-10'}`}>
+        <div className={`flex items-center justify-between ${post.image_url && '-mt-9'}`}>
           <Link
             to={`${post.startups ? `/startup/${post.startups?.id}` : `/mentorship-page/${post.mentorship_page?.id}`}`}
             className={`${!post.image_url && 'flex justify-between items-center gap-2'}`}
@@ -205,7 +205,7 @@ export function PostCard({ post, deletePost }: PostCardProps) {
               <img
                 src={getImageUrl(post.startups ? post.startups.display_image : post.mentorship_page?.image_url) || undefined}
                 alt=""
-                className='w-10 h-10 rounded-full'
+                className='w-10 h-10 rounded-full shadow-sm object-cover'
               />
             ) : (
               <div className='bg-blue-600 w-10 h-10 rounded-full flex justify-center items-center'>

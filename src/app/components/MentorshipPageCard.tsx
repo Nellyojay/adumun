@@ -5,7 +5,7 @@ import { getImageUrl } from "../constants/imageHandler";
 export default function MentorshipPageCard(mentorship: MentorshipData) {
 
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow group">
+    <div className="gallery-card bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow group">
 
       {/* Mentor Image */}
       <div className="aspect-video bg-linear-to-br from-blue-500 to-blue-600 relative overflow-hidden">

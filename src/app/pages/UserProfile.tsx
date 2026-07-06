@@ -323,7 +323,7 @@ export function UserProfile() {
           )}
           {tab === 1 && userData.user_roles.includes(MENTOR_ROLE) && (
             (mentorshipData ?? []).length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+              <div className="gallery-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                 {mentorshipData?.map((page) => (
                   <Link key={page.id} to={`/mentorship-page/${page.id}`}>
                     <MentorshipPageCard {...page} />
@@ -346,7 +346,7 @@ export function UserProfile() {
           )}
           {tab === 2 && (
             (favStartups ?? []).length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="gallery-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {favStartups?.map((startup) => (
                   <StartupCard key={startup.id} startup={startup} userId={startup.user_id} />
                 ))}
@@ -359,7 +359,7 @@ export function UserProfile() {
           )}
           {tab === 3 && (
             (savPosts ?? []).length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="gallery-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {savPosts.map((post) => (
                   <PostCard
                     key={post.id}

@@ -23,7 +23,7 @@ interface StartupCardProps {
 export function StartupCard({ startup, userId }: StartupCardProps) {
   const { setSelectedProfile } = useUserData();
   return (
-    <div className="bg-white rounded-lg shadow-sm overflow-hidden md:hover:shadow-xl transition-all hover:-translate-y-1 duration-300">
+    <div className="gallery-card bg-white rounded-lg shadow-sm overflow-hidden md:hover:shadow-xl transition-all hover:-translate-y-1 duration-300">
       {/* Startup Image */}
       <Link
         to={`/startup/${startup.id}`}

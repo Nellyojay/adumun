@@ -131,7 +131,7 @@ function PostFeed() {
 
         <div className="col-span-12 md:col-span-5">
           {!loadingPosts && displayedPosts.length > 0 ? (
-            <div className="grid grid-cols-1 gap-1">
+            <div className="gallery-grid grid grid-cols-1 gap-1">
               {displayedPosts.map((post) => (
                 <PostCard
                   key={post.id}

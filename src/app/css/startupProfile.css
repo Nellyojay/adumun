@@ -1,0 +1,25 @@
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  align-items: start;
+  grid-auto-rows: max-content;
+}
+
+.gallery-grid>* {
+  align-self: start;
+  height: fit-content;
+}
+
+.gallery-card {
+  width: 100%;
+  height: fit-content;
+  align-self: start;
+  break-inside: avoid;
+}
+
+@media (max-width: 640px) {
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+}
