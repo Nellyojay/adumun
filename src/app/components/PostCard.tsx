@@ -31,6 +31,7 @@ export function PostCard({ post, deletePost }: PostCardProps) {
   const [showCommentModal, setShowCommentModal] = useState(false);
   const [comments, setComments] = useState<Comment[]>([]);
   const [loadingComments, setLoadingComments] = useState(false);
+  const [viewportHeight, setViewportHeight] = useState(() => typeof window !== 'undefined' ? window.innerHeight : 0);
 
   const startupId = post.startups?.id;
   const canComment = Boolean(startupId);
@@ -46,6 +47,15 @@ export function PostCard({ post, deletePost }: PostCardProps) {
       document.body.style.overflow = '';
     };
   }, [showCommentModal]);
+
+  useEffect(() => {
+    const updateViewportHeight = () => setViewportHeight(window.innerHeight);
+
+    updateViewportHeight();
+    window.addEventListener('resize', updateViewportHeight);
+
+    return () => window.removeEventListener('resize', updateViewportHeight);
+  }, []);
 
   const postOwner = Boolean(currentUser?.id === post.user_id && user?.id == currentUser?.auth_id)
 
@@ -81,7 +91,10 @@ export function PostCard({ post, deletePost }: PostCardProps) {
   }, [session, currentUser, post.id]);
 
   const handleLike = async () => {
-    if (!session) return;
+    if (!session) {
+      showPopup('Login to like a post.', 'info');
+      return;
+    }
     setSavingLike(true);
 
     const nextLiked = !liked;
@@ -121,7 +134,10 @@ export function PostCard({ post, deletePost }: PostCardProps) {
   };
 
   const handleSave = async () => {
-    if (!session) return;
+    if (!session) {
+      showPopup('Login to save a post.', 'info');
+      return;
+    }
     setSavingSave(true);
 
     const nextSaved = !saved;
@@ -189,7 +205,8 @@ export function PostCard({ post, deletePost }: PostCardProps) {
         <img
           src={getImageUrl(post.image_url) || '/default-post-image.jpg'}
           alt="Post"
-          className="w-full h-auto object-cover"
+          className="w-full object-contain bg-gray-100"
+          style={{ maxHeight: `${Math.min(viewportHeight * 0.8, 720)}px` }}
         />
       )}
 
@@ -273,7 +290,7 @@ export function PostCard({ post, deletePost }: PostCardProps) {
               <button
                 title='Comment'
                 onClick={() => setShowCommentModal(true)}
-                disabled={!session || !canComment}
+                disabled={!canComment}
                 className={`flex items-center space-x-1 transition-colors ${canComment ? 'text-gray-500' : 'text-gray-300 cursor-not-allowed'}`}
               >
                 <MessageCircle className="w-5 h-5" />
@@ -282,7 +299,7 @@ export function PostCard({ post, deletePost }: PostCardProps) {
             <button
               title='Like'
               onClick={handleLike}
-              disabled={!session || savingLike}
+              disabled={savingLike}
               className={`flex items-center space-x-1 transition-colors ${liked ? 'text-red-500' : 'text-gray-700 hover:text-red-500'}`}
             >
               <Heart
@@ -293,7 +310,7 @@ export function PostCard({ post, deletePost }: PostCardProps) {
             <button
               title='Save'
               onClick={handleSave}
-              disabled={!session || savingSave}
+              disabled={savingSave}
               className={`flex items-center space-x-1 transition-colors ${saved ? 'text-blue-500' : 'text-gray-700 hover:text-blue-500'}`}
             >
               <Bookmark className={`w-5 h-5 ${saved ? 'fill-blue-500 text-blue-500' : 'text-gray-500'}`} />
