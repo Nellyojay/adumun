@@ -20,6 +20,35 @@ export function Signup() {
     agreeToTerms: false
   });
 
+  async function emailCheck(email: string) {
+    if (!email) return false;
+    setLoading(true);
+
+    const normalizedEmail = email.trim().toLowerCase();
+
+    const { error } = await supabase.auth.signInWithOtp({
+      email: normalizedEmail,
+      options: {
+        shouldCreateUser: false,
+        emailRedirectTo: 'https://nellyojay.github.io/adumun/'
+      }
+    });
+
+    if (!error) {
+      setLoading(false);
+      return true;
+    }
+
+    const message = error.message?.toLowerCase() || '';
+    if (message.includes('user not found') || message.includes('no user found')) {
+      setLoading(false);
+      return false;
+    }
+
+    setLoading(false);
+    return true;
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -30,6 +59,13 @@ export function Signup() {
     }
     if (!formData.agreeToTerms) {
       alert('Please agree to the terms and conditions');
+      setLoading(false);
+      return;
+    }
+
+    const emailExists = await emailCheck(formData.email);
+    if (emailExists) {
+      alert('An account with this email already exists. Please sign in instead.');
       setLoading(false);
       return;
     }
@@ -235,7 +271,7 @@ export function Signup() {
                 className={`w-full bg-linear-to-r from-blue-600 to-indigo-600 text-white py-3 rounded-xl font-medium hover:from-blue-700 hover:to-indigo-700 transition-all shadow-md hover:shadow-lg ${loading ? 'opacity-50 cursor-not-allowed' : ''
                   }`}
               >
-                Create Account
+                {loading ? 'Creating...' : 'Create Account'}
               </button>
             </form>
 

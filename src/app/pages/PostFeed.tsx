@@ -6,7 +6,6 @@ import Loader from "../constants/loader";
 import { BUSINESS_PERSONNEL_ROLE, MENTOR_ROLE, useUserData } from "../contexts/userDataContext";
 import { Link } from "react-router-dom";
 import { getImageUrl } from "../constants/imageHandler";
-import { Bookmark } from "lucide-react";
 import { useAuth } from "../contexts/authContext";
 import { useMentorshipData } from "../contexts/mentorshipContext";
 
