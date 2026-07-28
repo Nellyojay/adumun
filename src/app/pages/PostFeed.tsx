@@ -60,7 +60,7 @@ function PostFeed() {
 
       <div className="max-w-6xl mx-auto pt-6 pb-20 grid grid-cols-12 gap-4">
 
-        <div className="sticky top-18 h-fit hidden md:block col-span-12 md:col-span-3 space-y-2">
+        <div className="sticky top-18 h-fit hidden sm:block col-span-12 sm:col-span-3 space-y-2">
 
           <div className="bg-white rounded-md shadow-sm p-4">
             {session ? (
@@ -129,7 +129,7 @@ function PostFeed() {
 
         </div>
 
-        <div className="col-span-12 md:col-span-5">
+        <div className="col-span-12 sm:col-span-5">
           {!loadingPosts && displayedPosts.length > 0 ? (
             <div className="gallery-grid grid grid-cols-1 gap-1">
               {displayedPosts.map((post) => (
@@ -152,7 +152,7 @@ function PostFeed() {
           )}
         </div>
 
-        <div className="sticky top-18 h-fit hidden md:block col-span-12 md:col-span-4 space-y-2">
+        <div className="sticky top-18 h-fit hidden sm:block col-span-12 sm:col-span-4 space-y-2">
 
           <div className="bg-white rounded-md shadow-sm p-4">
             <p className="font-semibold">Trending Businesses</p>
