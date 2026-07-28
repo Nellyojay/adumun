@@ -8,8 +8,8 @@ export default function MentorshipPageCard(mentorship: MentorshipData) {
     <div className="gallery-card bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow group">
 
       {/* Mentor Image */}
-      <div className="aspect-video bg-linear-to-br from-blue-500 to-blue-600 relative overflow-hidden">
-        <div className="absolute inset-0 flex items-center justify-center">
+      <div className="bg-linear-to-br from-blue-500 to-blue-600 overflow-hidden">
+        <div className="flex items-center justify-center">
           {mentorship.image_url ? (
             <img
               src={getImageUrl(mentorship.image_url) || undefined}
