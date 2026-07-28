@@ -31,7 +31,22 @@ export function PostCard({ post, deletePost }: PostCardProps) {
   const [showCommentModal, setShowCommentModal] = useState(false);
   const [comments, setComments] = useState<Comment[]>([]);
   const [loadingComments, setLoadingComments] = useState(false);
-  const [viewportHeight, setViewportHeight] = useState(() => typeof window !== 'undefined' ? window.innerHeight : 0);
+  const viewportHeight = useState(() => {
+    if (typeof window === 'undefined') return 0;
+
+    const storedHeight = window.localStorage.getItem('postcard-viewport-height');
+    if (storedHeight) {
+      const parsedHeight = Number(storedHeight);
+      if (!Number.isNaN(parsedHeight) && parsedHeight > 0) {
+        return parsedHeight;
+      }
+    }
+
+    const initialHeight = window.innerHeight;
+    window.localStorage.setItem('postcard-viewport-height', String(initialHeight));
+    return initialHeight;
+  })[0];
+  const maxImageHeight = Math.min(viewportHeight * 0.8, 720);
 
   const startupId = post.startups?.id;
   const canComment = Boolean(startupId);
@@ -47,15 +62,6 @@ export function PostCard({ post, deletePost }: PostCardProps) {
       document.body.style.overflow = '';
     };
   }, [showCommentModal]);
-
-  useEffect(() => {
-    const updateViewportHeight = () => setViewportHeight(window.innerHeight);
-
-    updateViewportHeight();
-    window.addEventListener('resize', updateViewportHeight);
-
-    return () => window.removeEventListener('resize', updateViewportHeight);
-  }, []);
 
   const postOwner = Boolean(currentUser?.id === post.user_id && user?.id == currentUser?.auth_id)
 
@@ -206,7 +212,7 @@ export function PostCard({ post, deletePost }: PostCardProps) {
           src={getImageUrl(post.image_url) || '/default-post-image.jpg'}
           alt="Post"
           className="w-full object-contain bg-gray-100"
-          style={{ maxHeight: `${Math.min(viewportHeight * 0.8, 720)}px` }}
+          style={{ maxHeight: `${maxImageHeight}px` }}
         />
       )}
 
