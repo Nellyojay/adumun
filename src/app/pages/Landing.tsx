@@ -18,7 +18,7 @@ export function Landing() {
       .single();
 
     if (error) {
-      console.error('Error fetching web name:', error);
+      return;
     } else {
       setWebName(data.web_name);
     }

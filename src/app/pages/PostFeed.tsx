@@ -92,7 +92,7 @@ function PostFeed() {
 
           {session && (currentUser?.user_roles.includes(BUSINESS_PERSONNEL_ROLE) || currentUser?.user_roles.includes(MENTOR_ROLE)) && (
             <div className="bg-white rounded-md shadow-sm p-4 space-y-2">
-              <p className="font-semibold">My Pages ({userStartups?.length || userMentorshipPages?.length})</p>
+              <p className="font-semibold">My Businesses ({userStartups?.length})</p>
 
               {(userStartups?.length ?? 0) > 0 ? (
                 <>
@@ -107,6 +107,8 @@ function PostFeed() {
                 </>
               ) : null}
 
+              <p className="font-semibold">My Mentorships ({userMentorshipPages?.length})</p>
+
               {(userMentorshipPages?.length ?? 0) > 0 ? (
                 <>
                   {userMentorshipPages?.map(m => (
@@ -120,10 +122,6 @@ function PostFeed() {
                 </>
               ) : null}
 
-              <div className="flex gap-2">
-                <Bookmark className="fill-black" size={18} />
-                <p className="font-semibold text-xs">Saved</p>
-              </div>
             </div>
           )}
 
