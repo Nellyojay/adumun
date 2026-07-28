@@ -446,7 +446,7 @@ export function StartupProfile() {
                 onClick={() => setShowMore(!showMore)}
                 className="w-full mt-4 flex items-center justify-center space-x-2 py-3 text-blue-600 hover:bg-blue-50 rounded-xl transition-all font-medium"
               >
-                <span>{showMore ? 'View Less' : 'View More About Startup'}</span>
+                <span>{showMore ? 'Close' : `View More About ${startup?.name}`}</span>
                 {showMore ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
               </button>
 

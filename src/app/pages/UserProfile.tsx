@@ -195,14 +195,14 @@ export function UserProfile() {
                 )}
               </div>
 
-              <div className="flex items-center justify-center md:block text-gray-500 mt-2">
+              {isOwner && (<div className="flex items-center justify-center md:block text-gray-500 mt-2">
                 <Link to={'/following'} className="text-blue-600 hover:text-blue-400">
                   Businesses Following <span className='font-semibold text-gray-600'>{userData.following}</span>
                 </Link>
-              </div>
+              </div>)}
             </div>
 
-            {isOwner ? (
+            {isOwner && (
               <div className="flex flex-col gap-2">
                 <Link
                   to="/settings"
@@ -210,7 +210,7 @@ export function UserProfile() {
                   Settings
                 </Link>
               </div>
-            ) : null}
+            )}
           </div>
 
           {isOwner && (
@@ -264,7 +264,7 @@ export function UserProfile() {
                 >Pages</button>
               )}
 
-              <div className='flex items-center justify-center gap-1 md:hover:text-gray-800'>
+              {isOwner && (<div className='flex items-center justify-center gap-1 md:hover:text-gray-800'>
                 <button
                   title='favorite businesses'
                   onClick={() => setTab(2)}
@@ -272,17 +272,18 @@ export function UserProfile() {
                 >
                   <Star className={`fill-gray-500 md:hover:fill-gray-700 ${tab === 2 && 'fill-gray-800'}`} size={18} color='' />
                 </button>
-              </div>
+              </div>)}
 
-              <div className='flex items-center gap-1 md:hover:text-gray-800'>
-                <button
-                  title='saved posts'
-                  onClick={() => setTab(3)}
-                  className={`font-semibold cursor-pointer transition-all duration-200 ${tab === 3 && 'text-gray-800 border-b-2'}`}
-                >
-                  <Bookmark className={`fill-gray-500 md:hover:fill-gray-700 ${tab === 3 && 'fill-gray-800'}`} size={18} color='' />
-                </button>
-              </div>
+              {isOwner && (
+                <div className='flex items-center gap-1 md:hover:text-gray-800'>
+                  <button
+                    title='saved posts'
+                    onClick={() => setTab(3)}
+                    className={`font-semibold cursor-pointer transition-all duration-200 ${tab === 3 && 'text-gray-800 border-b-2'}`}
+                  >
+                    <Bookmark className={`fill-gray-500 md:hover:fill-gray-700 ${tab === 3 && 'fill-gray-800'}`} size={18} color='' />
+                  </button>
+                </div>)}
             </div>
 
             <div ref={actionsRef} className='relative'>
@@ -344,7 +345,7 @@ export function UserProfile() {
               </div>
             )
           )}
-          {tab === 2 && (
+          {(tab === 2) && (
             (favStartups ?? []).length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {favStartups?.map((startup) => (
