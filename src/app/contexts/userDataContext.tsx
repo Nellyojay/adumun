@@ -13,6 +13,7 @@ export type userData = {
   full_name: string;
   created_at: string;
   user_name: string;
+  user_name_updated_at?: string | null;
   bio: string;
   following: number;
   profile_image: string;

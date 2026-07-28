@@ -18,6 +18,10 @@ export function EditProfile() {
   const [profileImage, setProfileImage] = useState<File | null>(null);
   const [fullName, setFullName] = useState(currentUser?.full_name || '');
   const [userName, setUserName] = useState(currentUser?.user_name || '');
+  const disbaleUsernameChange = Boolean(
+    currentUser?.user_name_updated_at &&
+    new Date(currentUser.user_name_updated_at).getTime() + 90 * 24 * 60 * 60 * 1000 > Date.now()
+  );
   const [bio, setBio] = useState(currentUser?.bio || '');
   const [roles, setRoles] = useState<string[]>(currentUser?.user_roles || []);
   const [loading, setLoading] = useState(false);
@@ -44,12 +48,26 @@ export function EditProfile() {
     setLoading(true);
     setError(null);
 
+    const existingUserName = currentUser?.user_name?.trim() || '';
+    const newUserName = userName?.trim() || '';
+
+    const usernameChanged = Boolean(
+      newUserName &&
+      newUserName !== existingUserName
+    );
+
+    const isOlderThan90Days = (timestamp?: string | null) => {
+      if (!timestamp) return false;
+      const changedAt = new Date(timestamp).getTime();
+      return Date.now() - changedAt >= 90 * 24 * 60 * 60 * 1000;
+    };
+
     // Username uniqueness check
-    if (userName) {
+    if (newUserName && usernameChanged) {
       const { data: existingUser, error: checkError } = await supabase
         .from('users')
         .select('id')
-        .eq('user_name', userName)
+        .eq('user_name', newUserName)
         .maybeSingle();
 
       if (checkError) {
@@ -65,14 +83,36 @@ export function EditProfile() {
       }
     }
 
+    const updatePayload: Record<string, unknown> = {
+      full_name: fullName,
+      bio,
+      user_roles: roles,
+    };
+
+    if (usernameChanged) {
+
+      if (isOlderThan90Days(currentUser?.user_name_updated_at) && currentUser?.user_name) {
+        const { error: archiveError } = await supabase
+          .from('old_user_names')
+          .insert({
+            user_id: currentUser.id,
+            old_user_name: currentUser.user_name,
+          });
+
+        if (archiveError) {
+          setLoading(false);
+          setError(archiveError.message || 'Could not archive the old username.');
+          return;
+        }
+      }
+
+      updatePayload.user_name = userName;
+      updatePayload.user_name_updated_at = new Date().toISOString();
+    }
+
     const { error: updateError } = await supabase
       .from('users')
-      .update({
-        full_name: fullName,
-        user_name: userName,
-        bio,
-        user_roles: roles,
-      })
+      .update(updatePayload)
       .eq('id', profileId);
 
     if (updateError) {
@@ -172,8 +212,12 @@ export function EditProfile() {
                 value={userName}
                 placeholder='e.g. johnDoe123'
                 onChange={(e) => setUserName(e.target.value)}
+                disabled={disbaleUsernameChange}
                 className="mt-1 block w-full p-2 rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
               />
+              <p className="text-xs text-gray-500">
+                {disbaleUsernameChange && 'Username can only be changed once every 90 days.'}
+              </p>
             </div>
 
             <div>
