@@ -86,7 +86,7 @@ export function CreateStartup() {
             {/* Startup Name */}
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                Startup Business Name *
+                Business Name *
               </label>
               <input
                 type="text"
@@ -95,7 +95,7 @@ export function CreateStartup() {
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="Enter your startup name"
+                placeholder="Enter your business name"
               />
             </div>
 
@@ -111,7 +111,7 @@ export function CreateStartup() {
                 value={formData.founder}
                 onChange={(e) => setFormData({ ...formData, founder: e.target.value })}
                 className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="Your name"
+                placeholder="Name of business owner"
               />
             </div>
 
@@ -140,7 +140,7 @@ export function CreateStartup() {
             {/* Description */}
             <div>
               <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-2">
-                Startup intro description *
+                Business intro description *
               </label>
               <textarea
                 id="description"
@@ -149,7 +149,7 @@ export function CreateStartup() {
                 value={formData.introDescription}
                 onChange={(e) => setFormData({ ...formData, introDescription: e.target.value })}
                 className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
-                placeholder="Tell us about your startup..."
+                placeholder="Tell us a little about your business..."
               />
             </div>
 
@@ -175,7 +175,7 @@ export function CreateStartup() {
               <div className="space-y-4">
                 <div>
                   <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
-                    Startup business Phone Number *
+                    Business Phone Number *
                   </label>
                   <input
                     type="tel"
@@ -190,7 +190,7 @@ export function CreateStartup() {
 
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                    Startup business email
+                    Business email
                   </label>
                   <input
                     type="email"
@@ -198,7 +198,7 @@ export function CreateStartup() {
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    placeholder="yourstartup@email.com"
+                    placeholder="yourbusiness@email.com"
                   />
                 </div>
 
