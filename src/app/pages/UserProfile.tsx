@@ -15,6 +15,7 @@ import { PostCard } from '../components/PostCard';
 import { ActionsPopup } from '../components/Popup';
 import MentorshipPageCard from '../components/MentorshipPageCard';
 import { useMentorshipData } from '../contexts/mentorshipContext';
+import { useWebData } from '../contexts/webData';
 
 type Favorites = {
   startup_id: string
@@ -49,6 +50,7 @@ const noteMessage = [
 
 export function UserProfile() {
   const { id } = useParams<{ id: string }>();
+  const { webName } = useWebData();
   const { startupData, posts, fetchStartupPosts, handleDeletePost } = useStartup();
   const { userData, setSelectedProfile, selectedProfile } = useUserData();
   const { user } = useAuth();
@@ -185,7 +187,7 @@ export function UserProfile() {
               <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 text-gray-500 text-xs mt-4">
                 <div className="flex items-center space-x-2">
                   <Calendar className="w-4 h-4" />
-                  <span>Joined Adumun {formatDate(userData?.created_at, false)}</span>
+                  <span>Joined {webName} {formatDate(userData?.created_at, false)}</span>
                 </div>
                 {userData.user_roles.includes(BUSINESS_PERSONNEL_ROLE) && (
                   <div className="flex items-center space-x-2">

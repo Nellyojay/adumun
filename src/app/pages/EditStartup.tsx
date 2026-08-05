@@ -166,8 +166,8 @@ export function EditStartup() {
       <div className="min-h-screen bg-gray-50">
         <Navbar />
         <div className="pt-24 text-center">
-          <h1 className="text-2xl text-gray-900">No startup selected</h1>
-          <p className="text-gray-600">Please select a startup first.</p>
+          <h1 className="text-2xl text-gray-900">No Business selected</h1>
+          <p className="text-gray-600">Please select a business first.</p>
         </div>
       </div>
     );
@@ -213,7 +213,7 @@ export function EditStartup() {
 
             <div className='block md:flex gap-12 justify-center'>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Launch Banner
+                Business Banner
 
                 {formData.cover_image ? (
                   <div className="w-full flex items-start gap-1">
@@ -250,7 +250,7 @@ export function EditStartup() {
               </label>
 
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Launch Display image
+                Business Display image
                 {formData.display_image ? (
                   <div className="w-full flex items-start gap-1">
                     <img
