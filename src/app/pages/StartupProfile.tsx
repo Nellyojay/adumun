@@ -294,259 +294,269 @@ export function StartupProfile() {
         </div>
 
         {/* Profile Header Section */}
-        <div className="bg-white -mt-8 mx-4 rounded-3xl shadow-lg p-6 relative z-10">
-          {/* Logo overlapping banner */}
-          <div className="flex flex-col items-center md:flex-row md:items-start gap-4">
-            <div className="w-28 h-28 rounded-full shadow-xl -mt-14 bg-gray-200 flex items-center justify-center border border-gray-300">
-              {startup?.display_image ? (
-                <img
-                  src={getImageUrl(startup?.display_image) || 'https://user-images.githubusercontent.com/237508/90246627-ecbda400-de2c-11ea-8bfb-b4307bfb975d.png'}
-                  alt=""
-                  className="object-cover w-28 h-28 rounded-full bg-linear-to-br from-blue-500 to-indigo-600 shrink-0 flex items-center justify-center shadow-xl border-4 border-white"
-                />
+        <div className="flex flex-col items-center">
+          <div className="bg-white -mt-8 mx-4 rounded-3xl shadow-lg p-6 relative z-10">
+            {/* Logo overlapping banner */}
+            <div className="flex flex-col items-center md:flex-row md:items-start gap-4">
+              <div className="w-28 h-28 rounded-full shadow-xl -mt-14 bg-gray-200 flex items-center justify-center border border-gray-300">
+                {startup?.display_image ? (
+                  <img
+                    src={getImageUrl(startup?.display_image) || 'https://user-images.githubusercontent.com/237508/90246627-ecbda400-de2c-11ea-8bfb-b4307bfb975d.png'}
+                    alt=""
+                    className="object-cover w-28 h-28 rounded-full bg-linear-to-br from-blue-500 to-indigo-600 shrink-0 flex items-center justify-center shadow-xl border-4 border-white"
+                  />
+                ) : (
+                  <span className="text-4xl font-bold text-gray-700">{startup?.name[0]}</span>
+                )}
+              </div>
+
+              <div className="flex-1 text-center md:text-left mt-2">
+
+                {/* Startup Name */}
+                <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-1">
+                  {startup?.name}
+                </h1>
+
+                {/* Founder Name */}
+                <Link to={`/profile/${startup?.user_id ?? ''}`} className="text-lg text-gray-600 mb-2 md:hover:text-blue-600">
+                  Founded by {startup?.founder_name}
+                </Link>
+
+                {/* Category and Location */}
+                <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 mb-3">
+                  <span className="text-sm text-gray-700 bg-gray-100 px-3 py-1 rounded-full">
+                    {startup?.products_and_services ? startup.products_and_services.join(', ') : 'General'}
+                  </span>
+                </div>
+
+                {/* Contact Info */}
+                <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 text-sm text-gray-600 mb-3">
+                  <div className="flex items-center space-x-1">
+                    <Phone className="w-4 h-4" />
+                    <a href={`tel:${startup?.phone}`} className='text-blue-600'>+{formatPhoneEA(startup?.phone)}</a>
+                  </div>
+                  <div className="flex items-center space-x-1">
+                    <Globe className="w-4 h-4" />
+                    <a href={startup?.website ? `https://${startup?.website}` : 'https://www.example.com'} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                      {startup?.website ? startup.website : 'www.example.com'}
+                    </a>
+                  </div>
+                </div>
+
+                {/* Short Description */}
+                <p className="text-gray-700 leading-relaxed mb-4">
+                  {startup?.intro_description}
+                </p>
+
+                <div className='flex gap-6'>
+                  <p className='text-gray-600'>Followers <strong>{startup?.followers}</strong></p>
+                  <Link
+                    to='#opinions'
+                    onClick={() => setShowComments(!showComments)}
+                    className='text-gray-600 md:hover:text-blue-600 transition-colors flex items-center gap-1'
+                  >
+                    Opinions
+                    <span><strong>{comments.filter(c => c.parent_id === null).length}</strong></span>
+                    <BsChevronDown className='w-3 h-3' />
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-6 text-xs md:text-sm">
+              {isOwner ? (
+                <>
+                  <Link
+                    to={`/startup/${id}/edit`}
+                    className='flex items-center justify-center space-x-2 px-4 py-3 rounded-xl font-medium transition-all bg-linear-to-r from-blue-600 to-indigo-600 text-white hover:shadow-lg'
+                  >
+                    <Edit className="w-5 h-5" />
+                    <span>Edit startup</span>
+                  </Link>
+
+                  <button
+                    onClick={() => setOpenDeleteModal(true)}
+                    className="flex items-center justify-center gap-1 px-4 py-3 rounded-xl font-medium transition-all bg-red-600 text-white hover:bg-red-700"
+                  >
+                    <Trash2 className="w-5 h-5" />
+                    <span>Delete startup</span>
+                  </button>
+                </>
               ) : (
-                <span className="text-4xl font-bold text-gray-700">{startup?.name[0]}</span>
-              )}
-            </div>
-
-            <div className="flex-1 text-center md:text-left mt-2">
-
-              {/* Startup Name */}
-              <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-1">
-                {startup?.name}
-              </h1>
-
-              {/* Founder Name */}
-              <Link to={`/profile/${startup?.user_id ?? ''}`} className="text-lg text-gray-600 mb-2 md:hover:text-blue-600">
-                Founded by {startup?.founder_name}
-              </Link>
-
-              {/* Category and Location */}
-              <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 mb-3">
-                <span className="text-sm text-gray-700 bg-gray-100 px-3 py-1 rounded-full">
-                  {startup?.products_and_services ? startup.products_and_services.join(', ') : 'General'}
-                </span>
-              </div>
-
-              {/* Contact Info */}
-              <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 text-sm text-gray-600 mb-3">
-                <div className="flex items-center space-x-1">
-                  <Phone className="w-4 h-4" />
-                  <a href={`tel:${startup?.phone}`} className='text-blue-600'>+{formatPhoneEA(startup?.phone)}</a>
-                </div>
-                <div className="flex items-center space-x-1">
-                  <Globe className="w-4 h-4" />
-                  <a href={startup?.website ? `https://${startup?.website}` : 'https://www.example.com'} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
-                    {startup?.website ? startup.website : 'www.example.com'}
-                  </a>
-                </div>
-              </div>
-
-              {/* Short Description */}
-              <p className="text-gray-700 leading-relaxed mb-4">
-                {startup?.intro_description}
-              </p>
-
-              <div className='flex gap-6'>
-                <p className='text-gray-600'>Followers <strong>{startup?.followers}</strong></p>
-                <Link
-                  to='#opinions'
-                  onClick={() => setShowComments(!showComments)}
-                  className='text-gray-600 md:hover:text-blue-600 transition-colors flex items-center gap-1'
-                >
-                  Opinions
-                  <span><strong>{comments.filter(c => c.parent_id === null).length}</strong></span>
-                  <BsChevronDown className='w-3 h-3' />
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          {/* Action Buttons */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-6 text-xs md:text-sm">
-            {isOwner ? (
-              <>
-                <Link
-                  to={`/startup/${id}/edit`}
-                  className='flex items-center justify-center space-x-2 px-4 py-3 rounded-xl font-medium transition-all bg-linear-to-r from-blue-600 to-indigo-600 text-white hover:shadow-lg'
-                >
-                  <Edit className="w-5 h-5" />
-                  <span>Edit startup</span>
-                </Link>
-
                 <button
-                  onClick={() => setOpenDeleteModal(true)}
-                  className="flex items-center justify-center gap-1 px-4 py-3 rounded-xl font-medium transition-all bg-red-600 text-white hover:bg-red-700"
+                  onClick={() => handleFollow()}
+                  disabled={!session}
+                  className={`flex items-center justify-center space-x-2 px-4 py-3 rounded-xl font-medium transition-all ${following
+                    ? 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                    : 'bg-linear-to-r from-blue-600 to-indigo-600 text-white hover:shadow-lg'
+                    }`}
                 >
-                  <Trash2 className="w-5 h-5" />
-                  <span>Delete startup</span>
+                  <UserPlus className="w-5 h-5" />
+                  <span>{following ? 'Following' : 'Follow'}</span>
                 </button>
-              </>
-            ) : (
-              <button
-                onClick={() => handleFollow()}
-                disabled={!session}
-                className={`flex items-center justify-center space-x-2 px-4 py-3 rounded-xl font-medium transition-all ${following
-                  ? 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                  : 'bg-linear-to-r from-blue-600 to-indigo-600 text-white hover:shadow-lg'
-                  }`}
+              )}
+
+              <a
+                href={`tel:${startup?.phone}`}
+                className="flex items-center justify-center space-x-2 px-4 py-3 rounded-xl font-medium bg-white border-2 border-gray-300 text-gray-700 hover:bg-gray-50 transition-all"
               >
-                <UserPlus className="w-5 h-5" />
-                <span>{following ? 'Following' : 'Follow'}</span>
-              </button>
-            )}
+                <Phone className="w-5 h-5" />
+                <span>Contact</span>
+              </a>
 
-            <a
-              href={`tel:${startup?.phone}`}
-              className="flex items-center justify-center space-x-2 px-4 py-3 rounded-xl font-medium bg-white border-2 border-gray-300 text-gray-700 hover:bg-gray-50 transition-all"
-            >
-              <Phone className="w-5 h-5" />
-              <span>Contact</span>
-            </a>
+              {!isOwner && (
+                <button
+                  onClick={handleFavorites}
+                  disabled={!session}
+                  className={`flex items-center justify-center space-x-2 px-4 py-3 rounded-xl font-medium transition-all ${favorites
+                    ? 'bg-red-50 text-red-500 border-2 border-red-200'
+                    : 'bg-white border-2 border-gray-300 text-gray-700 hover:bg-gray-50'
+                    }`}
+                >
+                  <Star className={`w-5 h-5 ${favorites ? 'fill-red-500' : ''}`} />
+                  <span>Favorite</span>
+                </button>
+              )}
 
-            {!isOwner && (
               <button
-                onClick={handleFavorites}
-                disabled={!session}
-                className={`flex items-center justify-center space-x-2 px-4 py-3 rounded-xl font-medium transition-all ${favorites
-                  ? 'bg-red-50 text-red-500 border-2 border-red-200'
-                  : 'bg-white border-2 border-gray-300 text-gray-700 hover:bg-gray-50'
-                  }`}
+                onClick={handleShare}
+                className="flex items-center justify-center space-x-2 px-4 py-3 rounded-xl font-medium bg-white border-2 border-gray-300 text-gray-700 hover:bg-gray-50 transition-all"
               >
-                <Star className={`w-5 h-5 ${favorites ? 'fill-red-500' : ''}`} />
-                <span>Favorite</span>
+                <Share2 className="w-5 h-5" />
+                <span>Share</span>
               </button>
-            )}
-
-            <button
-              onClick={handleShare}
-              className="flex items-center justify-center space-x-2 px-4 py-3 rounded-xl font-medium bg-white border-2 border-gray-300 text-gray-700 hover:bg-gray-50 transition-all"
-            >
-              <Share2 className="w-5 h-5" />
-              <span>Share</span>
-            </button>
-          </div>
-
-          {showComments ? (
-            <div id='opinions'>
-              <CommentBox
-                startupId={startup?.id ?? ''}
-                loading={loading}
-                comments={comments}
-                setComments={setComments}
-                showComments={showComments}
-                setShowComments={setShowComments}
-              />
             </div>
 
-          ) : (
-            <>
-              {/* View More Button */}
-              <button
-                onClick={() => setShowMore(!showMore)}
-                className="w-full mt-4 flex items-center justify-center space-x-2 py-3 text-blue-600 hover:bg-blue-50 rounded-xl transition-all font-medium"
-              >
-                <span>{showMore ? 'Close' : `View More About ${startup?.name}`}</span>
-                {showMore ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
-              </button>
+            {showComments ? (
+              <div id='opinions'>
+                <CommentBox
+                  startupId={startup?.id ?? ''}
+                  loading={loading}
+                  comments={comments}
+                  setComments={setComments}
+                  showComments={showComments}
+                  setShowComments={setShowComments}
+                />
+              </div>
 
-              {/* Expandable Details Section */}
-              {showMore && (
-                <div className="mt-6 pt-6 border-t border-gray-200 space-y-4 animate-in fade-in slide-in-from-top-2 duration-300">
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-2">Full Description</h3>
-                    <p className="text-gray-700 leading-relaxed">
-                      <span className={`${lineClamp ? 'line-clamp-0' : 'line-clamp-5'}`}>{startup?.description}</span>
-                      <span className='text-gray-400 font-semibold'>
-                        <button
-                          onClick={() => setLineClamp(!lineClamp)}
+            ) : (
+              <>
+                {/* View More Button */}
+                <button
+                  onClick={() => setShowMore(!showMore)}
+                  className="w-full mt-4 flex items-center justify-center space-x-2 py-3 text-blue-600 hover:bg-blue-50 rounded-xl transition-all font-medium"
+                >
+                  <span>{showMore ? 'Close' : `View More About ${startup?.name}`}</span>
+                  {showMore ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
+                </button>
+
+                {/* Expandable Details Section */}
+                {showMore && (
+                  <div className="mt-6 pt-6 border-t border-gray-200 space-y-4 animate-in fade-in slide-in-from-top-2 duration-300">
+                    <div>
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2">Full Description</h3>
+                      <p className="text-gray-700 leading-relaxed">
+                        <span className={`${lineClamp ? 'line-clamp-0' : 'line-clamp-5'}`}>{startup?.description}</span>
+                        <span className='text-gray-400 font-semibold'>
+                          <button
+                            onClick={() => setLineClamp(!lineClamp)}
+                          >
+                            {lineClamp ? 'collapse' : 'more'}
+                          </button>
+                        </span>
+                      </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <h3 className="text-sm font-semibold text-gray-900 mb-2">Contact Information</h3>
+                        <div className="space-y-2 text-sm text-gray-700">
+                          <div className="flex items-center space-x-2">
+                            <Mail className="w-4 h-4 text-blue-600" />
+                            <span>{startup?.email}</span>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <Phone className="w-4 h-4 text-blue-600" />
+                            <a href={`tel:${startup?.phone}`}>+{formatPhoneEA(startup?.phone)}</a>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <Globe className="w-4 h-4 text-blue-600" />
+                            <a href={startup?.website ? `https://${startup?.website}` : 'https://www.example.com'} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                              {startup?.website ? startup.website : 'www.example.com'}
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div>
+                        <h3 className="text-sm font-semibold text-gray-900 mb-2">Business Details</h3>
+                        <div className="space-y-2 text-sm text-gray-700">
+                          <div className="flex items-center space-x-2">
+                            <MapPin className="w-4 h-4 text-blue-600" />
+                            <span>{startup?.address}</span>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <Calendar className="w-4 h-4 text-blue-600" />
+                            <span>Founded in {formatDate(startup?.founded_in, true)}</span>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <GraduationCap className="w-4 h-4 text-blue-600" />
+                            <span>Founder: {startup?.founder_name}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div>
+                      <h3 className="text-sm font-semibold text-gray-900 mb-2">Social Media</h3>
+                      <div className="flex space-x-3">
+                        <a
+                          title='twitter'
+                          href={`https://x.com/${startup?.x_username}`}
+                          target='_blank'
+                          rel='noopener noreferrer'
+                          className="w-10 h-10 bg-gray-100 text-black rounded-full flex items-center justify-center hover:bg-blue-200 transition-colors"
                         >
-                          {lineClamp ? 'collapse' : 'more'}
-                        </button>
-                      </span>
-                    </p>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <h3 className="text-sm font-semibold text-gray-900 mb-2">Contact Information</h3>
-                      <div className="space-y-2 text-sm text-gray-700">
-                        <div className="flex items-center space-x-2">
-                          <Mail className="w-4 h-4 text-blue-600" />
-                          <span>{startup?.email}</span>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <Phone className="w-4 h-4 text-blue-600" />
-                          <a href={`tel:${startup?.phone}`}>+{formatPhoneEA(startup?.phone)}</a>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <Globe className="w-4 h-4 text-blue-600" />
-                          <a href={startup?.website ? `https://${startup?.website}` : 'https://www.example.com'} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
-                            {startup?.website ? startup.website : 'www.example.com'}
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div>
-                      <h3 className="text-sm font-semibold text-gray-900 mb-2">Business Details</h3>
-                      <div className="space-y-2 text-sm text-gray-700">
-                        <div className="flex items-center space-x-2">
-                          <MapPin className="w-4 h-4 text-blue-600" />
-                          <span>{startup?.address}</span>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <Calendar className="w-4 h-4 text-blue-600" />
-                          <span>Founded in {formatDate(startup?.founded_in, true)}</span>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <GraduationCap className="w-4 h-4 text-blue-600" />
-                          <span>Founder: {startup?.founder_name}</span>
-                        </div>
+                          <BsTwitterX className="w-5 h-5" />
+                        </a>
+                        <a
+                          title='facebook'
+                          target='_blank'
+                          rel='noopener noreferrer'
+                          className="w-10 h-10 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center hover:bg-blue-200 transition-colors"
+                        >
+                          <FaFacebook className="w-6 h-6" />
+                        </a>
+                        <a
+                          title='whatsApp'
+                          href={`https://wa.me/${formatPhoneEA(startup?.phone)}`}
+                          target='_blank'
+                          rel='noopener noreferrer'
+                          className="w-10 h-10 bg-green-100 text-green-500 rounded-full flex items-center justify-center hover:bg-green-200 transition-colors"
+                        >
+                          <FaWhatsapp className="w-6 h-6" />
+                        </a>
                       </div>
                     </div>
                   </div>
+                )}
+              </>
+            )}
 
-                  <div>
-                    <h3 className="text-sm font-semibold text-gray-900 mb-2">Social Media</h3>
-                    <div className="flex space-x-3">
-                      <a
-                        title='twitter'
-                        href={`https://x.com/${startup?.x_username}`}
-                        target='_blank'
-                        rel='noopener noreferrer'
-                        className="w-10 h-10 bg-gray-100 text-black rounded-full flex items-center justify-center hover:bg-blue-200 transition-colors"
-                      >
-                        <BsTwitterX className="w-5 h-5" />
-                      </a>
-                      <a
-                        title='facebook'
-                        target='_blank'
-                        rel='noopener noreferrer'
-                        className="w-10 h-10 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center hover:bg-blue-200 transition-colors"
-                      >
-                        <FaFacebook className="w-6 h-6" />
-                      </a>
-                      <a
-                        title='whatsApp'
-                        href={`https://wa.me/${formatPhoneEA(startup?.phone)}`}
-                        target='_blank'
-                        rel='noopener noreferrer'
-                        className="w-10 h-10 bg-green-100 text-green-500 rounded-full flex items-center justify-center hover:bg-green-200 transition-colors"
-                      >
-                        <FaWhatsapp className="w-6 h-6" />
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </>
-          )}
+          </div>
 
+          <Link
+            to="/catalogue"
+            className="mt-4 inline-flex items-center justify-center rounded-2xl bg-linear-to-r from-blue-400 via-blue-500 to-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-500/20 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl hover:bg-linear-to-r hover:from-blue-600 hover:via-blue-700 hover:to-blue-800"
+          >
+            View Catalogue
+          </Link>
         </div>
 
+
         {/* Posts Feed Section */}
-        <div className="mt-8 px-1">
+        <div className="mt-4 px-1">
           <div className="mb-2 px-2">
             <div className='flex justify-between mb-2 pb-2 border-b border-gray-400'>
               <h2 className="text-2xl font-bold text-gray-900 mb-2">Posts</h2>

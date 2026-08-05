@@ -76,7 +76,7 @@ export function Navbar({ showSearch = false, onSearch }: NavbarProps) {
   return (
     <nav className="fixed top-0 left-0 right-0 bg-white border-b border-gray-200 z-60">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-12">
           {/* Logo */}
           <Link to={session ? "/" : "/about"} className="flex items-center space-x-2">
             <div className="w-8 h-8 bg-linear-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center shadow-sm">
@@ -165,7 +165,7 @@ export function Navbar({ showSearch = false, onSearch }: NavbarProps) {
 
       {/* Mobile bottom tab bar */}
       <div className="md:hidden fixed inset-x-0 bottom-0 z-50 bg-white border-t border-gray-200">
-        <div className="flex justify-between items-center h-16 px-2">
+        <div className="flex justify-between items-center h-12 px-2">
           <Link
             to="/"
             className={`flex flex-col items-center justify-center gap-1 rounded-md px-2 py-1 ${location.pathname === '/' ? 'bg-blue-100 text-blue-600' : 'text-gray-600 hover:text-blue-600'}`}
