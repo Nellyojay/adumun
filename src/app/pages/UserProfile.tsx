@@ -185,7 +185,7 @@ export function UserProfile() {
               <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 text-gray-500 text-xs mt-4">
                 <div className="flex items-center space-x-2">
                   <Calendar className="w-4 h-4" />
-                  <span>Joined MyLaunch {formatDate(userData?.created_at, false)}</span>
+                  <span>Joined Adumun {formatDate(userData?.created_at, false)}</span>
                 </div>
                 {userData.user_roles.includes(BUSINESS_PERSONNEL_ROLE) && (
                   <div className="flex items-center space-x-2">
