@@ -1,0 +1,34 @@
+.detail-container {
+  margin: 0 auto;
+  max-width: 1200px;
+  min-height: calc(100vh - 6rem);
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+  justify-content: center;
+}
+
+@media (min-width: 800px) {
+  .detail-container {
+    display: grid;
+    grid-template-columns: minmax(320px, 1.3fr) minmax(320px, 0.9fr);
+    gap: 1.2rem;
+    align-items: center;
+  }
+
+  .detail-container>img {
+    min-height: calc(100vh - 6rem);
+    max-height: calc(100vh - 6rem);
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .detail-container>div {
+    max-height: calc(100vh - 6rem);
+    overflow-y: auto;
+  }
+
+  .detail-container>div::-webkit-scrollbar {
+    display: none;
+  }
+}

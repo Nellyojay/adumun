@@ -19,7 +19,10 @@ import TC_agree from "./pages/TC_agree";
 import PostFeed from "./pages/PostFeed";
 import MentorshipPage from "./pages/MentorshipPage";
 import CreateMentorship from "./pages/CreateMentorship";
-import EditMentorship from "./pages/EditMentorshipPage"; import { Catalogue } from "./pages/Catalogue"; import { ManageAccount } from "./pages/ManageAccount";
+import EditMentorship from "./pages/EditMentorshipPage";
+import { Catalogue } from "./pages/Catalogue";
+import ShowProductDetail from "./pages/ShowProductDetail";
+import { ManageAccount } from "./pages/ManageAccount";
 import { ChangePassword } from "./pages/ChangePassword";
 import { RecoverAccount } from "./pages/RecoverAccount";
 import { ResetPassword } from "./pages/ResetPassword";
@@ -112,6 +115,10 @@ export const router = createHashRouter([
   {
     path: "/catalogue",
     Component: Catalogue,
+  },
+  {
+    path: "/catalogue/:id",
+    Component: ShowProductDetail,
   },
   {
     path: "/change-password",

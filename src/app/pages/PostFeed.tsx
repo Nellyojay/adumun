@@ -57,9 +57,9 @@ function PostFeed() {
     <div className="bg-gray-200 min-h-screen pt-12">
       <Navbar showSearch={true} />
 
-      <div className="max-w-6xl mx-auto pt-6 pb-20 grid grid-cols-12 gap-4">
+      <div className="max-w-6xl mx-auto pt-3 sm:pt-1 pb-20 grid grid-cols-12 gap-2">
 
-        <div className="sticky top-18 h-fit hidden sm:block col-span-12 sm:col-span-3 space-y-2">
+        <div className="sticky top-12 h-fit hidden sm:block col-span-12 sm:col-span-3 space-y-2">
 
           <div className="bg-white rounded-md shadow-sm p-4">
             {session ? (
@@ -149,7 +149,7 @@ function PostFeed() {
           )}
         </div>
 
-        <div className="sticky top-18 h-fit hidden sm:block col-span-12 sm:col-span-4 space-y-2">
+        <div className="sticky top-12 h-fit hidden sm:block col-span-12 sm:col-span-4 space-y-2">
 
           <div className="bg-white rounded-md shadow-sm p-4">
             <p className="font-semibold">Trending Businesses</p>

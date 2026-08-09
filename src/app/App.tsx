@@ -1,6 +1,7 @@
 import { RouterProvider } from 'react-router';
 import { router } from './routes';
 import { PopupProvider, usePopup } from './contexts/EdgePopupContext';
+import { CatalogProvider } from './contexts/catalogContext';
 import GlobalPopup from './components/GlobalPopup';
 import { useEffect } from 'react';
 
@@ -27,9 +28,11 @@ export default function App() {
 
   return (
     <PopupProvider>
-      <NetworkWatcher />
-      <GlobalPopup />
-      <RouterProvider router={router} />
+      <CatalogProvider>
+        <NetworkWatcher />
+        <GlobalPopup />
+        <RouterProvider router={router} />
+      </CatalogProvider>
     </PopupProvider>
   );
 }
