@@ -10,6 +10,7 @@ export type CatalogueItem = {
   units: string;
   soldCount: number;
   category: string;
+  collection: string;
   description: string;
   cover: string;
 };
@@ -30,6 +31,7 @@ const catalogueItems: CatalogueItem[] = [
     units: '12 left',
     soldCount: 28,
     category: 'Habitat',
+    collection: 'Clothes',
     description:
       'A compact orbital suite designed for rapid deployment and immersive command control, wrapped in a metallic aurora shell.',
     cover:
@@ -45,6 +47,7 @@ const catalogueItems: CatalogueItem[] = [
     units: '0 left',
     soldCount: 54,
     category: 'Security',
+    collection: 'Shoes',
     description:
       'A futurist vault system that uses quantum-resistant locks, gesture controls, and atmospheric pulse trailing.',
     cover:
@@ -60,6 +63,7 @@ const catalogueItems: CatalogueItem[] = [
     units: '9 left',
     soldCount: 46,
     category: 'Infrastructure',
+    collection: 'Sweaters',
     description:
       'A modular energy mesh engineered for cityscapes, delivering adaptive lighting, storage, and AI-driven demand balancing.',
     cover:
@@ -75,6 +79,7 @@ const catalogueItems: CatalogueItem[] = [
     units: '34 left',
     soldCount: 32,
     category: 'Wearable',
+    collection: 'Trousers',
     description:
       'A fusion of ultra-thin optics and haptic feedback that keeps critical dashboards visible in any environment.',
     cover:
@@ -90,6 +95,7 @@ const catalogueItems: CatalogueItem[] = [
     units: '0 left',
     soldCount: 82,
     category: 'Mobility',
+    collection: 'Shoes',
     description:
       'A compact charging node built for drones and light vehicles, with smart routing and corrosive-resistant framing.',
     cover:
@@ -105,6 +111,7 @@ const catalogueItems: CatalogueItem[] = [
     units: '20 left',
     soldCount: 21,
     category: 'Hardware',
+    collection: 'Clothes',
     description:
       'Precision AR lenses that overlay data streams directly onto user sightlines with minimal glare and high durability.',
     cover:

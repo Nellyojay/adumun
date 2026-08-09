@@ -20,7 +20,8 @@ import PostFeed from "./pages/PostFeed";
 import MentorshipPage from "./pages/MentorshipPage";
 import CreateMentorship from "./pages/CreateMentorship";
 import EditMentorship from "./pages/EditMentorshipPage";
-import { Catalogue } from "./pages/Catalogue";
+import { Catalog } from "./pages/Catalog";
+import { CatalogueItems } from "./pages/CatalogueItems";
 import ShowProductDetail from "./pages/ShowProductDetail";
 import { ManageAccount } from "./pages/ManageAccount";
 import { ChangePassword } from "./pages/ChangePassword";
@@ -113,8 +114,12 @@ export const router = createHashRouter([
     Component: HelpCenter,
   },
   {
-    path: "/catalogue",
-    Component: Catalogue,
+    path: "/catalog",
+    Component: Catalog,
+  },
+  {
+    path: "/catalogue-items",
+    Component: CatalogueItems,
   },
   {
     path: "/catalogue/:id",

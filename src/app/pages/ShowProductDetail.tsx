@@ -47,7 +47,7 @@ const ShowProductDetail = () => {
               <div className="flex justify-between items-center bg-gray-300/70 rounded-sm px-2">
                 <div>
                   <span className="text-sm uppercase tracking-widest text-gray-700">{selectedItem.name}</span>
-                  <p className="text-sm text-gray-700 font-semibold">UGX{selectedItem.price}</p>
+                  <p className="text-sm text-gray-700 font-semibold">UGX {selectedItem.price}</p>
                 </div>
                 <div>
                   <span className={`inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-semibold uppercase ${selectedItem.status === 'Available'
@@ -77,7 +77,7 @@ const ShowProductDetail = () => {
                   </span>
                 </div>
                 <div>
-                  <p className="text-md text-gray-700 font-semibold">UGX{selectedItem.price}</p>
+                  <p className="text-md text-gray-700 font-semibold">UGX {selectedItem.price}</p>
                 </div>
               </div>
             </div>
@@ -102,7 +102,7 @@ const ShowProductDetail = () => {
             </div>
             <button
               type="button"
-              onClick={() => navigate('/catalogue', { replace: true })}
+              onClick={() => navigate(-1)}
               className="inline-flex w-full items-center justify-center rounded-3xl bg-blue-600 px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-white transition hover:bg-blue-700"
             >
               Back to catalogue

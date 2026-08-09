@@ -547,7 +547,7 @@ export function StartupProfile() {
           </div>
 
           <Link
-            to="/catalogue"
+            to="/catalog"
             className="mt-4 inline-flex items-center justify-center rounded-2xl bg-linear-to-r from-blue-400 via-blue-500 to-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-500/20 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl hover:bg-linear-to-r hover:from-blue-600 hover:via-blue-700 hover:to-blue-800"
           >
             View Catalogue
