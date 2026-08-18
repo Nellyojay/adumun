@@ -36,7 +36,7 @@ export function Catalog() {
                 <Link
                   key={collection}
                   to={`/catalogue-items?collection=${encodeURIComponent(collection)}`}
-                  className="group block overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
+                  className="group block overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition sm:hover:shadow-lg"
                 >
                   <div className="text-sm uppercase tracking-[0.24em] text-cyan-600">{collection}</div>
                   <h2 className="mt-4 text-2xl font-semibold text-slate-900">{count} item{count === 1 ? '' : 's'}</h2>
