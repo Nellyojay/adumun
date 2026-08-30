@@ -293,7 +293,7 @@ export function StartupProfile() {
 
         {/* Profile Header Section */}
         <div className="flex flex-col items-center">
-          <div className="bg-white -mt-8 min-w-lg mx-4 rounded-3xl shadow-lg p-6 relative z-10">
+          <div className="bg-white -mt-8 w-md sm:min-w-lg mx-4 rounded-3xl shadow-lg p-6 relative z-10">
             {/* Logo overlapping banner */}
             <div className="flex flex-col items-center md:flex-row md:items-start gap-4">
               <div className="w-28 h-28 rounded-full shadow-xl -mt-14 bg-gray-200 flex items-center justify-center border border-gray-300">
@@ -587,7 +587,7 @@ export function StartupProfile() {
                 setSelectedStartup(startup.id);
               }
             }}
-            className="inline-flex pt-8 -mt-6 items-center justify-center w-lg rounded-b-2xl bg-linear-to-r from-blue-400 via-blue-500 to-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-500/20 transition-all duration-200 sm:hover:translate-y-1 hover:bg-linear-to-r hover:from-blue-600 hover:via-blue-700 hover:to-blue-800"
+            className="inline-flex pt-8 -mt-6 items-center justify-center w-md sm:w-lg rounded-b-2xl bg-linear-to-r from-blue-400 via-blue-500 to-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-500/20 transition-all duration-200 sm:hover:translate-y-1 hover:bg-linear-to-r hover:from-blue-600 hover:via-blue-700 hover:to-blue-800"
           >
             View Catalogue
           </Link>
