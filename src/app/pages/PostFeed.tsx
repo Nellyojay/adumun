@@ -3,7 +3,7 @@ import { Navbar } from "../components/Navbar"
 import { PostCard } from "../components/PostCard";
 import { useStartup } from "../contexts/StartupProfileContext";
 import Loader from "../constants/loader";
-import { BUSINESS_PERSONNEL_ROLE, MENTOR_ROLE, useUserData } from "../contexts/userDataContext";
+import { BUSINESS_PERSONNEL_ROLE, MENTOR_ROLE, normalizeUserRoles, useUserData, } from "../contexts/userDataContext";
 import { Link } from "react-router-dom";
 import { getImageUrl } from "../constants/imageHandler";
 import { useAuth } from "../contexts/authContext";
@@ -17,6 +17,7 @@ function PostFeed() {
 
   const [visibleCount, setVisibleCount] = useState(10);
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
+  const currentUserRoles = normalizeUserRoles(currentUser?.user_roles);
   const userStartups = startupData?.filter(s => s.user_id === currentUser?.id);
   const userMentorshipPages = mentorshipData?.filter(m => m.users?.id === currentUser?.id)
 
@@ -89,7 +90,7 @@ function PostFeed() {
             )}
           </div>
 
-          {session && (currentUser?.user_roles.includes(BUSINESS_PERSONNEL_ROLE) || currentUser?.user_roles.includes(MENTOR_ROLE)) && (
+          {session && (currentUserRoles.includes(BUSINESS_PERSONNEL_ROLE) || currentUserRoles.includes(MENTOR_ROLE)) && (
             <div className="bg-white rounded-md shadow-sm p-4 space-y-2">
               <p className="font-semibold">My Businesses ({userStartups?.length})</p>
 

@@ -88,9 +88,10 @@ export function Feed() {
     );
 
     filteredUsers = filteredUsers?.filter(
-      user =>
-        user.full_name.toLowerCase().includes(query) ||
-        user.user_roles.some(role => role.toLowerCase().includes(query))
+      user => {
+        const roles = Array.isArray(user.user_roles) ? user.user_roles : [];
+        return user.full_name.toLowerCase().includes(query) || roles.some(role => role.toLowerCase().includes(query));
+      }
     );
   }
 
@@ -243,7 +244,7 @@ export function Feed() {
                   )}
                   <button onClick={() => navigate(`/profile/${user.id}`)} className="text-left">
                     <p className="font-semibold text-gray-900">{user.full_name}</p>
-                    <p className="text-sm text-gray-500">{user.user_roles.join(', ')}</p>
+                    <p className="text-sm text-gray-500">{(Array.isArray(user.user_roles) ? user.user_roles : []).join(', ')}</p>
                   </button>
                 </div>
               ))}

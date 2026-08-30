@@ -25,6 +25,7 @@ export function Navbar({ showSearch = false, onSearch }: NavbarProps) {
   const [hideLogoName, setHideLogoName] = useState(false);
   const [searchBarNavigateToFeed, setSearchBarNavigateToFeed] = useState(false);
 
+  const currentUserRoles = Array.isArray(currentUser?.user_roles) ? currentUser.user_roles : [];
   const actionsRef = useRef<HTMLDivElement | null>(null);
 
   if (!currentUser) {
@@ -136,7 +137,7 @@ export function Navbar({ showSearch = false, onSearch }: NavbarProps) {
                 <Link to="/feedback" className={`text-gray-500 hover:text-gray-800 transition-colors ${location.pathname === '/feedback' ? 'text-gray-800 border-b border-gray-800' : ''} hidden sm:block`}>
                   Feedback
                 </Link>
-                {(currentUser?.user_roles.includes(BUSINESS_PERSONNEL_ROLE) || currentUser?.user_roles.includes(MENTOR_ROLE)) && (
+                {(currentUserRoles.includes(BUSINESS_PERSONNEL_ROLE) || currentUserRoles.includes(MENTOR_ROLE)) && (
                   <button
                     onClick={() => { setOpenPopup(!openPopup) }}
                     className={`text-gray-500 hover:text-gray-800 transition-colors relative ${location.pathname === '/create' ? 'text-gray-800 border-b border-gray-800' : ''}`}

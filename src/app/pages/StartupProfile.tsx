@@ -333,13 +333,28 @@ export function StartupProfile() {
                 <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 text-sm text-gray-600 mb-3">
                   <div className="flex items-center space-x-1">
                     <Phone className="w-4 h-4" />
-                    <a href={`tel:${startup?.phone}`} className='text-blue-600'>+{formatPhoneEA(startup?.phone)}</a>
+                    {startup?.phone ? (
+                      <a href={`tel:${startup?.phone}`} className='text-blue-600'>
+                        +{formatPhoneEA(startup?.phone)}
+                      </a>
+                    ) : (
+                      <span className="text-gray-500">Phone not provided</span>
+                    )}
                   </div>
                   <div className="flex items-center space-x-1">
                     <Globe className="w-4 h-4" />
-                    <a href={startup?.website ? `https://${startup?.website}` : 'https://www.example.com'} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
-                      {startup?.website ? startup.website : 'www.example.com'}
-                    </a>
+                    {startup?.website ? (
+                      <a
+                        href={`https://${startup.website}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-600 hover:underline"
+                      >
+                        {startup.website}
+                      </a>
+                    ) : (
+                      <span className="text-gray-500">www.example.com</span>
+                    )}
                   </div>
                 </div>
 
@@ -457,10 +472,18 @@ export function StartupProfile() {
                     <div>
                       <h3 className="text-lg font-semibold text-gray-900 mb-2">Full Description</h3>
                       <p className="text-gray-700 leading-relaxed">
-                        <span className={`${lineClamp ? 'line-clamp-0' : 'line-clamp-5'}`}>{startup?.description}</span>
+                        <a
+                          href='#'
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setLineClamp(!lineClamp);
+                          }}
+                          className={`${lineClamp ? 'line-clamp-0' : 'line-clamp-5'}`}
+                        >{startup?.description}</a>
                         <span className='text-gray-400 font-semibold'>
                           <button
                             onClick={() => setLineClamp(!lineClamp)}
+                            className='hover:underline'
                           >
                             {lineClamp ? 'collapse' : 'more'}
                           </button>
@@ -474,17 +497,27 @@ export function StartupProfile() {
                         <div className="space-y-2 text-sm text-gray-700">
                           <div className="flex items-center space-x-2">
                             <Mail className="w-4 h-4 text-blue-600" />
-                            <span>{startup?.email}</span>
+                            {startup?.email
+                              ? <span>{startup.email}</span>
+                              : <span className="text-gray-500">Email not provided</span>
+                            }
                           </div>
                           <div className="flex items-center space-x-2">
                             <Phone className="w-4 h-4 text-blue-600" />
-                            <a href={`tel:${startup?.phone}`}>+{formatPhoneEA(startup?.phone)}</a>
+                            {startup?.phone
+                              ? <a href={`tel:${startup.phone}`}>+{formatPhoneEA(startup.phone)}</a>
+                              : <span className="text-gray-500">Phone not provided</span>
+                            }
                           </div>
                           <div className="flex items-center space-x-2">
                             <Globe className="w-4 h-4 text-blue-600" />
-                            <a href={startup?.website ? `https://${startup?.website}` : 'https://www.example.com'} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
-                              {startup?.website ? startup.website : 'www.example.com'}
-                            </a>
+                            {startup?.website ? (
+                              <a href={`https://${startup.website}`} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                                {startup.website}
+                              </a>
+                            ) : (
+                              <span className="text-gray-500">www.example.com</span>
+                            )}
                           </div>
                         </div>
                       </div>

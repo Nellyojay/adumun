@@ -19,7 +19,7 @@ export type userData = {
   profile_image: string;
   TC_agreed: boolean;
   favorites: number;
-  user_roles: string[];
+  user_roles: string[] | null;
   is_active: boolean;
   deleted_at: string;
 }
@@ -38,6 +38,8 @@ type UserDataContextType = {
   agreeToTC: () => Promise<boolean>;
 };
 
+export const normalizeUserRoles = (roles: string[] | null | undefined) => Array.isArray(roles) ? roles : [];
+
 const UserDataContext = createContext<UserDataContextType | null>(null);
 
 export const UserDataProvider = ({ children }: { children: React.ReactNode }) => {
@@ -46,11 +48,12 @@ export const UserDataProvider = ({ children }: { children: React.ReactNode }) =>
   const [selectedProfile, setSelectedProfile] = useState<string | null>(null);
   const [loadingUserData, setLoadingUserData] = useState(false);
 
-  const isBusinessPersonnel = Boolean(currentUser?.user_roles.includes(BUSINESS_PERSONNEL_ROLE));
-  const isInvestor = Boolean(currentUser?.user_roles.includes(INVESTOR_ROLE));
-  const isCustomer = Boolean(currentUser?.user_roles.includes(CUSTOMER_ROLE));
-  const isMentor = Boolean(currentUser?.user_roles.includes(MENTOR_ROLE));
-  const isAdmin = Boolean(currentUser?.user_roles.includes(ADMIN_ROLE));
+  const currentUserRoles = normalizeUserRoles(currentUser?.user_roles);
+  const isBusinessPersonnel = Boolean(currentUserRoles.includes(BUSINESS_PERSONNEL_ROLE));
+  const isInvestor = Boolean(currentUserRoles.includes(INVESTOR_ROLE));
+  const isCustomer = Boolean(currentUserRoles.includes(CUSTOMER_ROLE));
+  const isMentor = Boolean(currentUserRoles.includes(MENTOR_ROLE));
+  const isAdmin = Boolean(currentUserRoles.includes(ADMIN_ROLE));
 
   useEffect(() => {
     const { data: listener } = supabase.auth.onAuthStateChange(
@@ -109,7 +112,7 @@ export const UserDataProvider = ({ children }: { children: React.ReactNode }) =>
     }
 
     if (data) {
-      setUserData(data);
+      setUserData({ ...data, user_roles: normalizeUserRoles(data.user_roles) });
     }
     setLoadingUserData(false);
   }, [selectedProfile])
@@ -124,7 +127,7 @@ export const UserDataProvider = ({ children }: { children: React.ReactNode }) =>
       .single();
 
     if (data) {
-      setCurrentUser(data);
+      setCurrentUser({ ...data, user_roles: normalizeUserRoles(data.user_roles) });
     }
     setLoadingUserData(false);
   }

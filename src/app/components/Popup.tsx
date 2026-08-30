@@ -4,13 +4,14 @@ import { useState, type SetStateAction } from "react";
 import { Check } from "lucide-react";
 import SuccessMessage from "./SuccessMessage";
 
-export const ActionsPopup = (user: userData | null) => {
+export const ActionsPopup = (user: Partial<userData> | null) => {
+  const userRoles = Array.isArray(user?.user_roles) ? user.user_roles : [];
 
   return (
     <div
       className="absolute top-10 right-0 flex flex-col bg-white rounded-md border-2 border-gray-300 shadow-lg p-2 w-52 z-10 font-semibold"
     >
-      {user?.user_roles?.includes(BUSINESS_PERSONNEL_ROLE) && (
+      {userRoles.includes(BUSINESS_PERSONNEL_ROLE) && (
         <Link
           to="/create"
           className="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md"
@@ -18,7 +19,7 @@ export const ActionsPopup = (user: userData | null) => {
           Create Business Page
         </Link>
       )}
-      {user?.user_roles?.includes(MENTOR_ROLE) && (
+      {userRoles.includes(MENTOR_ROLE) && (
         <Link
           to="/mentorship-page/create"
           className="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md"

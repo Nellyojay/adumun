@@ -164,7 +164,7 @@ export function CreateStartup() {
                 value={formData.productOrSevices}
                 onChange={(e) => setFormData({ ...formData, productOrSevices: e.target.value })}
                 className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="Your name"
+                placeholder="List your products or services, separated by commas"
               />
             </div>
 

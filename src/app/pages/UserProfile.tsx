@@ -63,6 +63,7 @@ export function UserProfile() {
   const [openActionsPopup, setOpenActiionsPopup] = useState(false);
 
   const actionsRef = useRef<HTMLDivElement | null>(null);
+  const userRoles = Array.isArray(userData?.user_roles) ? userData.user_roles : [];
 
   const profileId = id || selectedProfile || userData?.id || user?.id || null;
   const isOwner = Boolean(
@@ -72,8 +73,8 @@ export function UserProfile() {
   );
 
   useEffect(() => {
-    setTab(userData?.user_roles.includes(BUSINESS_PERSONNEL_ROLE) ? 0 : 1)
-  }, [userData])
+    setTab(userRoles.includes(BUSINESS_PERSONNEL_ROLE) ? 0 : 1)
+  }, [userRoles])
 
   useEffect(() => {
     const handleClickOutside = (event: any) => {
@@ -171,8 +172,8 @@ export function UserProfile() {
               <h1 className="text-3xl font-bold text-gray-900">{userData?.full_name}</h1>
               <p className="text-sm text-gray-400 mb-4">@{userData?.user_name || 'Username'}</p>
               <div className="flex flex-wrap gap-2 justify-center md:justify-start mb-4">
-                {userData.user_roles && userData.user_roles.length > 0 ? (
-                  userData.user_roles.map((role, index) => (
+                {userRoles.length > 0 ? (
+                  userRoles.map((role, index) => (
                     <span key={index} className="px-3 py-1 bg-blue-100 text-blue-800 text-sm font-medium rounded-full">
                       {role}
                     </span>
@@ -189,7 +190,7 @@ export function UserProfile() {
                   <Calendar className="w-4 h-4" />
                   <span>Joined {webName} {formatDate(userData?.created_at, false)}</span>
                 </div>
-                {userData.user_roles.includes(BUSINESS_PERSONNEL_ROLE) && (
+                {userRoles.includes(BUSINESS_PERSONNEL_ROLE) && (
                   <div className="flex items-center space-x-2">
                     <Briefcase className="w-4 h-4" />
                     <span>{userStartups?.length} Business{userStartups?.length === 1 ? '' : 'es'}</span>
@@ -235,13 +236,14 @@ export function UserProfile() {
           {moreOpen && (
             <div className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mx-6 mt-2 rounded-lg text-xs md:text-sm">
               {noteMessage.map(n => {
-                if (userData.user_roles.includes(n.role)) {
+                if (userRoles.includes(n.role)) {
                   return (
                     <>
                       <p key={n.role}>- {n.message}</p>
                     </>
                   )
                 }
+                return null;
               })}
               <p className="font-bold mt-1">To change your role, edit your profile to the role of your choice.</p>
             </div>
@@ -252,14 +254,14 @@ export function UserProfile() {
         <div>
           <div className="sticky top-18 h-fit z-50 flex items-center justify-between mb-6">
             <div className='flex text-gray-500 space-x-4 bg-gray-50 rounded-lg py-1 px-4 mr-1 justify-around not-md:w-full shadow-gray-200 shadow-sm'>
-              {userData.user_roles.includes(BUSINESS_PERSONNEL_ROLE) && (
+              {userRoles.includes(BUSINESS_PERSONNEL_ROLE) && (
                 <button
                   onClick={() => setTab(0)}
                   className={`font-bold cursor-pointer md:hover:text-gray-800 transition-all duration-200 ${tab === 0 && 'text-gray-800 border-b-2'}`}
                 >Businesses</button>
               )}
 
-              {userData.user_roles.includes(MENTOR_ROLE) && (
+              {userRoles.includes(MENTOR_ROLE) && (
                 <button
                   onClick={() => setTab(1)}
                   className={`font-bold cursor-pointer md:hover:text-gray-800 transition-all duration-200 ${tab === 1 && 'text-gray-800 border-b-2'}`}
@@ -303,7 +305,7 @@ export function UserProfile() {
             </div>
           </div>
 
-          {tab === 0 && userData.user_roles.includes(BUSINESS_PERSONNEL_ROLE) && (
+          {tab === 0 && userRoles.includes(BUSINESS_PERSONNEL_ROLE) && (
             (userStartups ?? []).length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {userStartups?.map((startup) => (
@@ -324,7 +326,7 @@ export function UserProfile() {
               </div>
             )
           )}
-          {tab === 1 && userData.user_roles.includes(MENTOR_ROLE) && (
+          {tab === 1 && userRoles.includes(MENTOR_ROLE) && (
             (mentorshipData ?? []).length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                 {mentorshipData?.map((page) => (
