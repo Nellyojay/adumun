@@ -1,16 +1,75 @@
 
+import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router';
 import { Navbar } from '../components/Navbar';
 import { CircleDot, MapPin } from 'lucide-react';
 import { useCatalog } from '../contexts/catalogContext';
 import '../css/productDetail.css';
 import ScrollToTop from '../constants/scrollToTop';
+import supabase from '../supabaseClient';
 
 const ShowProductDetail = () => {
   const navigate = useNavigate();
+  const { collectionItems } = useCatalog();
   const { startupId, collection, productId } = useParams<{ startupId?: string; collection?: string; productId?: string }>();
-  const { getCollectionItemById } = useCatalog();
-  const selectedItem = productId ? getCollectionItemById(productId) : undefined;
+  const [resolvedItem, setResolvedItem] = useState<any | null>(null);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (!productId) {
+      setResolvedItem(null);
+      return;
+    }
+
+    const foundItem = collectionItems.find((item) => String(item.id) === String(productId));
+
+    if (foundItem) {
+      setResolvedItem(foundItem);
+      return;
+    }
+
+    let isMounted = true;
+
+    const fetchItem = async () => {
+      setLoading(true);
+      const { data, error } = await supabase
+        .from('collection_items')
+        .select('*')
+        .eq('id', productId)
+        .maybeSingle();
+
+      if (!isMounted) {
+        return;
+      }
+
+      if (!error && data) {
+        setResolvedItem(data);
+      } else {
+        setResolvedItem(null);
+      }
+
+      setLoading(false);
+    };
+
+    fetchItem();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [collectionItems, productId]);
+
+  const selectedItem = resolvedItem ?? collectionItems.find((item) => String(item.id) === String(productId)) ?? null;
+
+  if (loading && !selectedItem) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <Navbar />
+        <div className="mx-auto max-w-5xl px-4 py-20 text-center">
+          <p className="text-xl font-semibold text-gray-900">Loading product...</p>
+        </div>
+      </div>
+    );
+  }
 
   if (!selectedItem) {
     return (
@@ -48,7 +107,7 @@ const ShowProductDetail = () => {
               <img
                 src={selectedItem.image}
                 alt={selectedItem.name}
-                className="max-h-[calc(100vh-6rem)] max-w-[calc(100vw-2rem)] rounded-lg object-contain"
+                className="max-h-[calc(100vh-8rem)] max-w-[calc(100vw-2rem)] rounded-lg object-contain"
               />
             </div>
 
@@ -79,13 +138,13 @@ const ShowProductDetail = () => {
                   </span>
                 </div>
                 <div>
-                  <p className="text-md font-semibold text-gray-700">UGX {selectedItem.price}</p>
+                  <p className="text-md font-semibold text-gray-700">UGX {selectedItem.price?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') || "Price not specified"}</p>
                 </div>
               </div>
             </div>
 
             <div className="min-h-28 max-h-52">
-              <p className="leading-8 text-gray-600">{selectedItem.description}</p>
+              <p className="leading-8 text-gray-600">{selectedItem.description || '-- No description available --'}</p>
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2">
@@ -93,14 +152,14 @@ const ShowProductDetail = () => {
                 <p className="text-sm uppercase tracking-[0.28em] text-gray-500">Location</p>
                 <p className="mt-3 flex items-center gap-2 text-sm font-semibold text-gray-900">
                   <MapPin className="h-4 w-4 text-blue-600" />
-                  {selectedItem.location}
+                  {selectedItem.location || "Location not specified"}
                 </p>
               </div>
               <div className="rounded-3xl border border-gray-200 bg-gray-50 p-5 shadow-sm">
                 <p className="text-sm uppercase tracking-[0.28em] text-gray-500">Stock</p>
-                <p className="mt-3 text-lg font-semibold text-gray-900">{selectedItem.units}</p>
+                <p className="mt-3 text-lg font-semibold text-gray-900">{selectedItem.units || "Stock value not specified"}</p>
                 <p className="mt-2 text-sm text-gray-500">
-                  {selectedItem.status === 'Available' ? 'Ready for purchase' : 'Out of stock'}
+                  {selectedItem.status === 'Available' ? 'Ready for purchase' : selectedItem.status === 'Booked' ? 'Booked' : 'Out of stock'}
                 </p>
               </div>
             </div>

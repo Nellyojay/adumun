@@ -111,12 +111,12 @@ export function CatalogueItems() {
                         {item.status}
                       </span>
                       <span className="rounded-full bg-slate-950/70 px-3 py-1 text-xs text-slate-200 shadow-[0_15px_30px_rgba(0,0,0,0.45)]">
-                        ${item.price}
+                        ${item.price?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') || "Price not specified"}
                       </span>
                     </div>
 
-                    <div className="absolute inset-x-2 bottom-2 hidden rounded-2xl bg-gray-900/60 p-2 text-gray-400 shadow-md backdrop-blur-sm sm:block">
-                      <h2 className="ml-3 text-sm font-semibold not-sm:text-xs">{item.name}</h2>
+                    <div className="absolute w-full bottom-2 hidden rounded-2xl bg-gray-900/60 px-3 py-1 text-gray-400 shadow-md backdrop-blur-sm sm:block">
+                      <h2 className="text-sm not-sm:text-xs line-clamp-1">{item.name}</h2>
                     </div>
                   </Link>
                 );

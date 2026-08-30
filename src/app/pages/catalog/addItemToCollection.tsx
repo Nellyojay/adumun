@@ -139,7 +139,7 @@ export function AddItemToCollection() {
 
     setTimeout(() => {
       setSubmitted(false);
-      navigate(`/startup/${startupId}/catalog/${encodeURIComponent(collection || selectedCollectionId)}/${data.id}`);
+      navigate(`/startup/${startupId}/catalog/${encodeURIComponent(collection || selectedCollectionId)}/${data?.id}`);
     }, 4000);
   };
 
@@ -166,7 +166,8 @@ export function AddItemToCollection() {
             </div>
 
             <Link
-              to={startupId ? `/startup/${startupId}/catalog/${encodeURIComponent(collection || selectedCollectionId)}` : '/'}
+              to={startupId ? `/ startup / ${startupId} / catalog / ${encodeURIComponent(collection || selectedCollectionId)
+                }` : '/'}
               className="text-sm font-medium text-slate-500 hover:text-slate-800"
             >
               Back to collection
@@ -253,7 +254,8 @@ export function AddItemToCollection() {
                 <div className="flex flex-col-reverse gap-3 pt-2 sm:flex-row sm:justify-end">
                   <button
                     type="button"
-                    onClick={() => navigate(`/startup/${startupId}/catalog/${encodeURIComponent(collection || selectedCollectionId)}`)}
+                    onClick={() => navigate(`/ startup / ${startupId} / catalog / ${encodeURIComponent(collection || selectedCollectionId)
+                      }`)}
                     className="rounded-full border border-slate-300 px-5 py-3 text-sm font-medium text-slate-700 transition hover:bg-slate-100"
                   >
                     Cancel
