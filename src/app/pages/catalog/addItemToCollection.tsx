@@ -12,7 +12,7 @@ import { FOLDER, imageHandlerService } from '../../constants/imageHandler';
 export function AddItemToCollection() {
   const navigate = useNavigate();
   const { startupId, collection: collectionParam } = useParams<{ startupId?: string; collection?: string }>();
-  const { collections } = useCatalog();
+  const { collections, setSelectedCollection } = useCatalog();
   const { startupData } = useStartup();
   const { currentUser } = useUserData();
   const collection = decodeURIComponent(collectionParam || '');
@@ -35,6 +35,10 @@ export function AddItemToCollection() {
     status: 'Available',
     collection_id: selectedCollectionId,
   });
+
+  useEffect(() => {
+    setSelectedCollection(matchedCollection?.id || collection || null);
+  }, [collection, matchedCollection?.id, setSelectedCollection]);
 
   useEffect(() => {
     setFormData((prev) => ({

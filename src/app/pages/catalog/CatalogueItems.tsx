@@ -1,4 +1,5 @@
 import { Link, useNavigate, useParams } from 'react-router';
+import { useEffect } from 'react';
 import { Navbar } from '../../components/Navbar';
 import { CircleDot } from 'lucide-react';
 import { useCatalog } from '../../contexts/catalogContext';
@@ -6,7 +7,7 @@ import ScrollToTop from '../../constants/scrollToTop';
 import { useStartup } from '../../contexts/StartupProfileContext';
 
 export function CatalogueItems() {
-  const { collectionItems, collections } = useCatalog();
+  const { collectionItems, collections, setSelectedCollection, selectedCollection } = useCatalog();
   const { startupData } = useStartup();
   const navigate = useNavigate();
   const { startupId, collection: collectionParam } = useParams<{ startupId?: string; collection?: string }>();
@@ -21,21 +22,24 @@ export function CatalogueItems() {
   });
 
   const displayCollectionName = matchedCollection?.collection_name || collection;
+  const activeCollectionId = matchedCollection?.id || selectedCollection || collection || '';
 
-  const filteredItems = !collection
+  useEffect(() => {
+    const nextCollection = matchedCollection?.id || collection || null;
+    setSelectedCollection(nextCollection);
+  }, [matchedCollection?.id, collection, setSelectedCollection]);
+
+  const filteredItems = !activeCollectionId
     ? collectionItems
     : collectionItems.filter((item) => {
-      const collectionId = typeof item.collection_id === 'object' && item.collection_id ? item.collection_id.id : '';
-      const collectionName =
-        typeof item.collection_id === 'object' && item.collection_id && 'collection_name' in item.collection_id
-          ? String(item.collection_id.collection_name)
-          : '';
+      const itemCollectionId =
+        typeof item.collection_id === 'string'
+          ? item.collection_id
+          : item.collection_id && typeof item.collection_id === 'object'
+            ? String(item.collection_id.id || '')
+            : '';
 
-      return (
-        collectionId.toLowerCase() === normalizedCollection ||
-        collectionName.toLowerCase() === normalizedCollection ||
-        item.category.toLowerCase() === normalizedCollection
-      );
+      return itemCollectionId.toLowerCase() === activeCollectionId.toLowerCase();
     });
 
   return (

@@ -45,6 +45,8 @@ export type CatalogContextType = {
   getCollectionItemById: (id: string) => CollectionItems | undefined;
   collections: Collection[];
   collectionItems: CollectionItems[];
+  selectedCollection: string | null;
+  setSelectedCollection: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
 const catalogueItems: CatalogueItem[] = [
@@ -151,15 +153,21 @@ const CatalogContext = createContext<CatalogContextType | null>(null);
 export const CatalogProvider = ({ children }: { children: React.ReactNode }) => {
   const getItemById = (id: string) => catalogueItems.find((item) => item.id === id);
   const [collections, setCollections] = useState<Collection[]>([]);
-  const [collectionItems, setCollectionItems] = useState<CollectionItems[]>([]); // State for fetched catalogue items
+  const [collectionItems, setCollectionItems] = useState<CollectionItems[]>([]);
+  const [selectedCollection, setSelectedCollection] = useState<string | null>(null);
   const { selectedStartup } = useStartup();
 
   const getCollectionItemById = (id: string) => collectionItems.find((item) => item.id === id);
 
   useEffect(() => {
-    const fetchCollections = async () => {
-      if (!selectedStartup) return;
+    if (!selectedStartup) {
+      setCollections([]);
+      setCollectionItems([]);
+      setSelectedCollection(null);
+      return;
+    }
 
+    const fetchCollections = async () => {
       const { data, error } = await supabase
         .from('collections')
         .select('id, collection_name, startup_id, item_count')
@@ -171,18 +179,17 @@ export const CatalogProvider = ({ children }: { children: React.ReactNode }) => 
       }
 
       if (data) {
-        console.log('Fetched collections:', data);
         setCollections(data);
       }
     };
 
     const fetchCollectionItems = async () => {
-      if (!selectedStartup) return;
-
-      const { data, error } = await supabase
-        .from('catalogue_items')
+      let query = supabase
+        .from('collection_items')
         .select('*')
-        .eq('startup_id', selectedStartup);
+        .eq('collection_id', selectedCollection);
+
+      const { data, error } = await query;
 
       if (error) {
         console.error('Error fetching catalogue items:', error);
@@ -190,14 +197,14 @@ export const CatalogProvider = ({ children }: { children: React.ReactNode }) => 
       }
 
       if (data) {
-        console.log('Fetched catalogue items:', data);
+        console.log('Fetched collection items:', data);
         setCollectionItems(data);
       }
-    }
+    };
 
     fetchCollections();
     fetchCollectionItems();
-  }, [selectedStartup]);
+  }, [selectedStartup, selectedCollection]);
 
   return (
     <CatalogContext.Provider value={{
@@ -205,7 +212,9 @@ export const CatalogProvider = ({ children }: { children: React.ReactNode }) => 
       getItemById,
       getCollectionItemById,
       collections,
-      collectionItems
+      collectionItems,
+      selectedCollection,
+      setSelectedCollection,
     }}>
       {children}
     </CatalogContext.Provider>
@@ -221,7 +230,9 @@ export const useCatalog = () => {
       getItemById: () => undefined,
       getCollectionItemById: () => undefined,
       collections: [],
-      collectionItems: []
+      collectionItems: [],
+      selectedCollection: null,
+      setSelectedCollection: () => undefined,
     } as CatalogContextType;
   }
 
