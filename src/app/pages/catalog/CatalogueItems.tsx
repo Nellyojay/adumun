@@ -56,13 +56,18 @@ export function CatalogueItems() {
               {displayCollectionName ? `${displayCollectionName} collection` : 'All catalogue items'}
               <span className="text-slate-500"> - {startupName}</span>
             </h1>
-            {startupId && <p className="mt-2 text-sm text-slate-500">Startup: {startupName}</p>}
-            {displayCollectionName && (
-              <p className="mt-2 text-sm text-slate-500">
-                Showing products from the {displayCollectionName.toLowerCase()} collection.
-              </p>
-            )}
           </div>
+
+          {startupId && (
+            <div className="mb-6 flex justify-end">
+              <Link
+                to={`/startup/${startupId}/catalog/${encodeURIComponent(collection || '')}/add-item`}
+                className="inline-flex items-center justify-center rounded-full bg-cyan-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-cyan-700"
+              >
+                Add item to collection
+              </Link>
+            </div>
+          )}
 
           {filteredItems.length === 0 ? (
             <div className="rounded-3xl border border-dashed border-slate-300 bg-white p-8 text-center text-slate-700">

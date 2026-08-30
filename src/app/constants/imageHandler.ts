@@ -7,7 +7,8 @@ export const FOLDER = {
   STARTUP_PROFILE: "startup_profile_image",
   STARTUP_BANNER: "startup_banner",
   POST: "post_image",
-  MENTORSHIP_BANNER: "mentorship_banner"
+  MENTORSHIP_BANNER: "mentorship_banner",
+  COLLECTION_ITEM: "collection_item"
 } as const;
 
 type FolderType = (typeof FOLDER)[keyof typeof FOLDER];
@@ -33,6 +34,10 @@ const TABLE_MAP = {
     table: "mentorship_page",
     column: "image_url",
   },
+  [FOLDER.COLLECTION_ITEM]: {
+    table: "collection_items",
+    column: "image"
+  }
 };
 
 const compressImage = async (file: File | Blob, maxFileSize: number) => {
@@ -236,7 +241,8 @@ export const imageHandlerService = {
     userId: string,
     startupId?: string,
     postId?: string,
-    mentorshipId?: string
+    mentorshipId?: string,
+    collectionId?: string
   ): Promise<string | null> => {
     if (!file) return null;
 
@@ -261,6 +267,8 @@ export const imageHandlerService = {
       case FOLDER.MENTORSHIP_BANNER:
         folderPath = `${folder}/${mentorshipId}/banner_${timestamp}.jpg`;
         break;
+      case FOLDER.COLLECTION_ITEM:
+        folderPath = `${folder}/${startupId}/${collectionId}/item_${timestamp}.jpg`;
     }
 
     try {
@@ -336,6 +344,10 @@ export const imageHandlerService = {
 
       if (folder === FOLDER.MENTORSHIP_BANNER) {
         query = query.eq("id", mentorshipId).eq("user_id", userId);
+      }
+
+      if (folder === FOLDER.COLLECTION_ITEM) {
+        query = query.eq("id", collectionId);
       }
 
       const { error: updateError } = await query;

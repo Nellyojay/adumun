@@ -23,6 +23,7 @@ import EditMentorship from "./pages/EditMentorshipPage";
 import { Catalog } from "./pages/catalog/Catalog";
 import { CatalogueItems } from "./pages/catalog/CatalogueItems";
 import { CreateCollection } from "./pages/catalog/createCollection";
+import { AddItemToCollection } from "./pages/catalog/addItemToCollection";
 import ShowProductDetail from "./pages/ShowProductDetail";
 import { ManageAccount } from "./pages/ManageAccount";
 import { ChangePassword } from "./pages/ChangePassword";
@@ -81,6 +82,10 @@ export const router = createHashRouter([
   {
     path: "/startup/:startupId/catalog/:collection",
     Component: CatalogueItems,
+  },
+  {
+    path: "/startup/:startupId/catalog/:collection/add-item",
+    Component: AddItemToCollection,
   },
   {
     path: "/startup/:startupId/catalog/:collection/:productId",
