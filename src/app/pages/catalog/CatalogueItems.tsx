@@ -1,8 +1,8 @@
 import { Link, useNavigate, useParams } from 'react-router';
-import { Navbar } from '../components/Navbar';
+import { Navbar } from '../../components/Navbar';
 import { CircleDot } from 'lucide-react';
-import { useCatalog } from '../contexts/catalogContext';
-import ScrollToTop from '../constants/scrollToTop';
+import { useCatalog } from '../../contexts/catalogContext';
+import ScrollToTop from '../../constants/scrollToTop';
 
 export function CatalogueItems() {
   const { items } = useCatalog();

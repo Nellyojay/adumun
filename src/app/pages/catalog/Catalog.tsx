@@ -1,15 +1,22 @@
 
-import { Link, useNavigate } from 'react-router';
-import { Navbar } from '../components/Navbar';
-import { useCatalog } from '../contexts/catalogContext';
-import ScrollToTop from '../constants/scrollToTop';
-import { useStartup } from '../contexts/StartupProfileContext';
+import { Link, useNavigate, useParams } from 'react-router';
+import { Navbar } from '../../components/Navbar';
+import { useCatalog } from '../../contexts/catalogContext';
+import ScrollToTop from '../../constants/scrollToTop';
+import { useStartup } from '../../contexts/StartupProfileContext';
+import { useEffect } from 'react';
 
 export function Catalog() {
-  const { items } = useCatalog();
-  const { selectedStartup } = useStartup();
+  const { collections } = useCatalog();
+  const { setSelectedStartup } = useStartup();
+  const startupId = useParams<{ startupId?: string }>().startupId;
   const navigate = useNavigate();
-  const collections = Array.from(new Set(items.map((item) => item.collection)));
+
+  useEffect(() => {
+    if (startupId) {
+      setSelectedStartup(startupId);
+    }
+  }, [startupId, setSelectedStartup]);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -32,9 +39,9 @@ export function Catalog() {
               </p>
             </div>
 
-            {selectedStartup ? (
+            {startupId ? (
               <Link
-                to={`/startup/${selectedStartup}/catalog/create`}
+                to={`/startup/${startupId}/catalog/create`}
                 className="inline-flex items-center justify-center rounded-full bg-cyan-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-cyan-700"
               >
                 Create collection
@@ -52,21 +59,20 @@ export function Catalog() {
 
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {collections.map((collection) => {
-              const count = items.filter((item) => item.collection === collection).length;
               return (
                 <Link
-                  key={collection}
-                  to={selectedStartup ? `/startup/${selectedStartup}/catalog/${encodeURIComponent(collection)}` : '#'}
+                  key={collection.id}
+                  to={startupId ? `/startup/${startupId}/catalog/${encodeURIComponent(collection.id)}` : '#'}
                   onClick={(event) => {
-                    if (!selectedStartup) {
+                    if (!startupId) {
                       event.preventDefault();
                     }
                   }}
                   className="group block overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition sm:hover:shadow-lg"
                 >
-                  <div className="text-sm uppercase tracking-[0.24em] text-cyan-600">{collection}</div>
-                  <h2 className="mt-4 text-2xl font-semibold text-slate-900">{count} item{count === 1 ? '' : 's'}</h2>
-                  <p className="mt-3 text-sm leading-6 text-slate-500">View only {collection.toLowerCase()} products in the catalogue.</p>
+                  <div className="text-sm uppercase tracking-[0.24em] text-cyan-600">{collection.collection_name}</div>
+                  <h2 className="mt-4 text-2xl font-semibold text-slate-900">{collection.item_count || 0} item{collection.item_count === 1 ? '' : 's'}</h2>
+                  <p className="mt-3 text-sm leading-6 text-slate-500">View only {collection.collection_name.toLowerCase()} products in the catalogue.</p>
                   <div className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-cyan-600 transition group-hover:text-cyan-700">
                     <span>Explore</span>
                     <span aria-hidden="true">→</span>

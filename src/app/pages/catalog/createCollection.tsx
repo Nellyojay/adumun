@@ -36,8 +36,8 @@ export function CreateCollection() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!formData.collection_name.trim() || !formData.description.trim()) {
-      setErrorMessage('Please fill in all required fields.');
+    if (!formData.collection_name.trim()) {
+      setErrorMessage('Please fill in the collection name.');
       return;
     }
 

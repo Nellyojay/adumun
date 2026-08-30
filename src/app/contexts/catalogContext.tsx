@@ -1,4 +1,6 @@
-import React, { createContext, useContext } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import { useStartup } from './StartupProfileContext';
+import supabase from '../supabaseClient';
 
 export type CatalogueItem = {
   id: string;
@@ -15,9 +17,17 @@ export type CatalogueItem = {
   cover: string;
 };
 
+export type Collection = {
+  id: string;
+  collection_name: string;
+  startup_id: string;
+  item_count: number;
+};
+
 export type CatalogContextType = {
   items: CatalogueItem[];
   getItemById: (id: string) => CatalogueItem | undefined;
+  collections: Collection[];
 };
 
 const catalogueItems: CatalogueItem[] = [
@@ -123,9 +133,34 @@ const CatalogContext = createContext<CatalogContextType | null>(null);
 
 export const CatalogProvider = ({ children }: { children: React.ReactNode }) => {
   const getItemById = (id: string) => catalogueItems.find((item) => item.id === id);
+  const [collections, setCollections] = useState<Collection[]>([]);
+  const { selectedStartup } = useStartup();
+
+  useEffect(() => {
+    const fetchCollections = async () => {
+      if (!selectedStartup) return;
+
+      const { data, error } = await supabase
+        .from('collections')
+        .select('id, collection_name, startup_id, item_count')
+        .eq('startup_id', selectedStartup);
+
+      if (error) {
+        console.error('Error fetching collections:', error);
+        return;
+      }
+
+      if (data) {
+        console.log('Fetched collections:', data);
+        setCollections(data);
+      }
+    };
+
+    fetchCollections();
+  }, [selectedStartup]);
 
   return (
-    <CatalogContext.Provider value={{ items: catalogueItems, getItemById }}>
+    <CatalogContext.Provider value={{ items: catalogueItems, getItemById, collections }}>
       {children}
     </CatalogContext.Provider>
   );
