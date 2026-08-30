@@ -57,30 +57,37 @@ export function Catalog() {
             )}
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {collections.map((collection) => {
-              return (
-                <Link
-                  key={collection.id}
-                  to={startupId ? `/startup/${startupId}/catalog/${encodeURIComponent(collection.id)}` : '#'}
-                  onClick={(event) => {
-                    if (!startupId) {
-                      event.preventDefault();
-                    }
-                  }}
-                  className="group block overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition sm:hover:shadow-lg"
-                >
-                  <div className="text-sm uppercase tracking-[0.24em] text-cyan-600">{collection.collection_name}</div>
-                  <h2 className="mt-4 text-2xl font-semibold text-slate-900">{collection.item_count || 0} item{collection.item_count === 1 ? '' : 's'}</h2>
-                  <p className="mt-3 text-sm leading-6 text-slate-500">View only {collection.collection_name.toLowerCase()} products in the catalogue.</p>
-                  <div className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-cyan-600 transition group-hover:text-cyan-700">
-                    <span>Explore</span>
-                    <span aria-hidden="true">→</span>
-                  </div>
-                </Link>
-              );
-            })}
-          </div>
+          {collections.length > 0
+            ? (
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                {collections.map((collection) => {
+                  return (
+                    <Link
+                      key={collection.id}
+                      to={startupId ? `/startup/${startupId}/catalog/${encodeURIComponent(collection.id)}` : '#'}
+                      onClick={(event) => {
+                        if (!startupId) {
+                          event.preventDefault();
+                        }
+                      }}
+                      className="group block overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition sm:hover:shadow-lg"
+                    >
+                      <div className="text-sm uppercase tracking-[0.24em] text-cyan-600">{collection.collection_name}</div>
+                      <h2 className="mt-4 text-2xl font-semibold text-slate-900">{collection.item_count || 0} item{collection.item_count === 1 ? '' : 's'}</h2>
+                      <p className="mt-3 text-sm leading-6 text-slate-500">View only {collection.collection_name.toLowerCase()} products in the catalogue.</p>
+                      <div className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-cyan-600 transition group-hover:text-cyan-700">
+                        <span>Explore</span>
+                        <span aria-hidden="true">→</span>
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
+            ) : (
+              <div className="rounded-3xl border border-dashed border-slate-300 bg-white p-8 text-center text-slate-700">
+                No collections available.
+              </div>
+            )}
         </div>
       </div>
     </div>

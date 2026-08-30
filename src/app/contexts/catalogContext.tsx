@@ -17,6 +17,21 @@ export type CatalogueItem = {
   cover: string;
 };
 
+export type CollectionItems = {
+  id: string;
+  name: string;
+  price: string;
+  status: 'Available' | 'Sold' | 'Booked';
+  units: string;
+  category: string;
+  description: string;
+  image: string;
+  location: string;
+  collection_id: {
+    id: string;
+  };
+}
+
 export type Collection = {
   id: string;
   collection_name: string;
@@ -27,7 +42,9 @@ export type Collection = {
 export type CatalogContextType = {
   items: CatalogueItem[];
   getItemById: (id: string) => CatalogueItem | undefined;
+  getCollectionItemById: (id: string) => CollectionItems | undefined;
   collections: Collection[];
+  collectionItems: CollectionItems[];
 };
 
 const catalogueItems: CatalogueItem[] = [
@@ -134,7 +151,10 @@ const CatalogContext = createContext<CatalogContextType | null>(null);
 export const CatalogProvider = ({ children }: { children: React.ReactNode }) => {
   const getItemById = (id: string) => catalogueItems.find((item) => item.id === id);
   const [collections, setCollections] = useState<Collection[]>([]);
+  const [collectionItems, setCollectionItems] = useState<CollectionItems[]>([]); // State for fetched catalogue items
   const { selectedStartup } = useStartup();
+
+  const getCollectionItemById = (id: string) => collectionItems.find((item) => item.id === id);
 
   useEffect(() => {
     const fetchCollections = async () => {
@@ -156,11 +176,37 @@ export const CatalogProvider = ({ children }: { children: React.ReactNode }) => 
       }
     };
 
+    const fetchCollectionItems = async () => {
+      if (!selectedStartup) return;
+
+      const { data, error } = await supabase
+        .from('catalogue_items')
+        .select('*')
+        .eq('startup_id', selectedStartup);
+
+      if (error) {
+        console.error('Error fetching catalogue items:', error);
+        return;
+      }
+
+      if (data) {
+        console.log('Fetched catalogue items:', data);
+        setCollectionItems(data);
+      }
+    }
+
     fetchCollections();
+    fetchCollectionItems();
   }, [selectedStartup]);
 
   return (
-    <CatalogContext.Provider value={{ items: catalogueItems, getItemById, collections }}>
+    <CatalogContext.Provider value={{
+      items: catalogueItems,
+      getItemById,
+      getCollectionItemById,
+      collections,
+      collectionItems
+    }}>
       {children}
     </CatalogContext.Provider>
   );
@@ -168,8 +214,16 @@ export const CatalogProvider = ({ children }: { children: React.ReactNode }) => 
 
 export const useCatalog = () => {
   const context = useContext(CatalogContext);
+
   if (!context) {
-    throw new Error('useCatalog must be used within a CatalogProvider');
+    return {
+      items: [],
+      getItemById: () => undefined,
+      getCollectionItemById: () => undefined,
+      collections: [],
+      collectionItems: []
+    } as CatalogContextType;
   }
+
   return context;
 };
