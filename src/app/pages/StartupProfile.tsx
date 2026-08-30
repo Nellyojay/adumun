@@ -283,7 +283,7 @@ export function StartupProfile() {
       <Navbar showAuth={false} />
       <ScrollToTop />
 
-      <main className="max-w-6xl mx-auto pt-16 pb-20">
+      <main className="max-w-6xl mx-auto pt-12 pb-20">
         {/* Banner Image */}
         <div className="relative w-full h-48 md:h-64 bg-linear-to-br from-gray-500 via-gray-700 to-gray-900">
           <img
@@ -295,7 +295,7 @@ export function StartupProfile() {
 
         {/* Profile Header Section */}
         <div className="flex flex-col items-center">
-          <div className="bg-white -mt-8 mx-4 rounded-3xl shadow-lg p-6 relative z-10">
+          <div className="bg-white -mt-8 min-w-lg mx-4 rounded-3xl shadow-lg p-6 relative z-10">
             {/* Logo overlapping banner */}
             <div className="flex flex-col items-center md:flex-row md:items-start gap-4">
               <div className="w-28 h-28 rounded-full shadow-xl -mt-14 bg-gray-200 flex items-center justify-center border border-gray-300">
@@ -480,18 +480,21 @@ export function StartupProfile() {
                           }}
                           className={`${lineClamp ? 'line-clamp-0' : 'line-clamp-5'}`}
                         >{startup?.description}</a>
-                        <span className='text-gray-400 font-semibold'>
-                          <button
-                            onClick={() => setLineClamp(!lineClamp)}
-                            className='hover:underline'
-                          >
-                            {lineClamp ? 'collapse' : 'more'}
-                          </button>
-                        </span>
+                        {startup?.description ? (
+                          <span className='text-gray-400 font-semibold'>
+                            <button
+                              onClick={() => setLineClamp(!lineClamp)}
+                              className='hover:underline'
+                            >
+                              {lineClamp ? 'collapse' : 'more'}
+                            </button>
+                          </span>) : (
+                          <span className="text-gray-500">-- No description provided --</span>
+                        )}
                       </p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
                         <h3 className="text-sm font-semibold text-gray-900 mb-2">Contact Information</h3>
                         <div className="space-y-2 text-sm text-gray-700">
@@ -522,7 +525,7 @@ export function StartupProfile() {
                         </div>
                       </div>
 
-                      <div>
+                      <div className="border-t sm:border-t-0 sm:border-l border-gray-200 pt-4 sm:pt-0 pl-0 sm:pl-4">
                         <h3 className="text-sm font-semibold text-gray-900 mb-2">Business Details</h3>
                         <div className="space-y-2 text-sm text-gray-700">
                           <div className="flex items-center space-x-2">
@@ -581,7 +584,7 @@ export function StartupProfile() {
 
           <Link
             to="/catalog"
-            className="mt-4 inline-flex items-center justify-center rounded-2xl bg-linear-to-r from-blue-400 via-blue-500 to-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-500/20 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl hover:bg-linear-to-r hover:from-blue-600 hover:via-blue-700 hover:to-blue-800"
+            className="inline-flex pt-8 -mt-6 items-center justify-center w-lg rounded-b-2xl bg-linear-to-r from-blue-400 via-blue-500 to-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-500/20 transition-all duration-200 sm:hover:translate-y-1 hover:bg-linear-to-r hover:from-blue-600 hover:via-blue-700 hover:to-blue-800"
           >
             View Catalogue
           </Link>
