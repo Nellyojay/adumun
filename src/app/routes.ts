@@ -55,6 +55,10 @@ export const router = createHashRouter([
     Component: FollowingStartups,
   },
   {
+    path: "/create",
+    Component: CreateStartup,
+  },
+  {
     path: "/startup/:id",
     Component: StartupProfile,
   },
@@ -83,14 +87,6 @@ export const router = createHashRouter([
     Component: ShowProductDetail,
   },
   {
-    path: "/mentorship-page/:id/add-post",
-    Component: AddPost,
-  },
-  {
-    path: "/create",
-    Component: CreateStartup,
-  },
-  {
     path: "/login",
     Component: Login,
   },
@@ -115,12 +111,16 @@ export const router = createHashRouter([
     Component: MentorshipPage,
   },
   {
-    path: "/mentorship-page/create",
-    Component: CreateMentorship,
+    path: "/mentorship-page/:id/add-post",
+    Component: AddPost,
   },
   {
     path: "/mentorship-page/:id/edit",
     Component: EditMentorship,
+  },
+  {
+    path: "/mentorship-page/create",
+    Component: CreateMentorship,
   },
   {
     path: "/settings",
