@@ -22,6 +22,7 @@ import CreateMentorship from "./pages/CreateMentorship";
 import EditMentorship from "./pages/EditMentorshipPage";
 import { Catalog } from "./pages/Catalog";
 import { CatalogueItems } from "./pages/CatalogueItems";
+import { CreateCollection } from "./pages/catalog/createCollection";
 import ShowProductDetail from "./pages/ShowProductDetail";
 import { ManageAccount } from "./pages/ManageAccount";
 import { ChangePassword } from "./pages/ChangePassword";
@@ -64,6 +65,22 @@ export const router = createHashRouter([
   {
     path: "/startup/:id/add-post",
     Component: AddPost,
+  },
+  {
+    path: "/startup/:startupId/catalog",
+    Component: Catalog,
+  },
+  {
+    path: "/startup/:startupId/catalog/create",
+    Component: CreateCollection,
+  },
+  {
+    path: "/startup/:startupId/catalog/:collection",
+    Component: CatalogueItems,
+  },
+  {
+    path: "/startup/:startupId/catalog/:collection/:productId",
+    Component: ShowProductDetail,
   },
   {
     path: "/mentorship-page/:id/add-post",
@@ -112,18 +129,6 @@ export const router = createHashRouter([
   {
     path: "/help-center",
     Component: HelpCenter,
-  },
-  {
-    path: "/catalog",
-    Component: Catalog,
-  },
-  {
-    path: "/catalogue-items",
-    Component: CatalogueItems,
-  },
-  {
-    path: "/catalogue/:id",
-    Component: ShowProductDetail,
   },
   {
     path: "/change-password",

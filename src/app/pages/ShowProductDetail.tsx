@@ -8,9 +8,9 @@ import ScrollToTop from '../constants/scrollToTop';
 
 const ShowProductDetail = () => {
   const navigate = useNavigate();
-  const { id } = useParams<{ id: string }>();
+  const { startupId, collection, productId } = useParams<{ startupId?: string; collection?: string; productId?: string }>();
   const { getItemById } = useCatalog();
-  const selectedItem = id ? getItemById(id) : undefined;
+  const selectedItem = productId ? getItemById(productId) : undefined;
 
   if (!selectedItem) {
     return (
@@ -19,7 +19,10 @@ const ShowProductDetail = () => {
         <div className="mx-auto max-w-5xl px-4 py-20 text-center">
           <p className="text-xl font-semibold text-gray-900">Product not found</p>
           <p className="mt-3 text-gray-600">The selected catalogue item does not exist.</p>
-          <Link to="/catalogue" className="mt-6 inline-flex rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-white transition hover:bg-blue-700">
+          <Link
+            to={startupId && collection ? `/startup/${startupId}/catalog/${encodeURIComponent(collection)}` : '/'}
+            className="mt-6 inline-flex rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-white transition hover:bg-blue-700"
+          >
             Back to catalogue
           </Link>
         </div>
@@ -64,7 +67,7 @@ const ShowProductDetail = () => {
 
           <div className="space-y-6 bg-white rounded-lg p-4 lg:p-8">
 
-            <div className="w-full hidden md:block rounded-lg py-2 px-4 shadow-sm">
+            <div className="w-full hidden sm:block rounded-lg py-2 px-4 shadow-sm">
               <div className="flex flex-col gap-2">
                 <div className="flex items-center justify-between gap-4">
                   <span className="text-sm uppercase tracking-widest text-gray-700">{selectedItem.name}</span>
@@ -102,7 +105,7 @@ const ShowProductDetail = () => {
             </div>
             <button
               type="button"
-              onClick={() => navigate(-1)}
+              onClick={() => navigate(startupId && collection ? `/startup/${startupId}/catalog/${encodeURIComponent(collection)}` : -1 as any)}
               className="inline-flex w-full items-center justify-center rounded-3xl bg-blue-600 px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-white transition hover:bg-blue-700"
             >
               Back to catalogue

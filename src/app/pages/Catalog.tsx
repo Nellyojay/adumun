@@ -3,9 +3,11 @@ import { Link, useNavigate } from 'react-router';
 import { Navbar } from '../components/Navbar';
 import { useCatalog } from '../contexts/catalogContext';
 import ScrollToTop from '../constants/scrollToTop';
+import { useStartup } from '../contexts/StartupProfileContext';
 
 export function Catalog() {
   const { items } = useCatalog();
+  const { selectedStartup } = useStartup();
   const navigate = useNavigate();
   const collections = Array.from(new Set(items.map((item) => item.collection)));
 
@@ -21,12 +23,31 @@ export function Catalog() {
             <p className="text-sm font-semibold">Back</p>
           </button>
 
-          <div className="mb-10">
-            <p className="text-sm uppercase tracking-[0.28em] text-cyan-600">Collections</p>
-            <h1 className="mt-3 text-4xl font-semibold tracking-tight text-slate-900">Shop by collection</h1>
-            <p className="mt-3 max-w-2xl text-sm text-slate-500">
-              Browse curated collections like shoes, clothes, sweaters, trousers and more. Select a collection to view matching catalogue items.
-            </p>
+          <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <div>
+              <p className="text-sm uppercase tracking-[0.28em] text-cyan-600">Collections</p>
+              <h1 className="mt-3 text-4xl font-semibold tracking-tight text-slate-900">Shop by collection</h1>
+              <p className="mt-3 max-w-2xl text-sm text-slate-500">
+                Browse curated collections like shoes, clothes, sweaters, trousers and more. Select a collection to view matching catalogue items.
+              </p>
+            </div>
+
+            {selectedStartup ? (
+              <Link
+                to={`/startup/${selectedStartup}/catalog/create`}
+                className="inline-flex items-center justify-center rounded-full bg-cyan-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-cyan-700"
+              >
+                Create collection
+              </Link>
+            ) : (
+              <button
+                type="button"
+                disabled
+                className="inline-flex cursor-not-allowed items-center justify-center rounded-full bg-slate-300 px-5 py-3 text-sm font-semibold text-slate-600 shadow-sm"
+              >
+                Create collection
+              </button>
+            )}
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -35,7 +56,12 @@ export function Catalog() {
               return (
                 <Link
                   key={collection}
-                  to={`/catalogue-items?collection=${encodeURIComponent(collection)}`}
+                  to={selectedStartup ? `/startup/${selectedStartup}/catalog/${encodeURIComponent(collection)}` : '#'}
+                  onClick={(event) => {
+                    if (!selectedStartup) {
+                      event.preventDefault();
+                    }
+                  }}
                   className="group block overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition sm:hover:shadow-lg"
                 >
                   <div className="text-sm uppercase tracking-[0.24em] text-cyan-600">{collection}</div>

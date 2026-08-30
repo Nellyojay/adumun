@@ -59,6 +59,8 @@ type StartupContextType = {
   startupLoading: boolean;
   loadingPosts: boolean;
   posts: Post[];
+  selectedStartup: string | null;
+  setSelectedStartup: React.Dispatch<React.SetStateAction<string | null>>;
   fetchStartupPosts: () => void;
   handleDeletePost: (postId: number) => void;
   getStartupData: () => void;
@@ -74,6 +76,7 @@ export const StartupProvider = ({ children }: { children: React.ReactNode }) => 
   const [posts, setPosts] = useState<Post[]>([]);
   const [startupLoading, setStartupLoading] = useState(false);
   const [startupData, setStartupData] = useState<StartupData[] | null>([]);
+  const [selectedStartup, setSelectedStartup] = useState<string | null>(null);
 
   const getStartupData = useCallback(async () => {
     setStartupLoading(true)
@@ -178,7 +181,19 @@ export const StartupProvider = ({ children }: { children: React.ReactNode }) => 
   }, [getStartupData, currentUser]);
 
   return (
-    <StartupContext.Provider value={{ startupData, startupLoading, loadingPosts, posts, getStartupData, setLoadingPosts, setPosts, fetchStartupPosts, handleDeletePost }}>
+    <StartupContext.Provider value={{
+      startupData,
+      startupLoading,
+      loadingPosts,
+      posts,
+      selectedStartup,
+      setSelectedStartup,
+      getStartupData,
+      setLoadingPosts,
+      setPosts,
+      fetchStartupPosts,
+      handleDeletePost
+    }}>
       {children}
     </StartupContext.Provider>
   );

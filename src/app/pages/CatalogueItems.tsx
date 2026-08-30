@@ -1,4 +1,4 @@
-import { Link, useNavigate, useSearchParams } from 'react-router';
+import { Link, useNavigate, useParams } from 'react-router';
 import { Navbar } from '../components/Navbar';
 import { CircleDot } from 'lucide-react';
 import { useCatalog } from '../contexts/catalogContext';
@@ -6,9 +6,9 @@ import ScrollToTop from '../constants/scrollToTop';
 
 export function CatalogueItems() {
   const { items } = useCatalog();
-  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const collection = searchParams.get('collection') || '';
+  const { startupId, collection: collectionParam } = useParams<{ startupId?: string; collection?: string }>();
+  const collection = decodeURIComponent(collectionParam || '');
   const filteredItems = collection
     ? items.filter((item) => item.collection.toLowerCase() === collection.toLowerCase())
     : items;
@@ -29,6 +29,9 @@ export function CatalogueItems() {
             <h1 className="mt-2 text-3xl font-semibold text-slate-900">
               {collection ? `${collection} collection` : 'All catalogue items'}
             </h1>
+            {startupId && (
+              <p className="mt-2 text-sm text-slate-500">Startup: {startupId}</p>
+            )}
             {collection && (
               <p className="mt-2 text-sm text-slate-500">Showing products from the {collection.toLowerCase()} collection.</p>
             )}
@@ -43,7 +46,12 @@ export function CatalogueItems() {
               {filteredItems.map((item) => (
                 <Link
                   key={item.id}
-                  to={`/catalogue/${item.id}`}
+                  to={startupId ? `/startup/${startupId}/catalog/${encodeURIComponent(collection)}/${item.id}` : '#'}
+                  onClick={(event) => {
+                    if (!startupId) {
+                      event.preventDefault();
+                    }
+                  }}
                   className="group relative overflow-hidden border border-white/10 bg-slate-900/90 p-0 text-left shadow-[0_20px_80px_rgba(15,23,42,0.45)] transition-all duration-300"
                 >
                   <img
