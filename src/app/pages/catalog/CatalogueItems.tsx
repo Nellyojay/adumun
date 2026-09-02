@@ -5,6 +5,7 @@ import { CircleDot } from 'lucide-react';
 import { useCatalog } from '../../contexts/catalogContext';
 import ScrollToTop from '../../constants/scrollToTop';
 import { useStartup } from '../../contexts/StartupProfileContext';
+import { usePageDataOwner } from '../../constants/ownerTag';
 
 export function CatalogueItems() {
   const { collectionItems, collections, setSelectedCollection, selectedCollection } = useCatalog();
@@ -13,7 +14,9 @@ export function CatalogueItems() {
   const { startupId, collection: collectionParam } = useParams<{ startupId?: string; collection?: string }>();
   const collection = decodeURIComponent(collectionParam || '');
   const normalizedCollection = collection.toLowerCase();
-  const startupName = startupData?.find((startup) => startup.id === startupId)?.name ?? 'Unknown';
+  const activeStartup = startupData?.find((startup) => startup.id === startupId);
+  const startupName = activeStartup?.name ?? 'Unknown';
+  const isOwner = usePageDataOwner(activeStartup);
 
   const matchedCollection = collections.find((entry) => {
     const collectionId = String(entry.id || '').toLowerCase();
@@ -62,7 +65,7 @@ export function CatalogueItems() {
             </h1>
           </div>
 
-          {startupId && (
+          {isOwner && startupId && (
             <div className="mb-6 flex justify-end">
               <Link
                 to={`/startup/${startupId}/catalog/${encodeURIComponent(collection || '')}/add-item`}

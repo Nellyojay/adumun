@@ -5,12 +5,15 @@ import { useCatalog } from '../../contexts/catalogContext';
 import ScrollToTop from '../../constants/scrollToTop';
 import { useStartup } from '../../contexts/StartupProfileContext';
 import { useEffect } from 'react';
+import { usePageDataOwner } from '../../constants/ownerTag';
 
 export function Catalog() {
   const { collections } = useCatalog();
-  const { setSelectedStartup } = useStartup();
+  const { setSelectedStartup, startupData } = useStartup();
   const startupId = useParams<{ startupId?: string }>().startupId;
   const navigate = useNavigate();
+  const activeStartup = startupData?.find((startup) => startup.id === startupId);
+  const isOwner = usePageDataOwner(activeStartup);
 
   useEffect(() => {
     if (startupId) {
@@ -39,21 +42,13 @@ export function Catalog() {
               </p>
             </div>
 
-            {startupId ? (
+            {isOwner && startupId && (
               <Link
                 to={`/startup/${startupId}/catalog/create`}
                 className="inline-flex items-center justify-center rounded-full bg-cyan-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-cyan-700"
               >
                 Create collection
               </Link>
-            ) : (
-              <button
-                type="button"
-                disabled
-                className="inline-flex cursor-not-allowed items-center justify-center rounded-full bg-slate-300 px-5 py-3 text-sm font-semibold text-slate-600 shadow-sm"
-              >
-                Create collection
-              </button>
             )}
           </div>
 

@@ -165,7 +165,7 @@ const ShowProductDetail = () => {
             </div>
             <button
               type="button"
-              onClick={() => navigate(startupId && collection ? `/startup/${startupId}/catalog/${encodeURIComponent(collection)}` : -1 as any)}
+              onClick={() => navigate(-1)}
               className="inline-flex w-full items-center justify-center rounded-3xl bg-blue-600 px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-white transition hover:bg-blue-700"
             >
               Back to catalogue
