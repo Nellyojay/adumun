@@ -60,10 +60,15 @@ export function Feed() {
     ? mentorshipData
     : mentorshipData?.filter(m => m.category === selectedCategory);
   let filteredPosts = selectedCategory === 'All'
-    ? posts
+    ? posts?.slice(0, 5)
     : posts?.filter(p => p.startups?.cartegory === selectedCategory);
 
-  let filteredUsers = tab === 'users' ? users : [];
+  let filteredUsers = selectedCategory === 'All'
+    ? users?.slice(0, 5)
+    : users?.filter(user => {
+      const roles = Array.isArray(user.user_roles) ? user.user_roles : [];
+      return roles.some(role => role.toLowerCase() === selectedCategory.toLowerCase());
+    });
 
   // Filter by search query
   if (searchQuery.trim()) {
@@ -137,7 +142,7 @@ export function Feed() {
       />
 
       {/* Feed Content */}
-      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-18">
+      <main className="max-w-6xl mx-auto px-1 sm:px-6 lg:px-8 py-14">
         {/* Search and Sort Controls */}
         <div className="mb-2">
           <div className="text-gray-700">
@@ -177,7 +182,7 @@ export function Feed() {
               </button>
             </div>
 
-            <div className='flex items-center shadow-lg p-1 rounded-full gap-1'>
+            <div className='hidden items-center shadow-lg p-1 rounded-full gap-1'>
               <ArrowUpDown className="w-4 h-4 text-gray-500" />
               <select
                 title='sortBy'

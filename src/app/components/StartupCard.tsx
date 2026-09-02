@@ -38,7 +38,7 @@ export function StartupCard({ startup, userId }: StartupCardProps) {
       </Link>
 
       {/* Card Content */}
-      <div className="p-4 space-y-3">
+      <div className="p-2 space-y-2">
         {/* Header */}
         <div className="flex items-start justify-between">
           <div className="flex-1">
@@ -52,10 +52,10 @@ export function StartupCard({ startup, userId }: StartupCardProps) {
                 {startup.name}
               </h3>
             </Link>
-            <div className="flex items-center space-x-2 mt-1">
+            <div className="flex items-center space-x-2">
               <Link
                 to={`/profile/${userId}`}
-                className="text-sm text-gray-600 primary-color-hover"
+                className="text-sm text-gray-400 primary-color-hover"
                 onClick={() => setSelectedProfile(userId)}
               >
                 by {startup.founder_name}
@@ -65,7 +65,7 @@ export function StartupCard({ startup, userId }: StartupCardProps) {
         </div>
 
         {/* Description */}
-        <p className="text-sm text-gray-700 line-clamp-3">
+        <p className="text-xs sm:text-sm text-gray-700 line-clamp-1">
           {startup.intro_description}
         </p>
 

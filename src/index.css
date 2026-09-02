@@ -54,6 +54,11 @@
   }
 }
 
+.hover-up:hover {
+  transform: translateY(-3px);
+  transition: transform 0.3s ease-in-out;
+}
+
 .primary-bg {
   background-color: var(--color-cyan-600);
 }
@@ -61,6 +66,11 @@
 .primary-bg-hover:hover {
   background-color: var(--color-cyan-700);
   color: white;
+}
+
+.primary-bg-soft:hover {
+  background-color: var(--color-cyan-100);
+  box-shadow: 0 4px 6px rgba(139, 139, 139, 0.1);
 }
 
 .primary-gradient {

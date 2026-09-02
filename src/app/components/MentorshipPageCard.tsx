@@ -28,12 +28,12 @@ export default function MentorshipPageCard(mentorship: MentorshipData) {
           <span className="inline-block px-2.5 py-1 primary-soft-bg primary-color text-xs rounded-full mb-2">
             {mentorship.category}
           </span>
-          <h3 className="text-lg group-primary-color-hover transition-colors">
+          <h3 className="md:text-lg group-primary-color-hover transition-colors">
             {mentorship.topic}
           </h3>
         </div>
 
-        <p className="text-gray-600 text-sm mb-2 line-clamp-3">
+        <p className="text-gray-600 text-xs sm:text-sm mb-2 line-clamp-2">
           {mentorship.description}
         </p>
 
@@ -45,7 +45,7 @@ export default function MentorshipPageCard(mentorship: MentorshipData) {
             className="w-10 h-10 rounded-full object-cover"
           />
           <div>
-            <p className="text-sm">{mentorship.users.full_name}</p>
+            <p className="text-xs sm:text-sm line-clamp-1">{mentorship.users.full_name}</p>
             <p className="text-xs text-gray-500">Mentor</p>
           </div>
         </div>

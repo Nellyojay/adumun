@@ -458,10 +458,10 @@ export function StartupProfile() {
                 {/* View More Button */}
                 <button
                   onClick={() => setShowMore(!showMore)}
-                  className="w-full mt-4 flex items-center justify-center space-x-2 py-3 primary-color primary-bg-hover rounded-xl transition-all font-medium"
+                  className="w-full sm:hover:underline mt-4 flex items-center justify-center space-x-2 py-3 primary-color primary-color-hover rounded-xl transition-all font-medium"
                 >
                   <span>{showMore ? 'Close' : `View More About ${startup?.name}`}</span>
-                  {showMore ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
+                  {showMore ? <ChevronUp className="w-5 h-5 icon-hover" /> : <ChevronDown className="w-5 h-5" />}
                 </button>
 
                 {/* Expandable Details Section */}
@@ -587,7 +587,7 @@ export function StartupProfile() {
                 setSelectedStartup(startup.id);
               }
             }}
-            className="inline-flex pt-8 -mt-6 items-center justify-center w-xs sm:w-lg rounded-b-2xl primary-bg px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-primary transition-all duration-200 sm:hover:translate-y-1"
+            className="inline-flex pt-8 -mt-6 items-center justify-center w-xs sm:w-lg rounded-b-2xl primary-bg primary-bg-hover px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-primary transition-all duration-200 sm:hover:translate-y-1"
           >
             View Catalog
           </Link>
