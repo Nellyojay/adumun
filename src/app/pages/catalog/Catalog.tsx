@@ -6,6 +6,7 @@ import ScrollToTop from '../../constants/scrollToTop';
 import { useStartup } from '../../contexts/StartupProfileContext';
 import { useEffect } from 'react';
 import { usePageDataOwner } from '../../constants/ownerTag';
+import { ChevronRight } from 'lucide-react';
 
 export function Catalog() {
   const { collections } = useCatalog();
@@ -33,13 +34,10 @@ export function Catalog() {
             <p className="text-sm font-semibold">Back</p>
           </button>
 
-          <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <div className="mb-4 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
               <p className="text-sm uppercase tracking-[0.28em] text-cyan-600">Collections</p>
               <h1 className="mt-3 text-4xl font-semibold tracking-tight text-slate-900">Shop by collection</h1>
-              <p className="mt-3 max-w-2xl text-sm text-slate-500">
-                Browse curated collections like shoes, clothes, sweaters, trousers and more. Select a collection to view matching catalogue items.
-              </p>
             </div>
 
             {isOwner && startupId && (
@@ -65,15 +63,14 @@ export function Catalog() {
                           event.preventDefault();
                         }
                       }}
-                      className="group block overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition sm:hover:shadow-lg"
+                      className="flex items-center rounded-3xl border border-slate-200 bg-white p-4 shadow-sm transition sm:hover:shadow-lg"
                     >
-                      <div className="text-sm uppercase tracking-[0.24em] text-cyan-600">{collection.collection_name}</div>
-                      <h2 className="mt-4 text-2xl font-semibold text-slate-900">{collection.item_count || 0} item{collection.item_count === 1 ? '' : 's'}</h2>
-                      <p className="mt-3 text-sm leading-6 text-slate-500">View only {collection.collection_name.toLowerCase()} products in the catalogue.</p>
-                      <div className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-cyan-600 transition group-hover:text-cyan-700">
-                        <span>Explore</span>
-                        <span aria-hidden="true">→</span>
+                      <div className="w-full">
+                        <div className="text-sm font-bold uppercase tracking-[0.24em] text-cyan-600">{collection.collection_name}</div>
+                        <h2 className="font-semibold text-slate-900">{collection.item_count || 0} item{collection.item_count === 1 ? '' : 's'}</h2>
                       </div>
+
+                      <ChevronRight className="" />
                     </Link>
                   );
                 })}
