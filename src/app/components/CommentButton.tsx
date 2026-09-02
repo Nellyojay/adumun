@@ -12,7 +12,7 @@ export function CommentButton({ count, onClick }: CommentButtonProps) {
     <button
       onClick={onClick}
       disabled={!session}
-      className="flex items-center space-x-2 text-gray-700 md:hover:text-blue-500 transition-colors"
+      className="flex items-center space-x-2 text-gray-700 primary-color-hover transition-colors"
     >
       <MessageCircle className="w-5 h-5" />
       <span>{count}</span>

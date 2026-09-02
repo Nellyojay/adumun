@@ -57,7 +57,7 @@ export function RecoverAccount() {
           <div className="bg-white rounded-2xl shadow-md p-8">
             {/* Header */}
             <div className="text-center mb-8">
-              <div className="w-20 h-20 rounded-full bg-linear-to-br from-blue-500 to-indigo-600 flex items-center justify-center mx-auto mb-4 shadow-lg">
+              <div className="w-20 h-20 rounded-full primary-gradient flex items-center justify-center mx-auto mb-4 shadow-lg">
                 <RefreshCw className="w-10 h-10 text-white" />
               </div>
               <h1 className="text-2xl font-bold text-gray-900 mb-2">
@@ -73,15 +73,15 @@ export function RecoverAccount() {
               <button
                 onClick={() => setRecoveryType('reactivate')}
                 className={`w-full p-4 rounded-xl border-2 transition-all text-left ${recoveryType === 'reactivate'
-                  ? 'border-blue-600 bg-blue-50'
+                  ? 'primary-border primary-soft-bg'
                   : 'border-gray-200 hover:border-gray-300'
                   }`}
               >
                 <div className="flex items-start gap-3">
-                  <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center mt-0.5 ${recoveryType === 'reactivate' ? 'border-blue-600' : 'border-gray-300'
+                  <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center mt-0.5 ${recoveryType === 'reactivate' ? 'primary-border' : 'border-gray-300'
                     }`}>
                     {recoveryType === 'reactivate' && (
-                      <div className="w-2.5 h-2.5 rounded-full bg-blue-600" />
+                      <div className="w-2.5 h-2.5 rounded-full primary-bg" />
                     )}
                   </div>
                   <div className="flex-1">
@@ -98,15 +98,15 @@ export function RecoverAccount() {
               <button
                 onClick={() => setRecoveryType('password')}
                 className={`w-full p-4 rounded-xl border-2 transition-all text-left ${recoveryType === 'password'
-                  ? 'border-blue-600 bg-blue-50'
+                  ? 'primary-border primary-soft-bg'
                   : 'border-gray-200 hover:border-gray-300'
                   }`}
               >
                 <div className="flex items-start gap-3">
-                  <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center mt-0.5 ${recoveryType === 'password' ? 'border-blue-600' : 'border-gray-300'
+                  <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center mt-0.5 ${recoveryType === 'password' ? 'primary-border' : 'border-gray-300'
                     }`}>
                     {recoveryType === 'password' && (
-                      <div className="w-2.5 h-2.5 rounded-full bg-blue-600" />
+                      <div className="w-2.5 h-2.5 rounded-full primary-bg" />
                     )}
                   </div>
                   <div className="flex-1">
@@ -135,7 +135,7 @@ export function RecoverAccount() {
                       id="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 primary-focus focus:border-transparent"
                       placeholder="Enter your email"
                       required
                     />
@@ -153,7 +153,7 @@ export function RecoverAccount() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full bg-linear-to-r from-blue-600 to-indigo-600 text-white py-3 rounded-full hover:from-blue-700 hover:to-indigo-700 transition-all font-medium shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="w-full primary-bg primary-bg-hover text-white py-3 rounded-full transition-all font-medium shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 {isLoading ? (
                   <>
@@ -190,7 +190,7 @@ export function RecoverAccount() {
                     logout();
                     navigate('/login', { replace: true })
                   }}
-                  className="text-sm text-blue-600 hover:text-blue-700 font-medium"
+                  className="text-sm primary-color primary-color-hover font-medium"
                 >
                   Back to Login
                 </button>
@@ -213,11 +213,11 @@ export function RecoverAccount() {
             </p>
 
             {recoveryType === 'password' && (
-              <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-6">
-                <p className="text-sm text-blue-800">
+              <div className="primary-soft-bg border primary-border rounded-xl p-4 mb-6">
+                <p className="text-sm primary-soft-color">
                   <strong>Didn't receive the email?</strong>
                 </p>
-                <p className="text-sm text-blue-700 mt-1">
+                <p className="text-sm primary-soft-color mt-1">
                   Check your spam folder or try again in a few minutes
                 </p>
               </div>
@@ -230,7 +230,7 @@ export function RecoverAccount() {
                     setIsSuccess(false);
                     setEmail('');
                   }}
-                  className="w-full px-6 py-3 bg-linear-to-r from-blue-600 to-indigo-600 text-white rounded-full hover:from-blue-700 hover:to-indigo-700 transition-all font-medium shadow-md hover:shadow-lg"
+                  className="w-full px-6 py-3 primary-bg primary-bg-hover text-white rounded-full transition-all font-medium shadow-md hover:shadow-lg"
                 >
                   Send Again
                 </button>
@@ -250,7 +250,7 @@ export function RecoverAccount() {
             {recoveryType === 'reactivate' && (
               <Link
                 to='/'
-                className="w-full px-6 py-3 bg-linear-to-r from-blue-600 to-indigo-600 text-white rounded-full hover:from-blue-700 hover:to-indigo-700 transition-all font-medium shadow-md hover:shadow-lg"
+                className="w-full px-6 py-3 primary-bg primary-bg-hover text-white rounded-full transition-all font-medium shadow-md hover:shadow-lg"
               >
                 Continue
               </Link>
@@ -265,7 +265,7 @@ export function RecoverAccount() {
           </p>
           <Link
             to="/feedback"
-            className="text-sm text-blue-600 hover:text-blue-700 font-medium"
+            className="text-sm primary-color primary-color-hover font-medium"
           >
             Contact Support
           </Link>

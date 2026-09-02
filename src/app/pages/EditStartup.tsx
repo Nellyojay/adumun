@@ -224,13 +224,13 @@ export function EditStartup() {
                     />
                     <button
                       onClick={dismissSelectedCoverImage}
-                      className='justify-end bg-blue-100 rounded-full border-none cursor-pointer'
+                      className='justify-end primary-soft-bg rounded-full border-none cursor-pointer'
                     >
                       <X className=" text-red-500 font-bold text-3xl hover:text-red-300" />
                     </button>
                   </div>
                 ) : (
-                  <div className="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center hover:border-blue-500 transition-colors">
+                  <div className="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center primary-border-hover transition-colors">
                     <input
                       type="file"
                       id="images"
@@ -259,7 +259,7 @@ export function EditStartup() {
                       className="w-full h-full rounded-lg object-cover"
                     />
                     <button
-                      className='justify-end bg-blue-100 rounded-full border-none cursor-pointer'
+                      className='justify-end primary-soft-bg rounded-full border-none cursor-pointer'
                       onClick={dismissSelectedDisplayImage}
                     >
                       <X className=" text-red-500 font-bold text-3xl hover:text-red-300" />
@@ -267,7 +267,7 @@ export function EditStartup() {
                   </div>
                 ) : (
 
-                  <div className="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center hover:border-blue-500 transition-colors">
+                  <div className="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center primary-border-hover transition-colors">
                     <input
                       type="file"
                       id="images"
@@ -398,7 +398,7 @@ export function EditStartup() {
                 <button
                   type="submit"
                   disabled={!session || !formData.name || !formData.founder_name || loading}
-                  className="flex-1 px-4 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex-1 px-4 py-3 primary-bg text-white rounded-xl primary-bg-hover transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {loading ? 'Submitting...' : 'Update Profile'}
                 </button>

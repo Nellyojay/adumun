@@ -96,7 +96,7 @@ export function FollowingStartups() {
           <div className="bg-white rounded-2xl shadow-md p-8 text-center">
             <p className="text-gray-500">No Businesses followed yet.</p>
             {currentUser?.id === userId && (
-              <Link to="/feed" className="mt-3 inline-block text-blue-600 hover:underline">
+              <Link to="/feed" className="mt-3 inline-block primary-color hover:underline">
                 Explore businesses to follow
               </Link>
             )}

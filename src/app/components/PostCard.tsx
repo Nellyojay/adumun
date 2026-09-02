@@ -231,7 +231,7 @@ export function PostCard({ post, deletePost }: PostCardProps) {
                 className='w-10 h-10 rounded-full shadow-sm object-cover'
               />
             ) : (
-              <div className='bg-blue-600 w-10 h-10 rounded-full flex justify-center items-center'>
+              <div className='primary-bg w-10 h-10 rounded-full flex justify-center items-center'>
                 <p className='text-white font-bold text-lg'>{post.startups ? post.startups?.name.charAt(0).toLocaleUpperCase() : post.mentorship_page?.topic.charAt(0).toLocaleUpperCase()}</p>
               </div>
             )}
@@ -317,9 +317,9 @@ export function PostCard({ post, deletePost }: PostCardProps) {
               title='Save'
               onClick={handleSave}
               disabled={savingSave}
-              className={`flex items-center space-x-1 transition-colors ${saved ? 'text-blue-500' : 'text-gray-700 hover:text-blue-500'}`}
+              className={`flex items-center space-x-1 transition-colors ${saved ? 'primary-color' : 'text-gray-700 primary-color-hover'}`}
             >
-              <Bookmark className={`w-5 h-5 ${saved ? 'fill-blue-500 text-blue-500' : 'text-gray-500'}`} />
+              <Bookmark className={`w-5 h-5 ${saved ? 'primary-fill primary-color' : 'text-gray-500'}`} />
               <p className="text-gray-500">{saves.toLocaleString()}</p>
             </button>
           </div>

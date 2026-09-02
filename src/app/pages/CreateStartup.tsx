@@ -94,7 +94,7 @@ export function CreateStartup() {
                 required
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 primary-focus focus:border-transparent"
                 placeholder="Enter your business name"
               />
             </div>
@@ -110,7 +110,7 @@ export function CreateStartup() {
                 required
                 value={formData.founder}
                 onChange={(e) => setFormData({ ...formData, founder: e.target.value })}
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 primary-focus focus:border-transparent"
                 placeholder="Name of business owner"
               />
             </div>
@@ -125,7 +125,7 @@ export function CreateStartup() {
                 required
                 value={formData.category}
                 onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 primary-focus focus:border-transparent"
               >
                 <option value="Fashion">Fashion</option>
                 <option value="Tech">Tech</option>
@@ -148,7 +148,7 @@ export function CreateStartup() {
                 rows={4}
                 value={formData.introDescription}
                 onChange={(e) => setFormData({ ...formData, introDescription: e.target.value })}
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 primary-focus focus:border-transparent resize-none"
                 placeholder="Tell us a little about your business..."
               />
             </div>
@@ -163,7 +163,7 @@ export function CreateStartup() {
                 required
                 value={formData.productOrSevices}
                 onChange={(e) => setFormData({ ...formData, productOrSevices: e.target.value })}
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 primary-focus focus:border-transparent"
                 placeholder="List your products or services, separated by commas"
               />
             </div>
@@ -183,7 +183,7 @@ export function CreateStartup() {
                     required
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 primary-focus focus:border-transparent"
                     placeholder="0712345678"
                   />
                 </div>
@@ -197,7 +197,7 @@ export function CreateStartup() {
                     id="email"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 primary-focus focus:border-transparent"
                     placeholder="yourbusiness@email.com"
                   />
                 </div>
@@ -211,7 +211,7 @@ export function CreateStartup() {
                     id="address"
                     value={formData.address}
                     onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 primary-focus focus:border-transparent"
                     placeholder="e.g. Aqua Complex level 4 Room 75"
                   />
                 </div>
@@ -238,7 +238,7 @@ export function CreateStartup() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="px-6 py-3 bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed text-white text-xs md:text-sm rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-all font-medium shadow-md hover:shadow-lg"
+                  className="px-6 py-3 primary-bg disabled:opacity-50 disabled:cursor-not-allowed text-white text-xs md:text-sm rounded-xl  transition-all font-medium shadow-md hover:shadow-lg"
                 >
                   {loading ? 'Publishing Business...' : 'Publish Business'}
                 </button>

@@ -72,7 +72,7 @@ export default function CreateMentorship() {
       <ScrollToTop />
 
       {/* Header */}
-      <div className="bg-blue-600 text-white py-6 px-4">
+      <div className="primary-bg text-white py-6 px-4">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-2xl md:text-3xl">Create Mentorship Page</h1>
         </div>
@@ -83,7 +83,7 @@ export default function CreateMentorship() {
         <div className="mb-6">
           <button
             onClick={() => navigate(-1)}
-            className="flex items-center gap-2 text-blue-600 hover:text-blue-700 transition-colors"
+            className="flex items-center gap-2 primary-color primary-color-hover transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Back to Home</span>
@@ -114,7 +114,7 @@ export default function CreateMentorship() {
                     value={formData.topic}
                     onChange={handleChange}
                     placeholder="e.g., Marketing in Agriculture"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 primary-focus"
                   />
                 </div>
 
@@ -133,7 +133,7 @@ export default function CreateMentorship() {
                     onChange={handleChange}
                     rows={3}
                     placeholder="Brief description of what students will learn..."
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 primary-focus resize-none"
                   />
                 </div>
 
@@ -151,7 +151,7 @@ export default function CreateMentorship() {
                     value={formData.category}
                     onChange={handleChange}
                     placeholder="e.g. Agriculture"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 primary-focus"
                   />
                 </div>
               </div>
@@ -177,7 +177,7 @@ export default function CreateMentorship() {
                       value={formData.mentorTitle}
                       onChange={handleChange}
                       placeholder="e.g., Senior Full-Stack Developer"
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 primary-focus"
                     />
                   </div>
                 </div>
@@ -198,7 +198,7 @@ export default function CreateMentorship() {
                       value={formData.location}
                       onChange={handleChange}
                       placeholder="City, State/Country"
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 primary-focus"
                     />
                   </div>
 
@@ -217,7 +217,7 @@ export default function CreateMentorship() {
                       value={formData.experience}
                       onChange={handleChange}
                       placeholder="e.g., 10+ years"
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 primary-focus"
                     />
                   </div>
                 </div>
@@ -237,7 +237,7 @@ export default function CreateMentorship() {
                     onChange={handleChange}
                     rows={4}
                     placeholder="Tell others about your background, expertise, and what you're passionate about in this specific category..."
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 primary-focus resize-none"
                   />
                 </div>
               </div>
@@ -267,7 +267,7 @@ export default function CreateMentorship() {
               </button>
               <button
                 type="submit"
-                className="flex-1 sm:flex-none px-6 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2"
+                className="flex-1 sm:flex-none px-6 py-2.5 primary-bg text-white rounded-lg primary-bg-hover transition-colors flex items-center justify-center gap-2"
               >
                 <span>Create Mentorship</span>
               </button>

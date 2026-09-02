@@ -36,7 +36,7 @@ export function ForgotPassword() {
   };
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center px-4 py-12">
+    <div className="min-h-screen primary-gradient-soft flex items-center justify-center px-4 py-12">
       <ScrollToTop />
       <div className="w-full max-w-md">
         <div className="bg-white rounded-2xl shadow-xl p-8">
@@ -65,7 +65,7 @@ export function ForgotPassword() {
                     id="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 primary-focus focus:border-transparent transition-all"
                     placeholder="your@email.com"
                     required
                   />
@@ -75,7 +75,7 @@ export function ForgotPassword() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className={`w-full bg-linear-to-r from-blue-600 to-indigo-600 text-white py-3 rounded-xl font-medium hover:from-blue-700 hover:to-indigo-700 transition-all shadow-md hover:shadow-lg ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                className={`w-full primary-bg primary-bg-hover text-white py-3 rounded-xl font-medium transition-all shadow-md hover:shadow-lg ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
                 {isLoading ? (
                   <span className="inline-flex items-center justify-center gap-2">
@@ -97,7 +97,7 @@ export function ForgotPassword() {
               </p>
               <Link
                 to="/login"
-                className="inline-block px-6 py-3 bg-linear-to-r from-blue-600 to-indigo-600 text-white rounded-full hover:from-blue-700 hover:to-indigo-700 transition-all font-medium"
+                className="inline-block px-6 py-3 primary-bg primary-bg-hover text-white rounded-full transition-all font-medium"
               >
                 Back to Login
               </Link>
@@ -107,7 +107,7 @@ export function ForgotPassword() {
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600">
               Remember your password?{' '}
-              <Link to="/login" className="text-blue-600 hover:text-blue-700 font-medium">
+              <Link to="/login" className="primary-color primary-color-hover font-medium">
                 Sign in
               </Link>
             </p>

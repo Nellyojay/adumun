@@ -125,7 +125,7 @@ export function ChangePassword() {
                   required
                   value={formData.currentPassword}
                   onChange={(e) => setFormData({ ...formData, currentPassword: e.target.value })}
-                  className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                  className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 primary-focus focus:border-transparent transition-all"
                   placeholder="Enter your current password"
                 />
                 <button
@@ -150,7 +150,7 @@ export function ChangePassword() {
                   required
                   value={formData.newPassword}
                   onChange={(e) => setFormData({ ...formData, newPassword: e.target.value })}
-                  className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                  className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 primary-focus focus:border-transparent transition-all"
                   placeholder="Enter your new password"
                 />
                 <button
@@ -175,7 +175,7 @@ export function ChangePassword() {
                   required
                   value={formData.confirmPassword}
                   onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
-                  className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                  className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 primary-focus focus:border-transparent transition-all"
                   placeholder="Confirm your new password"
                 />
                 <button
@@ -191,7 +191,7 @@ export function ChangePassword() {
             <button
               type="submit"
               disabled={loading}
-              className={`w-full py-3 rounded-xl text-white bg-linear-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 transition-all font-medium shadow-md ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+              className={`w-full py-3 rounded-xl text-white primary-bg primary-bg-hover transition-all font-medium shadow-md ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
             >
               {loading ? 'Updating…' : 'Update Password'}
             </button>
@@ -201,7 +201,7 @@ export function ChangePassword() {
         <div className="mt-6 text-center text-sm text-gray-600">
           <p>
             Remembered your password?{' '}
-            <Link to="/settings" className="text-blue-600 hover:text-blue-700 font-medium">
+            <Link to="/settings" className="primary-color primary-color-hover font-medium">
               Back to Settings
             </Link>
           </p>

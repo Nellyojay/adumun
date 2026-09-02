@@ -10,7 +10,7 @@ export function Footer() {
           {/* Logo and description */}
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
-              <div className="w-8 h-8 bg-linear-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center shadow-sm">
+              <div className="w-8 h-8 primary-gradient rounded-lg flex items-center justify-center shadow-sm">
                 <span className="text-white font-bold text-lg">{webName.charAt(0).toLocaleUpperCase()}</span>
               </div>
               <span className="text-xl font-semibold text-gray-900">{webName}</span>
@@ -25,12 +25,12 @@ export function Footer() {
             <h3 className="font-semibold text-gray-900 mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/feed" className="text-gray-600 hover:text-blue-600 transition-colors">
+                <Link to="/feed" className="text-gray-600 primary-color-hover transition-colors">
                   Explore
                 </Link>
               </li>
               <li>
-                <a href="#" className="text-gray-600 hover:text-blue-600 transition-colors">
+                <a href="#" className="text-gray-600 primary-color-hover transition-colors">
                   Terms
                 </a>
               </li>

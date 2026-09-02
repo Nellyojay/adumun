@@ -80,7 +80,7 @@ export function Navbar({ showSearch = false, onSearch }: NavbarProps) {
         <div className="flex items-center justify-between h-12">
           {/* Logo */}
           <Link to={session ? "/" : "/about"} className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-linear-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center shadow-sm">
+            <div className="w-8 h-8 primary-gradient rounded-lg flex items-center justify-center shadow-sm">
               <span className="text-white font-bold text-lg">{webName.charAt(0).toLocaleUpperCase()}</span>
             </div>
             {!hideLogoName && (
@@ -106,7 +106,7 @@ export function Navbar({ showSearch = false, onSearch }: NavbarProps) {
                   value={searchValue}
                   onChange={handleSearchChange}
                   placeholder="Search for businesses..."
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 primary-focus focus:border-transparent"
                 />
               </div>
             </div>
@@ -169,14 +169,14 @@ export function Navbar({ showSearch = false, onSearch }: NavbarProps) {
         <div className="flex justify-between items-center h-12 px-2">
           <Link
             to="/"
-            className={`flex flex-col items-center justify-center gap-1 rounded-md px-2 py-1 ${location.pathname === '/' ? 'bg-blue-100 text-blue-600' : 'text-gray-600 hover:text-blue-600'}`}
+            className={`flex flex-col items-center justify-center gap-1 rounded-md px-2 py-1 ${location.pathname === '/' ? 'primary-soft-bg primary-color' : 'text-gray-600 primary-color-hover'}`}
           >
             <Home className="w-5 h-5" />
             <span className="text-xs">Posts</span>
           </Link>
           <Link
             to="/feed"
-            className={`flex flex-col items-center justify-center gap-1 rounded-md px-2 py-1 ${location.pathname === '/feed' ? 'bg-blue-100 text-blue-600' : 'text-gray-600 hover:text-blue-600'}`}
+            className={`flex flex-col items-center justify-center gap-1 rounded-md px-2 py-1 ${location.pathname === '/feed' ? 'primary-soft-bg primary-color' : 'text-gray-600 primary-color-hover'}`}
           >
             <Compass className="w-5 h-5" />
             <span className="text-xs">Explore</span>
@@ -184,7 +184,7 @@ export function Navbar({ showSearch = false, onSearch }: NavbarProps) {
           {session && (
             <Link
               to="/feedback"
-              className={`flex flex-col items-center justify-center gap-1 rounded-md px-2 py-1 ${location.pathname === '/feedback' ? 'bg-blue-100 text-blue-600' : 'text-gray-600 hover:text-blue-600'}`}
+              className={`flex flex-col items-center justify-center gap-1 rounded-md px-2 py-1 ${location.pathname === '/feedback' ? 'primary-soft-bg primary-color' : 'text-gray-600 primary-color-hover'}`}
             >
               <MessageCircle className="w-5 h-5" />
               <span className="text-xs">Feedback</span>
@@ -194,7 +194,7 @@ export function Navbar({ showSearch = false, onSearch }: NavbarProps) {
             <Link
               to={`/profile/${currentUser?.id}`}
               onClick={() => setSelectedProfile(currentUser?.id)}
-              className={`flex flex-col items-center justify-center gap-1 rounded-md px-2 py-1 ${location.pathname.startsWith('/profile') ? 'bg-blue-100 text-blue-600' : 'text-gray-600 hover:text-blue-600'}`}
+              className={`flex flex-col items-center justify-center gap-1 rounded-md px-2 py-1 ${location.pathname.startsWith('/profile') ? 'primary-soft-bg primary-color' : 'text-gray-600 primary-color-hover'}`}
             >
               <img
                 src={getImageUrl(currentUser?.profile_image) || 'https://img.freepik.com/premium-vector/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-vector-illustration_561158-3467.jpg?semt=ais_incoming&w=740&q=80'}
@@ -206,7 +206,7 @@ export function Navbar({ showSearch = false, onSearch }: NavbarProps) {
           ) : (
             <Link
               to="/login"
-              className={`flex flex-col items-center justify-center gap-1 rounded-md px-2 py-1 ${location.pathname === '/login' ? 'bg-blue-100 text-blue-600' : 'text-gray-600 hover:text-blue-600'}`}
+              className={`flex flex-col items-center justify-center gap-1 rounded-md px-2 py-1 ${location.pathname === '/login' ? 'primary-soft-bg primary-color' : 'text-gray-600 primary-color-hover'}`}
             >
               <img
                 src={getImageUrl(currentUser?.profile_image) || 'https://img.freepik.com/premium-vector/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-vector-illustration_561158-3467.jpg?semt=ais_incoming&w=740&q=80'}

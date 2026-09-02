@@ -47,7 +47,7 @@ export function Settings() {
         <div className="bg-white rounded-2xl shadow-md p-6 mb-4">
           <div className="flex items-center gap-4">
             <div className="relative">
-              <div className="w-20 h-20 rounded-full bg-linear-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-lg">
+              <div className="w-20 h-20 rounded-full primary-gradient flex items-center justify-center shadow-lg">
                 {currentUser?.profile_image ? (
                   <img
                     src={getImageUrl(currentUser?.profile_image) || undefined}
@@ -114,7 +114,7 @@ export function Settings() {
             <button
               title='private-account'
               onClick={() => setPrivateAccount(!privateAccount)}
-              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${privateAccount ? 'bg-blue-600' : 'bg-gray-300'
+              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${privateAccount ? 'primary-bg' : 'bg-gray-300'
                 }`}
             >
               <span
@@ -147,7 +147,7 @@ export function Settings() {
             <button
               title='push-notifications'
               onClick={() => setNotificationsEnabled(!notificationsEnabled)}
-              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${notificationsEnabled ? 'bg-blue-600' : 'bg-gray-300'
+              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${notificationsEnabled ? 'primary-bg' : 'bg-gray-300'
                 }`}
             >
               <span

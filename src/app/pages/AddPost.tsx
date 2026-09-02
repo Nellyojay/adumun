@@ -124,7 +124,7 @@ export function AddPost() {
           <h1 className="text-lg md:text-xl font-bold">Add Post</h1>
           <button
             onClick={() => navigate(-1)}
-            className="text-blue-600 hover:text-blue-800 flex gap-2 items-center"
+            className="primary-color primary-color-hover flex gap-2 items-center"
           >
             <BiArrowBack />
             Back to page
@@ -144,7 +144,7 @@ export function AddPost() {
                     id="post-header"
                     value={heading}
                     onChange={(e) => setHeading(e.target.value)}
-                    className="mt-1 w-full border rounded-lg p-3 border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+                    className="mt-1 w-full border rounded-lg p-3 border-gray-300 primary-focus primary-focus"
                     placeholder="Write your sub-heading here..."
                   />
                 </div>
@@ -156,15 +156,15 @@ export function AddPost() {
                   id="post-content"
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
-                  className="mt-1 block w-full border rounded-lg p-3 border-gray-300 min-h-45 focus:ring-blue-500 focus:border-blue-500"
+                  className="mt-1 block w-full border rounded-lg p-3 border-gray-300 min-h-45 primary-focus primary-focus"
                   placeholder="Write your update here..."
                 />
               </div>
 
               <div>
                 <label htmlFor="post-image" className="block text-sm font-medium text-gray-700">Image</label>
-                <div className="mt-1 rounded-lg border-2 border-dashed border-blue-200 p-4 text-center transition-colors hover:border-blue-400 bg-blue-50">
-                  <p className="text-xs text-blue-600 mb-2">Upload a post image (PNG, JPG). Max 10MB.</p>
+                <div className="mt-1 rounded-lg border-2 border-dashed primary-border p-4 text-center transition-colors primary-border-hover primary-soft-bg">
+                  <p className="text-xs primary-color mb-2">Upload a post image (PNG, JPG). Max 10MB.</p>
                   <input
                     id="post-image"
                     type="file"
@@ -174,7 +174,7 @@ export function AddPost() {
                   />
                   <label
                     htmlFor="post-image"
-                    className="inline-flex items-center rounded-md border border-blue-500 bg-white px-3 py-2 text-sm font-medium text-blue-700 hover:bg-blue-100 cursor-pointer"
+                    className="inline-flex items-center rounded-md border primary-border bg-white px-3 py-2 text-sm font-medium primary-soft-color primary-bg-hover cursor-pointer"
                   >
                     Select Image
                   </label>
@@ -197,7 +197,7 @@ export function AddPost() {
                 <button
                   type="submit"
                   disabled={saving}
-                  className="w-full inline-flex justify-center items-center gap-2 px-4 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 disabled:bg-blue-300"
+                  className="w-full inline-flex justify-center items-center gap-2 px-4 py-3 primary-bg text-white rounded-lg font-semibold primary-bg-hover primary-bg-disabled"
                 >
                   {saving ? 'Saving...' : 'Publish Post'}
                 </button>

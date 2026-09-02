@@ -122,7 +122,7 @@ export default function MentorshipPage() {
       <div className="flex justify-between items-center px-4 pt-4">
         <button
           onClick={() => navigate(-1)}
-          className="flex items-center gap-2 text-blue-600 hover:text-blue-700 transition-colors"
+          className="flex items-center gap-2 primary-color primary-color-hover transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Back</span>
@@ -131,7 +131,7 @@ export default function MentorshipPage() {
         {isOwner && (
           <button
             onClick={() => navigate(`/mentorship-page/${pageData?.id}/edit`)}
-            className="flex justify-center items-center text-blue-400 hover:text-blue-600 border-2 border-blue-400 hover:border-blue-600 bg-blue-50 rounded-lg py-1 px-4 gap-2"
+            className="flex justify-center items-center primary-color primary-color-hover border-2 primary-border primary-border-hover primary-soft-bg rounded-lg py-1 px-4 gap-2"
           >
             <Edit size={18} />
             <span>Edit page</span>
@@ -168,7 +168,7 @@ export default function MentorshipPage() {
             {isOwner && (
               <button
                 onClick={() => navigate(`/mentorship-page/${id}/add-post`)}
-                className="flex justify-center items-center text-blue-400 hover:text-blue-600 border-2 border-blue-400 hover:border-blue-600 bg-blue-50 rounded-lg py-1 px-4 font-medium gap-2"
+                className="flex justify-center items-center primary-color primary-color-hover border-2 primary-border primary-border-hover primary-soft-bg rounded-lg py-1 px-4 font-medium gap-2"
               >
                 <Plus size={18} />
                 <span className="hidden md:block">Create post</span>

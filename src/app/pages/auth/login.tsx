@@ -52,13 +52,13 @@ export function Login() {
   }
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center px-4 py-12">
+    <div className="min-h-screen primary-gradient-soft flex items-center justify-center px-4 py-12">
       <ScrollToTop />
 
       <div className="w-full max-w-md">
         {/* Logo */}
         <Link to="/about" className="flex items-center justify-center space-x-2 mb-8">
-          <div className="w-12 h-12 bg-linear-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg">
+          <div className="w-12 h-12 primary-gradient rounded-xl flex items-center justify-center shadow-lg">
             <span className="text-white font-bold text-2xl">{webName.charAt(0).toLocaleUpperCase()}</span>
           </div>
           <span className="text-2xl font-bold text-gray-900">{webName}</span>
@@ -91,7 +91,7 @@ export function Login() {
                   required
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 primary-focus focus:border-transparent transition-all"
                   placeholder="your@email.com"
                 />
               </div>
@@ -110,7 +110,7 @@ export function Login() {
                   required
                   value={formData.password}
                   onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                  className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                  className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 primary-focus focus:border-transparent transition-all"
                   placeholder="Enter your password"
                 />
                 <button
@@ -128,11 +128,11 @@ export function Login() {
               <label className="flex items-center space-x-2 cursor-pointer">
                 <input
                   type="checkbox"
-                  className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
+                  className="w-4 h-4 primary-color border-gray-300 rounded focus:ring-2 primary-focus"
                 />
                 <span className="text-gray-600">Remember me</span>
               </label>
-              <Link to="/forgot-password" className="text-blue-600 hover:text-blue-700 font-medium">
+              <Link to="/forgot-password" className="primary-color primary-color-hover font-medium">
                 Forgot password?
               </Link>
             </div>
@@ -141,7 +141,7 @@ export function Login() {
             <button
               type="submit"
               disabled={loading}
-              className={`w-full bg-linear-to-r from-blue-600 to-indigo-600 text-white py-3 rounded-xl font-medium hover:from-blue-700 hover:to-indigo-700 transition-all shadow-md hover:shadow-lg ${loading ? 'opacity-50 cursor-not-allowed' : ''
+              className={`w-full primary-bg primary-bg-hover text-white py-3 rounded-xl font-medium transition-all shadow-md hover:shadow-lg ${loading ? 'opacity-50 cursor-not-allowed' : ''
                 }`}
             >
               Sign In
@@ -178,7 +178,7 @@ export function Login() {
           <div className="mt-6 text-center">
             <p className="text-gray-600">
               Don't have an account?{' '}
-              <Link to="/signup" className="text-blue-600 hover:text-blue-700 font-medium">
+              <Link to="/signup" className="primary-color primary-color-hover font-medium">
                 Sign up
               </Link>
             </p>

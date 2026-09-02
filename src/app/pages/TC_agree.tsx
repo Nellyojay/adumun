@@ -91,7 +91,7 @@ export default function TC_agree() {
   };
 
   return (
-    <div className="flex h-screen justify-center items-center bg-linear-to-br from-blue-100 via-indigo-50 to-purple-100">
+    <div className="flex h-screen justify-center items-center primary-gradient-soft">
       {!onboardingMessage && (
         <div className="border border-gray-300 p-6 mx-2 rounded-xl shadow-lg bg-gray-50">
           <h1 className="text-2xl font-bold mb-4">Welcome to {webName}!</h1>
@@ -108,7 +108,7 @@ export default function TC_agree() {
                 value={roles.join(', ')}
                 disabled
                 onChange={(e) => setRoles(e.target.value.split(', '))}
-                className="w-full not-md:text-sm px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full not-md:text-sm px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 primary-focus focus:border-transparent"
               />
               <button
                 onClick={() => {
@@ -135,7 +135,7 @@ export default function TC_agree() {
                 roles.push(e.target.value);
                 setRoles([...roles]);
               }}
-              className="w-full not-md:text-sm px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full not-md:text-sm px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 primary-focus focus:border-transparent"
             >
               <option value="">--Select--</option>
               <option value="business personnel">Business personnel</option>
@@ -157,7 +157,7 @@ export default function TC_agree() {
             {!agreed ? (
               <button
                 onClick={() => setAgreed(true)}
-                className="text-white font-semibold border border-gray-300 bg-blue-600 shadow-sm py-2 px-4 rounded-lg"
+                className="text-white font-semibold border border-gray-300 primary-bg shadow-sm py-2 px-4 rounded-lg"
               >
                 Agree
               </button>
@@ -172,7 +172,7 @@ export default function TC_agree() {
             <button
               onClick={handleSubmit}
               disabled={!agreed || loading}
-              className={`w-full mt-6 py-3 text-white font-semibold rounded-lg ${agreed && !loading && roles.length > 0 ? 'bg-blue-600 hover:bg-blue-700' : 'bg-gray-300 cursor-not-allowed'}`}
+              className={`w-full mt-6 py-3 text-white font-semibold rounded-lg ${agreed && !loading && roles.length > 0 ? 'primary-bg primary-bg-hover' : 'bg-gray-300 cursor-not-allowed'}`}
             >
               {loading ? 'Submitting...' : 'Submit'}
             </button>

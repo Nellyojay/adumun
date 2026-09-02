@@ -61,11 +61,11 @@ export function MentorPost({
           </div>
 
           <div className="flex items-center gap-4">
-            <button className="flex items-center gap-1.5 hover:text-blue-600 transition-colors">
+            <button className="flex items-center gap-1.5 primary-color-hover transition-colors">
               <ThumbsUp className="w-4 h-4" />
               <span>{likes}</span>
             </button>
-            <button className="flex items-center gap-1.5 hover:text-blue-600 transition-colors">
+            <button className="flex items-center gap-1.5 primary-color-hover transition-colors">
               <MessageCircle className="w-4 h-4" />
               <span>{comments}</span>
             </button>

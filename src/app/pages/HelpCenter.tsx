@@ -22,10 +22,10 @@ export function HelpCenter() {
       title: 'Account basics',
       description: 'Learn how to update your profile, change your password, and manage your account settings.',
       tag: 'Getting Started',
-      tagClass: 'text-blue-600',
+      tagClass: 'primary-color',
       icon: HelpCircle,
-      iconBg: 'bg-blue-50',
-      iconClass: 'text-blue-600',
+      iconBg: 'primary-soft-bg',
+      iconClass: 'primary-color',
     },
     {
       title: 'Protect your data',
@@ -88,7 +88,7 @@ export function HelpCenter() {
             <ChevronLeft className="w-6 h-6 text-gray-700" />
           </button>
           <div>
-            <p className="text-sm text-blue-600 font-semibold uppercase tracking-wide">Help Center</p>
+            <p className="text-sm primary-color font-semibold uppercase tracking-wide">Help Center</p>
             <h1 className="text-3xl font-bold text-gray-900">How can we help you?</h1>
             <p className="mt-2 text-sm text-gray-600">Browse support articles and contact our team if you need additional assistance.</p>
           </div>
@@ -137,7 +137,7 @@ export function HelpCenter() {
             </div>
             <Link
               to="/feedback"
-              className="inline-flex items-center justify-center rounded-full bg-blue-600 px-5 py-3 text-sm font-medium text-white hover:bg-blue-700 transition-colors"
+              className="inline-flex items-center justify-center rounded-full primary-bg px-5 py-3 text-sm font-medium text-white primary-bg-hover transition-colors"
             >
               Contact Support
             </Link>

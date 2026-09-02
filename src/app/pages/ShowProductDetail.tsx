@@ -80,7 +80,7 @@ const ShowProductDetail = () => {
           <p className="mt-3 text-gray-600">The selected catalogue item does not exist.</p>
           <Link
             to={startupId && collection ? `/startup/${startupId}/catalog/${encodeURIComponent(collection)}` : '/'}
-            className="mt-6 inline-flex rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-white transition hover:bg-blue-700"
+            className="mt-6 inline-flex rounded-full primary-bg px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-white transition primary-bg-hover"
           >
             Back to catalogue
           </Link>
@@ -151,7 +151,7 @@ const ShowProductDetail = () => {
               <div className="rounded-3xl border border-gray-200 bg-gray-50 p-5 shadow-sm">
                 <p className="text-sm uppercase tracking-[0.28em] text-gray-500">Location</p>
                 <p className="mt-3 flex items-center gap-2 text-sm font-semibold text-gray-900">
-                  <MapPin className="h-4 w-4 text-blue-600" />
+                  <MapPin className="h-4 w-4 primary-color" />
                   {selectedItem.location || "Location not specified"}
                 </p>
               </div>
@@ -166,7 +166,7 @@ const ShowProductDetail = () => {
             <button
               type="button"
               onClick={() => navigate(-1)}
-              className="inline-flex w-full items-center justify-center rounded-3xl bg-blue-600 px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-white transition hover:bg-blue-700"
+              className="inline-flex w-full items-center justify-center rounded-3xl primary-bg px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-white transition primary-bg-hover"
             >
               Back to catalogue
             </button>

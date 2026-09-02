@@ -139,8 +139,8 @@ export function CommentBox({ startupId, postId, comments, loading, setComments, 
           >
             <div className="flex gap-1">
               <div>
-                <div className="w-8 h-8 rounded-full bg-blue-100 shrink-0 flex items-center justify-center">
-                  <span className="text-sm font-medium text-blue-600">
+                <div className="w-8 h-8 rounded-full primary-soft-bg shrink-0 flex items-center justify-center">
+                  <span className="text-sm font-medium primary-color">
                     {(node.user_name || 'U')[0].toUpperCase()}
                   </span>
                 </div>
@@ -160,7 +160,7 @@ export function CommentBox({ startupId, postId, comments, loading, setComments, 
                         type="button"
                         title="Reply to this comment"
                         onClick={() => setReplyToCommentId(node.id)}
-                        className="text-xs text-blue-500 hover:underline pr-2"
+                        className="text-xs primary-color hover:underline pr-2"
                       >
                         Reply
                       </button>
@@ -171,7 +171,7 @@ export function CommentBox({ startupId, postId, comments, loading, setComments, 
                           type="button"
                           title="Edit this comment"
                           onClick={() => beginEdit(node)}
-                          className="p-1 text-gray-500 hover:text-blue-600"
+                          className="p-1 text-gray-500 primary-color-hover"
                         >
                           <Edit2 className="w-4 h-4" />
                         </button>
@@ -191,7 +191,7 @@ export function CommentBox({ startupId, postId, comments, loading, setComments, 
                 {editingCommentId === node.id ? (
                   <>
                     <textarea
-                      className="w-full mt-2 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full mt-2 p-2 border rounded-lg focus:outline-none focus:ring-2 primary-focus"
                       rows={2}
                       placeholder="Edit your comment"
                       value={editingText}
@@ -227,7 +227,7 @@ export function CommentBox({ startupId, postId, comments, loading, setComments, 
                     onClick={() => {
                       toggleReplies(node.id);
                     }}
-                    className="text-xs text-blue-500 hover:underline mt-1"
+                    className="text-xs primary-color hover:underline mt-1"
                   >
                     {openRepliesCommentId[String(node.id)] ? 'Hide Replies' : `View Replies (${node.children.length})`}
                   </button>
@@ -248,7 +248,7 @@ export function CommentBox({ startupId, postId, comments, loading, setComments, 
             <button
               type="button"
               onClick={() => showMore(parentKey, nodes.length)}
-              className="text-xs text-blue-600 hover:underline"
+              className="text-xs primary-color hover:underline"
             >
               View more ({nodes.length - visibleCount})
             </button>
@@ -370,12 +370,12 @@ export function CommentBox({ startupId, postId, comments, loading, setComments, 
       </div>
 
       {replyToCommentId && (
-        <div className="flex items-center justify-between bg-blue-50 border border-blue-100 rounded-lg px-3 py-2 text-sm text-blue-800">
+        <div className="flex items-center justify-between primary-soft-bg border primary-border rounded-lg px-3 py-2 text-sm primary-soft-color">
           <span>Replying to comment #{replyToCommentId}</span>
           <button
             type="button"
             onClick={() => setReplyToCommentId(null)}
-            className="text-blue-600 hover:underline"
+            className="primary-color hover:underline"
           >
             Cancel
           </button>
@@ -390,12 +390,12 @@ export function CommentBox({ startupId, postId, comments, loading, setComments, 
           disabled={!session}
           autoFocus={replyToCommentId !== null}
           placeholder={session ? 'Add a comment...' : 'Log in to comment'}
-          className="flex-1 px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="flex-1 px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 primary-focus focus:border-transparent"
         />
         <button
           title='Submit'
           type='submit'
-          className='bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed'
+          className='primary-bg text-white p-2 rounded-full primary-bg-hover transition-colors disabled:opacity-50 disabled:cursor-not-allowed'
           disabled={!session || !newComment.trim()}
         >
           <Send className='w-5 h-5' />

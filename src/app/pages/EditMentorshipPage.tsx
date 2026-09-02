@@ -122,7 +122,7 @@ export default function EditMentorship() {
       <ScrollToTop />
 
       {/* Header */}
-      <div className="bg-blue-600 text-white py-6 px-4">
+      <div className="primary-bg text-white py-6 px-4">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-2xl md:text-3xl">Edit Mentorship</h1>
         </div>
@@ -133,7 +133,7 @@ export default function EditMentorship() {
         <div className="mb-6">
           <button
             onClick={() => navigate(-1)}
-            className="flex items-center gap-2 text-blue-600 hover:text-blue-700 transition-colors"
+            className="flex items-center gap-2 primary-color primary-color-hover transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Back to Mentorship</span>
@@ -164,7 +164,7 @@ export default function EditMentorship() {
                     value={formData.topic}
                     onChange={handleChange}
                     placeholder="e.g., Web Development Mentorship"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 primary-focus"
                   />
                 </div>
 
@@ -183,7 +183,7 @@ export default function EditMentorship() {
                     value={formData.category}
                     onChange={handleChange}
                     placeholder="e.g., Web Development Mentorship"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 primary-focus"
                   />
                 </div>
 
@@ -202,7 +202,7 @@ export default function EditMentorship() {
                     onChange={handleChange}
                     rows={6}
                     placeholder="Brief description of what students will learn..."
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 primary-focus resize-none"
                   />
                 </div>
               </div>
@@ -228,7 +228,7 @@ export default function EditMentorship() {
                       value={formData.mentorTitle}
                       onChange={handleChange}
                       placeholder="e.g., Senior Full-Stack Developer"
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 primary-focus"
                     />
                   </div>
                 </div>
@@ -249,7 +249,7 @@ export default function EditMentorship() {
                       value={formData.location}
                       onChange={handleChange}
                       placeholder="City, State/Country"
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 primary-focus"
                     />
                   </div>
 
@@ -268,7 +268,7 @@ export default function EditMentorship() {
                       value={formData.experience}
                       onChange={handleChange}
                       placeholder="e.g., 10+ years"
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 primary-focus"
                     />
                   </div>
                 </div>
@@ -288,7 +288,7 @@ export default function EditMentorship() {
                     onChange={handleChange}
                     rows={8}
                     placeholder="Tell students about your background, expertise, and what you're passionate about..."
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 primary-focus resize-none"
                   />
                 </div>
 
@@ -302,14 +302,14 @@ export default function EditMentorship() {
                         className="w-full h-full rounded-lg object-cover"
                       />
                       <button
-                        className='justify-end bg-blue-100 rounded-full border-none cursor-pointer'
+                        className='justify-end primary-soft-bg rounded-full border-none cursor-pointer'
                         onClick={dismissSelectedImage}
                       >
                         <X className="text-red-500 font-bold text-3xl hover:text-red-300" />
                       </button>
                     </div>
                   ) : (
-                    <div className="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center hover:border-blue-500 transition-colors">
+                    <div className="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center primary-border-hover transition-colors">
                       <input
                         type="file"
                         id="images"
@@ -347,7 +347,7 @@ export default function EditMentorship() {
               <button
                 type="submit"
                 disabled={saving}
-                className="flex-1 sm:flex-none px-6 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2 disabled:bg-blue-300 disabled:cursor-not-allowed"
+                className="flex-1 sm:flex-none px-6 py-2.5 primary-bg text-white rounded-lg primary-bg-hover transition-colors flex items-center justify-center gap-2 primary-bg-disabled disabled:cursor-not-allowed"
               >
                 <Save className="w-4 h-4" />
                 <span>{saving ? "Saving..." : "Save Changes"}</span>

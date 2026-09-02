@@ -57,7 +57,7 @@ export const RateMentorship = ({
         id="category"
         required
         onChange={(e: any) => setRated(e.target.value)}
-        className="w-full not-md:text-sm px-2 py-1 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+        className="w-full not-md:text-sm px-2 py-1 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 primary-focus focus:border-transparent"
       >
         <option value={0}>--0--</option>
         <option value={1}>1</option>
@@ -82,7 +82,7 @@ export const RateMentorship = ({
           title="rate"
           onClick={() => handleClick()}
           disabled={saving}
-          className="rounded-lg flex justify-center items-center py-2 bg-blue-500 disabled:bg-blue-300 disabled:cursor-not-alloweds text-white"
+          className="rounded-lg flex justify-center items-center py-2 primary-bg primary-bg-disabled disabled:cursor-not-allowed text-white"
         >
           <Check />
         </button>

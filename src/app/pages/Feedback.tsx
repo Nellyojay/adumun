@@ -130,7 +130,7 @@ export function Feedback() {
         {/* Header */}
         <div className="text-center mb-12">
           <div className="flex justify-center mb-4">
-            <div className="w-16 h-16 bg-linear-to-br from-blue-600 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg">
+            <div className="w-16 h-16 primary-gradient rounded-2xl flex items-center justify-center shadow-lg">
               <MessageSquare className="w-8 h-8 text-white" />
             </div>
           </div>
@@ -162,7 +162,7 @@ export function Feedback() {
                       value={formData.author}
                       onChange={(e) => setFormData({ ...formData, author: e.target.value })}
                       placeholder="John Doe"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 primary-focus focus:border-transparent"
                     />
                   </div>
                   <div>
@@ -176,7 +176,7 @@ export function Feedback() {
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       placeholder="john@example.com"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 primary-focus focus:border-transparent"
                     />
                   </div>
                 </div>
@@ -191,7 +191,7 @@ export function Feedback() {
                     required
                     value={formData.category}
                     onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 primary-focus focus:border-transparent"
                   >
                     <option value="General Feedback">General Feedback</option>
                     <option value="Feature Request">Feature Request</option>
@@ -246,7 +246,7 @@ export function Feedback() {
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     rows={6}
                     placeholder={`Tell us what you think about ${webName}...`}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 primary-focus focus:border-transparent resize-none"
                   />
                   <p className="text-sm text-gray-500 mt-2">
                     Minimum 10 characters ({formData.message.length}/10)
@@ -262,7 +262,7 @@ export function Feedback() {
                   />
                 ) : loading ? (
                   <p
-                    className="w-full bg-linear-to-r from-blue-400 to-indigo-200 text-white py-4 rounded-xl font-medium hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+                    className="w-full primary-bg primary-bg-hover text-white py-4 rounded-xl font-medium hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
                   >
                     <span>Submitting...</span>
                   </p>
@@ -270,7 +270,7 @@ export function Feedback() {
                   <button
                     type="submit"
                     disabled={formData.message.length < 10}
-                    className="w-full bg-linear-to-r from-blue-600 to-indigo-600 text-white py-4 rounded-xl font-medium hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+                    className="w-full primary-bg primary-bg-hover text-white py-4 rounded-xl font-medium hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
                   >
                     <Send className="w-5 h-5" />
                     <span>Submit Feedback</span>
@@ -284,15 +284,15 @@ export function Feedback() {
           {/* Feedback Stats & Info */}
           <div className="space-y-6">
             {/* Stats Card */}
-            <div className="bg-linear-to-br from-blue-600 via-indigo-600 to-purple-600 rounded-2xl shadow-md p-6 text-white">
+            <div className="primary-gradient rounded-2xl shadow-md p-6 text-white">
               <h3 className="text-xl font-bold mb-4">Community Feedback</h3>
               <div className="space-y-4">
                 <div>
-                  <p className="text-blue-100 text-sm mb-1">Total Feedback</p>
+                  <p className="primary-light-color text-sm mb-1">Total Feedback</p>
                   <p className="text-3xl font-bold">{feedbackList.length}</p>
                 </div>
                 <div>
-                  <p className="text-blue-100 text-sm mb-1">Average Rating</p>
+                  <p className="primary-light-color text-sm mb-1">Average Rating</p>
                   <div className="flex items-center space-x-2">
                     <p className="text-3xl font-bold">
                       {feedbackList.length > 0 ? (feedbackList.reduce((acc, f) => acc + f.rating, 0) / feedbackList.length).toFixed(1) : '0.0'}
@@ -349,7 +349,7 @@ export function Feedback() {
                   {/* Header */}
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex items-center space-x-3">
-                      <div className="w-10 h-10 rounded-full bg-linear-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white font-semibold">
+                      <div className="w-10 h-10 rounded-full primary-gradient flex items-center justify-center text-white font-semibold">
                         {feedback.author[0]}
                       </div>
                       <div>
@@ -361,7 +361,7 @@ export function Feedback() {
                   </div>
 
                   {/* Category Badge */}
-                  <span className="inline-block text-xs bg-blue-50 text-blue-700 px-3 py-1 rounded-full mb-3">
+                  <span className="inline-block text-xs primary-soft-bg primary-soft-color px-3 py-1 rounded-full mb-3">
                     {feedback.category}
                   </span>
 

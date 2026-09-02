@@ -183,7 +183,7 @@ export function Feed() {
                 title='sortBy'
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as 'newest' | 'likes' | 'trending' | 'rated')}
-                className="px-2 py-1 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-gray-700 not-md:text-xs"
+                className="px-2 py-1 border border-gray-300 rounded-full focus:outline-none focus:ring-2 primary-focus focus:border-transparent bg-white text-gray-700 not-md:text-xs"
               >
                 <option value="newest">Newest</option>
                 <option value="likes">Most Liked</option>

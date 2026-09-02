@@ -50,7 +50,7 @@ export function ResetPassword() {
   };
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center px-4 py-12">
+    <div className="min-h-screen primary-gradient-soft flex items-center justify-center px-4 py-12">
       <ScrollToTop />
       <div className="w-full max-w-md">
         <div className="bg-white rounded-2xl shadow-xl p-8">
@@ -67,7 +67,7 @@ export function ResetPassword() {
           )}
 
           {statusMessage && (
-            <div className="flex items-center gap-2 p-3 bg-blue-50 border border-blue-200 rounded-xl text-blue-700 mb-6">
+            <div className="flex items-center gap-2 p-3 primary-soft-bg border primary-border rounded-xl primary-soft-color mb-6">
               <CheckCircle className="w-5 h-5" />
               <span>{statusMessage}</span>
             </div>
@@ -86,7 +86,7 @@ export function ResetPassword() {
                     id="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 primary-focus focus:border-transparent transition-all"
                     placeholder="Enter new password"
                     required
                   />
@@ -111,7 +111,7 @@ export function ResetPassword() {
                     id="confirmPassword"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
-                    className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 primary-focus focus:border-transparent transition-all"
                     placeholder="Confirm new password"
                     required
                   />
@@ -128,7 +128,7 @@ export function ResetPassword() {
               <button
                 type="submit"
                 disabled={loading}
-                className={`w-full bg-linear-to-r from-blue-600 to-indigo-600 text-white py-3 rounded-xl font-medium hover:from-blue-700 hover:to-indigo-700 transition-all shadow-md hover:shadow-lg ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                className={`w-full primary-bg primary-bg-hover text-white py-3 rounded-xl font-medium transition-all shadow-md hover:shadow-lg ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
                 {loading ? (
                   <span className="inline-flex items-center justify-center gap-2">
@@ -148,7 +148,7 @@ export function ResetPassword() {
               <p className="text-gray-600">Your password has been updated successfully. You will be redirected to login shortly.</p>
               <Link
                 to="/login"
-                className="inline-block px-6 py-3 bg-linear-to-r from-blue-600 to-indigo-600 text-white rounded-full hover:from-blue-700 hover:to-indigo-700 transition-all font-medium"
+                className="inline-block px-6 py-3 primary-bg primary-bg-hover text-white rounded-full transition-all font-medium"
               >
                 Back to Login Now
               </Link>
@@ -158,7 +158,7 @@ export function ResetPassword() {
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600">
               Remember your password?{' '}
-              <Link to="/login" className="text-blue-600 hover:text-blue-700 font-medium">
+              <Link to="/login" className="primary-color primary-color-hover font-medium">
                 Sign in
               </Link>
             </p>

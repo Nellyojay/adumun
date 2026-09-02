@@ -20,7 +20,7 @@ export function MentorHeader({ topic, imageUrl, description }: MentorHeaderProps
           <BookOpen className="w-8 h-8 md:w-10 md:h-10" />
           <h1 className="text-2xl md:text-4xl">{topic}</h1>
         </div>
-        <p className="text-blue-100 text-sm md:text-base max-w-3xl">
+        <p className="primary-light-color text-sm md:text-base max-w-3xl">
           {description}
         </p>
       </div>

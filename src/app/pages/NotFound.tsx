@@ -12,7 +12,7 @@ export function NotFound() {
         </p>
         <Link
           to="/"
-          className="inline-flex items-center space-x-2 bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition-colors"
+          className="inline-flex items-center space-x-2 primary-bg text-white px-6 py-3 rounded-full primary-bg-hover transition-colors"
         >
           <Home className="w-5 h-5" />
           <span>Back to Home</span>

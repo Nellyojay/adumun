@@ -188,7 +188,7 @@ export function ManageAccount() {
           <p className="text-sm text-gray-500 mb-2">
             Need help with something else?
           </p>
-          <Link to="/feedback" className="text-sm text-blue-600 hover:text-blue-700 font-medium">
+          <Link to="/feedback" className="text-sm primary-color primary-color-hover font-medium">
             Contact Support
           </Link>
         </div>

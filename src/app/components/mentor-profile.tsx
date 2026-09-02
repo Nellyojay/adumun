@@ -58,7 +58,7 @@ export function MentorProfile({
           {/* Stats for mobile */}
           <div className="md:hidden relative flex items-center gap-8">
             <div className="flex items-center gap-2">
-              <Award className="w-5 h-5 text-blue-600" />
+              <Award className="w-5 h-5 primary-color" />
               <div>
                 <p className="text-xs text-gray-500">Experience</p>
                 <p className="text-sm">{experience}</p>
@@ -72,7 +72,7 @@ export function MentorProfile({
               disabled={!session}
               className="flex items-center gap-2 cursor-pointer active:bg-gray-200 p-2 rounded-lg transition-colors"
             >
-              <Star className="w-5 h-5 text-blue-600" />
+              <Star className="w-5 h-5 primary-color" />
               <div>
                 <p className="text-xs text-gray-500">Rating</p>
                 <p className="text-sm">{rating || 0}/5.0</p>
@@ -102,7 +102,7 @@ export function MentorProfile({
               {/* Stats for desktop */}
               <div className="relative flex gap-8 not-md:hidden">
                 <div className="flex items-center gap-2">
-                  <Award className="w-5 h-5 text-blue-600" />
+                  <Award className="w-5 h-5 primary-color" />
                   <div>
                     <p className="text-xs text-gray-500">Experience</p>
                     <p className="text-sm">{experience}</p>
@@ -115,7 +115,7 @@ export function MentorProfile({
                   }}
                   className="flex items-center gap-2 cursor-pointer hover:bg-gray-100 p-2 rounded-lg"
                 >
-                  <Star className="w-5 h-5 text-blue-600" />
+                  <Star className="w-5 h-5 primary-color" />
                   <div>
                     <p className="text-xs text-gray-500">Rating</p>
                     <p className="text-sm">{rating || 0}/5.0</p>
@@ -132,7 +132,7 @@ export function MentorProfile({
                 )}
               </div>
             </div>
-            <p className="text-blue-600 text-sm md:text-base mb-2">{title}</p>
+            <p className="primary-color text-sm md:text-base mb-2">{title}</p>
             <div className="flex items-center gap-2 text-gray-600 text-sm">
               <MapPin className="w-4 h-4" />
               <span>{location}</span>

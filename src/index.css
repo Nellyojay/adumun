@@ -58,8 +58,62 @@
   background-color: var(--color-cyan-600);
 }
 
+.primary-bg-hover:hover {
+  background-color: var(--color-cyan-700);
+  color: white;
+}
+
+.primary-gradient {
+  background: linear-gradient(135deg, var(--color-cyan-500), var(--color-cyan-700));
+}
+
+.primary-gradient-soft {
+  background: linear-gradient(135deg, var(--color-cyan-50), var(--color-slate-50));
+}
+
+.primary-soft-bg {
+  background-color: var(--color-cyan-50);
+}
+
+.primary-bg-disabled:disabled {
+  background-color: var(--color-cyan-300);
+}
+
 .primary-color {
   color: var(--color-cyan-600);
+}
+
+.primary-soft-color {
+  color: var(--color-cyan-700);
+}
+
+.primary-light-color {
+  color: var(--color-cyan-100);
+}
+
+.primary-color-hover:hover {
+  color: var(--color-cyan-700);
+}
+
+.primary-border {
+  border-color: var(--color-cyan-500);
+}
+
+.primary-border-hover:hover {
+  border-color: var(--color-cyan-600);
+}
+
+.primary-fill {
+  fill: var(--color-cyan-500);
+}
+
+.shadow-primary {
+  --tw-shadow-color: color-mix(in srgb, var(--color-cyan-600) 20%, transparent);
+}
+
+.primary-focus:focus {
+  --tw-ring-color: var(--color-cyan-500);
+  border-color: var(--color-cyan-500);
 }
 
 .secondary-bg {
@@ -76,12 +130,4 @@
 
 .accent-color {
   color: var(--color-cyan-400);
-}
-
-.primary-bg:hover {
-  background-color: var(--color-cyan-700);
-}
-
-.primary-color:hover {
-  color: var(--color-cyan-700);
 }

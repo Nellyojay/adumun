@@ -47,7 +47,7 @@ export function StartupCard({ startup, userId }: StartupCardProps) {
               onClick={() => setSelectedProfile(userId)}
             >
               <h3
-                className="font-semibold text-gray-900 hover:text-blue-600 transition-colors line-clamp-1"
+                className="font-semibold text-gray-900 primary-color-hover transition-colors line-clamp-1"
               >
                 {startup.name}
               </h3>
@@ -55,7 +55,7 @@ export function StartupCard({ startup, userId }: StartupCardProps) {
             <div className="flex items-center space-x-2 mt-1">
               <Link
                 to={`/profile/${userId}`}
-                className="text-sm text-gray-600 md:hover:text-blue-600"
+                className="text-sm text-gray-600 primary-color-hover"
                 onClick={() => setSelectedProfile(userId)}
               >
                 by {startup.founder_name}
@@ -73,7 +73,7 @@ export function StartupCard({ startup, userId }: StartupCardProps) {
         <div className="pt-2 border-t border-gray-100">
           <Link
             to={`/startup/${startup.id}`}
-            className="text-sm text-blue-600 hover:text-blue-700 font-medium"
+            className="text-sm primary-color primary-color-hover font-medium"
           >
             View
           </Link>

@@ -268,7 +268,7 @@ export function StartupProfile() {
         <Navbar showAuth={false} />
         <div className="pt-24 text-center">
           <h1 className="text-2xl text-gray-900">Startup not found</h1>
-          <Link to="/feed" className="text-blue-600 hover:underline mt-4 inline-block">
+          <Link to="/feed" className="primary-color hover:underline mt-4 inline-block">
             Back to Feed
           </Link>
         </div>
@@ -301,7 +301,7 @@ export function StartupProfile() {
                   <img
                     src={getImageUrl(startup?.display_image) || 'https://user-images.githubusercontent.com/237508/90246627-ecbda400-de2c-11ea-8bfb-b4307bfb975d.png'}
                     alt=""
-                    className="object-cover w-28 h-28 rounded-full bg-linear-to-br from-blue-500 to-indigo-600 shrink-0 flex items-center justify-center shadow-xl border-4 border-white"
+                    className="object-cover w-28 h-28 rounded-full primary-gradient shrink-0 flex items-center justify-center shadow-xl border-4 border-white"
                   />
                 ) : (
                   <span className="text-4xl font-bold text-gray-700">{startup?.name[0]}</span>
@@ -316,7 +316,7 @@ export function StartupProfile() {
                 </h1>
 
                 {/* Founder Name */}
-                <Link to={`/profile/${startup?.user_id ?? ''}`} className="text-lg text-gray-600 mb-2 md:hover:text-blue-600">
+                <Link to={`/profile/${startup?.user_id ?? ''}`} className="text-lg text-gray-600 mb-2 primary-color-hover">
                   Founded by {startup?.founder_name}
                 </Link>
 
@@ -332,7 +332,7 @@ export function StartupProfile() {
                   <div className="flex items-center space-x-1">
                     <Phone className="w-4 h-4" />
                     {startup?.phone ? (
-                      <a href={`tel:${startup?.phone}`} className='text-blue-600'>
+                      <a href={`tel:${startup?.phone}`} className='primary-color'>
                         +{formatPhoneEA(startup?.phone)}
                       </a>
                     ) : (
@@ -346,7 +346,7 @@ export function StartupProfile() {
                         href={`https://${startup.website}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-blue-600 hover:underline"
+                        className="primary-color hover:underline"
                       >
                         {startup.website}
                       </a>
@@ -366,7 +366,7 @@ export function StartupProfile() {
                   <Link
                     to='#opinions'
                     onClick={() => setShowComments(!showComments)}
-                    className='text-gray-600 md:hover:text-blue-600 transition-colors flex items-center gap-1'
+                    className='text-gray-600 primary-color-hover transition-colors flex items-center gap-1'
                   >
                     Opinions
                     <span><strong>{comments.filter(c => c.parent_id === null).length}</strong></span>
@@ -382,7 +382,7 @@ export function StartupProfile() {
                 <>
                   <Link
                     to={`/startup/${id}/edit`}
-                    className='flex items-center justify-center space-x-2 px-4 py-3 rounded-xl font-medium transition-all bg-linear-to-r from-blue-600 to-indigo-600 text-white hover:shadow-lg'
+                    className='flex items-center justify-center space-x-2 px-4 py-3 rounded-xl font-medium transition-all primary-bg primary-bg-hover text-white hover:shadow-lg'
                   >
                     <Edit className="w-5 h-5" />
                     <span>Edit startup</span>
@@ -402,7 +402,7 @@ export function StartupProfile() {
                   disabled={!session}
                   className={`flex items-center justify-center space-x-2 px-4 py-3 rounded-xl font-medium transition-all ${following
                     ? 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                    : 'bg-linear-to-r from-blue-600 to-indigo-600 text-white hover:shadow-lg'
+                    : 'primary-bg primary-bg-hover text-white hover:shadow-lg'
                     }`}
                 >
                   <UserPlus className="w-5 h-5" />
@@ -458,7 +458,7 @@ export function StartupProfile() {
                 {/* View More Button */}
                 <button
                   onClick={() => setShowMore(!showMore)}
-                  className="w-full mt-4 flex items-center justify-center space-x-2 py-3 text-blue-600 hover:bg-blue-50 rounded-xl transition-all font-medium"
+                  className="w-full mt-4 flex items-center justify-center space-x-2 py-3 primary-color primary-bg-hover rounded-xl transition-all font-medium"
                 >
                   <span>{showMore ? 'Close' : `View More About ${startup?.name}`}</span>
                   {showMore ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
@@ -497,23 +497,23 @@ export function StartupProfile() {
                         <h3 className="text-sm font-semibold text-gray-900 mb-2">Contact Information</h3>
                         <div className="space-y-2 text-sm text-gray-700">
                           <div className="flex items-center space-x-2">
-                            <Mail className="w-4 h-4 text-blue-600" />
+                            <Mail className="w-4 h-4 primary-color" />
                             {startup?.email
                               ? <span>{startup.email}</span>
                               : <span className="text-gray-500">Email not provided</span>
                             }
                           </div>
                           <div className="flex items-center space-x-2">
-                            <Phone className="w-4 h-4 text-blue-600" />
+                            <Phone className="w-4 h-4 primary-color" />
                             {startup?.phone
                               ? <a href={`tel:${startup.phone}`}>+{formatPhoneEA(startup.phone)}</a>
                               : <span className="text-gray-500">Phone not provided</span>
                             }
                           </div>
                           <div className="flex items-center space-x-2">
-                            <Globe className="w-4 h-4 text-blue-600" />
+                            <Globe className="w-4 h-4 primary-color" />
                             {startup?.website ? (
-                              <a href={`https://${startup.website}`} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                              <a href={`https://${startup.website}`} target="_blank" rel="noopener noreferrer" className="primary-color hover:underline">
                                 {startup.website}
                               </a>
                             ) : (
@@ -527,15 +527,15 @@ export function StartupProfile() {
                         <h3 className="text-sm font-semibold text-gray-900 mb-2">Business Details</h3>
                         <div className="space-y-2 text-sm text-gray-700">
                           <div className="flex items-center space-x-2">
-                            <MapPin className="w-4 h-4 text-blue-600" />
+                            <MapPin className="w-4 h-4 primary-color" />
                             <span>{startup?.address}</span>
                           </div>
                           <div className="flex items-center space-x-2">
-                            <Calendar className="w-4 h-4 text-blue-600" />
+                            <Calendar className="w-4 h-4 primary-color" />
                             <span>Founded in {formatDate(startup?.founded_in, true)}</span>
                           </div>
                           <div className="flex items-center space-x-2">
-                            <GraduationCap className="w-4 h-4 text-blue-600" />
+                            <GraduationCap className="w-4 h-4 primary-color" />
                             <span>Founder: {startup?.founder_name}</span>
                           </div>
                         </div>
@@ -550,7 +550,7 @@ export function StartupProfile() {
                           href={`https://x.com/${startup?.x_username}`}
                           target='_blank'
                           rel='noopener noreferrer'
-                          className="w-10 h-10 bg-gray-100 text-black rounded-full flex items-center justify-center hover:bg-blue-200 transition-colors"
+                          className="w-10 h-10 bg-gray-100 text-black rounded-full flex items-center justify-center primary-bg-hover transition-colors"
                         >
                           <BsTwitterX className="w-5 h-5" />
                         </a>
@@ -558,7 +558,7 @@ export function StartupProfile() {
                           title='facebook'
                           target='_blank'
                           rel='noopener noreferrer'
-                          className="w-10 h-10 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center hover:bg-blue-200 transition-colors"
+                          className="w-10 h-10 primary-soft-bg primary-color rounded-full flex items-center justify-center primary-bg-hover transition-colors"
                         >
                           <FaFacebook className="w-6 h-6" />
                         </a>
@@ -587,7 +587,7 @@ export function StartupProfile() {
                 setSelectedStartup(startup.id);
               }
             }}
-            className="inline-flex pt-8 -mt-6 items-center justify-center w-xs sm:w-lg rounded-b-2xl primary-bg px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-500/20 transition-all duration-200 sm:hover:translate-y-1"
+            className="inline-flex pt-8 -mt-6 items-center justify-center w-xs sm:w-lg rounded-b-2xl primary-bg px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-primary transition-all duration-200 sm:hover:translate-y-1"
           >
             View Catalog
           </Link>
@@ -600,7 +600,7 @@ export function StartupProfile() {
             <div className='flex justify-between mb-2 pb-2 border-b border-gray-400'>
               <h2 className="text-2xl font-bold text-gray-900 mb-2">Posts</h2>
               {isOwner && (
-                <Link to={`/startup/${startup?.id}/add-post`} className='flex items-center px-2 gap-2 text-blue-600 md:text-gray-500 md:hover:text-blue-600 border-2 border-blue-600 md:border-gray-400 rounded-lg md:hover:border-blue-600 md:hover:shadow-' >
+                <Link to={`/startup/${startup?.id}/add-post`} className='flex items-center px-2 gap-2 primary-color md:text-gray-500 primary-border border-2 rounded-lg primary-border-hover' >
                   Add Post
                   <Plus />
                 </Link>

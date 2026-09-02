@@ -42,7 +42,7 @@ export function Landing() {
           <div className="max-w-7xl mx-auto text-center">
             <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
               Launch. Showcase.
-              <span className="block bg-linear-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent mt-2 pb-2">Grow your business.</span>
+              <span className="block primary-color text-transparent mt-2 pb-2">Grow your business.</span>
             </h1>
             <p className="md:text-xl text-gray-600 max-w-2xl mx-auto mb-10">
               {webName} is a platform where entrepreneurs, startups and business owners showcase their ideas, products and growing to the world.
@@ -50,13 +50,13 @@ export function Landing() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
                 to="/signup"
-                className="bg-linear-to-r from-blue-600 to-indigo-600 text-white px-4 md:px-8 py-2 md:py-4 rounded-full hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg hover:shadow-xl text-lg font-medium"
+                className="primary-bg primary-bg-hover text-white px-4 md:px-8 py-2 md:py-4 rounded-full  transition-all shadow-lg hover:shadow-xl text-lg font-medium"
               >
                 Create Account
               </Link>
               <Link
                 to="/feed"
-                className="bg-white text-blue-600 border-2 border-blue-600 px-4 md:px-8 py-2 md:py-4 rounded-full hover:bg-blue-50 transition-colors text-lg font-medium shadow-md hover:shadow-lg"
+                className="bg-white primary-color border-2 primary-border px-4 md:px-8 py-2 md:py-4 rounded-full primary-bg-hover transition-colors text-lg font-medium shadow-md hover:shadow-lg"
               >
                 Explore Businesses
               </Link>
@@ -78,7 +78,7 @@ export function Landing() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="bg-white rounded-2xl p-8 shadow-md text-center hover:shadow-xl transition-shadow">
-                <div className="w-16 h-16 bg-linear-to-br from-blue-500 to-indigo-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 primary-gradient rounded-full flex items-center justify-center mx-auto mb-4">
                   <Rocket className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">Launching a business?</h3>
@@ -124,7 +124,7 @@ export function Landing() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="text-center">
-                <div className="w-16 h-16 bg-linear-to-br from-blue-600 to-indigo-600 text-white rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold shadow-lg">
+                <div className="w-16 h-16 primary-gradient text-white rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold shadow-lg">
                   1
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">Create an Account</h3>
@@ -233,27 +233,27 @@ export function Landing() {
         <section id='why-it-was-started' className='py-20'>
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              ~ Why <span className='text-blue-600'>{webName}</span> Exists ~
+              ~ Why <span className='primary-color'>{webName}</span> Exists ~
             </h2>
           </div>
 
-          <div className='border border-gray-400 bg-blue-950 opacity-80 m-10 lg:mx-auto lg:max-w-xl p-8 rounded-xl shadow-md'>
+          <div className='border border-gray-400 primary-bg opacity-80 m-10 lg:mx-auto lg:max-w-xl p-8 rounded-xl shadow-md'>
             <p className='font-semibold text-white'>Many entrepreneurs and small businesses struggle to get visibilty on their early stages. {webName} was created to give every idea and every business mutual visibility. It is a space where innovations, ambition, and entrepreneurship can be shared with the world.</p>
           </div>
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 bg-blue-600 lg:max-w-7xl lg:mx-auto rounded-xl shadow-md shadow-blue-900">
+        <section className="py-20 primary-bg lg:max-w-7xl lg:mx-auto rounded-xl shadow-md shadow-primary">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
               Ready to Showcase Your Business?
             </h2>
-            <p className="text-xl text-blue-100 mb-10">
+            <p className="text-xl primary-light-color mb-10">
               Join hundreds of entrepreneurs already showcasing their businesses and ideas
             </p>
             <Link
               to={session ? "/create" : "/signup"}
-              className="bg-white text-blue-600 px-8 py-4 rounded-full hover:bg-gray-100 transition-colors text-lg font-medium inline-block shadow-xl hover:shadow-2xl"
+              className="bg-white primary-color px-8 py-4 rounded-full hover:bg-gray-100 transition-colors text-lg font-medium inline-block shadow-xl hover:shadow-2xl"
             >
               Get Started Now
             </Link>

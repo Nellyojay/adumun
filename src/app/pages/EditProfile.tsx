@@ -172,7 +172,7 @@ export function EditProfile() {
                 />
               </div>
             ) : (
-              <div className="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center hover:border-blue-500 transition-colors">
+              <div className="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center primary-border-hover transition-colors">
                 <input
                   type="file"
                   id="images"
@@ -198,7 +198,7 @@ export function EditProfile() {
                 value={fullName}
                 placeholder='e.g. John Doe'
                 onChange={(e) => setFullName(e.target.value)}
-                className="mt-1 block w-full p-2 rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                className="mt-1 block w-full p-2 rounded-lg border-gray-300 shadow-sm primary-focus primary-focus"
                 required
               />
             </div>
@@ -213,7 +213,7 @@ export function EditProfile() {
                 placeholder='e.g. johnDoe123'
                 onChange={(e) => setUserName(e.target.value)}
                 disabled={disbaleUsernameChange}
-                className="mt-1 block w-full p-2 rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                className="mt-1 block w-full p-2 rounded-lg border-gray-300 shadow-sm primary-focus primary-focus"
               />
               <p className="text-xs text-gray-500">
                 {disbaleUsernameChange && 'Username can only be changed once every 90 days.'}
@@ -228,7 +228,7 @@ export function EditProfile() {
                 id="bio"
                 value={bio}
                 onChange={(e) => setBio(e.target.value)}
-                className="mt-1 block w-full p-2 rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                className="mt-1 block w-full p-2 rounded-lg border-gray-300 shadow-sm primary-focus primary-focus"
                 rows={4}
               />
             </div>
@@ -245,7 +245,7 @@ export function EditProfile() {
                   value={roles.join(', ')}
                   disabled
                   onChange={(e) => setRoles(e.target.value.split(', '))}
-                  className="w-full not-md:text-sm px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full not-md:text-sm px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 primary-focus focus:border-transparent"
                 />
                 <button
                   onClick={() => {
@@ -271,7 +271,7 @@ export function EditProfile() {
                   roles.push(e.target.value);
                   setRoles([...roles]);
                 }}
-                className="w-full not-md:text-sm px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full not-md:text-sm px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 primary-focus focus:border-transparent"
               >
                 <option value="">--Select--</option>
                 <option value="business personnel">Business personnel</option>
@@ -294,7 +294,7 @@ export function EditProfile() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-blue-300"
+                  className="px-5 py-2 primary-bg text-white rounded-lg primary-bg-hover primary-bg-disabled"
                 >
                   {loading ? 'Saving...' : 'Save Changes'}
                 </button>

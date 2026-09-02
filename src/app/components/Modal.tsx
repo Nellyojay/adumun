@@ -48,7 +48,7 @@ export function Modal({
           <button
             type="button"
             onClick={onConfirm}
-            className={confirmClassName ?? 'px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700'}
+            className={confirmClassName ?? 'px-4 py-2 rounded-lg primary-bg text-white primary-bg-hover'}
           >
             {confirmText}
           </button>

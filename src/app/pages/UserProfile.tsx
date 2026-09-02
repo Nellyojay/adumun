@@ -162,7 +162,7 @@ export function UserProfile() {
                 className="max-w-50 max-h-50 rounded-lg object-contain bg-gray-200 shadow-xl"
               />
             ) : (
-              <div className="w-32 h-32 rounded-full bg-linear-to-br from-blue-500 to-indigo-600 shrink-0 flex items-center justify-center shadow-lg">
+              <div className="w-32 h-32 rounded-full primary-gradient shrink-0 flex items-center justify-center shadow-lg">
                 <span className="text-5xl font-bold text-white">{userData?.full_name.charAt(0) || 'U'}</span>
               </div>
             )}
@@ -174,7 +174,7 @@ export function UserProfile() {
               <div className="flex flex-wrap gap-2 justify-center md:justify-start mb-4">
                 {userRoles.length > 0 ? (
                   userRoles.map((role, index) => (
-                    <span key={index} className="px-3 py-1 bg-blue-100 text-blue-800 text-sm font-medium rounded-full">
+                    <span key={index} className="px-3 py-1 primary-soft-bg primary-soft-color text-sm font-medium rounded-full">
                       {role}
                     </span>
                   ))
@@ -199,7 +199,7 @@ export function UserProfile() {
               </div>
 
               {isOwner && (<div className="flex items-center justify-center md:block text-gray-500 mt-2">
-                <Link to={'/following'} className="text-blue-600 hover:text-blue-400">
+                <Link to={'/following'} className="primary-color primary-color-hover">
                   Businesses Following <span className='font-semibold text-gray-600'>{userData.following}</span>
                 </Link>
               </div>)}
@@ -209,7 +209,7 @@ export function UserProfile() {
               <div className="flex flex-col gap-2">
                 <Link
                   to="/settings"
-                  className="flex justify-center items-center px-6 py-2 bg-linear-to-r from-gray-500 to-gray-700 text-white rounded-full hover:from-gray-600 hover:to-gray-800 transition-all font-medium shadow-md hover:shadow-lg">
+                  className="flex justify-center items-center px-6 py-2 bg-gray-700 text-white rounded-full hover:bg-gray-800 transition-all font-medium shadow-md hover:shadow-lg">
                   Settings
                 </Link>
               </div>
@@ -221,14 +221,14 @@ export function UserProfile() {
               <button
                 title={moreOpen ? 'Hide role information' : 'View more about user roles'}
                 onClick={() => setMoreOpen(!moreOpen)}
-                className='text-xs md:text-sm text-blue-600 md:hover:text-blue-400 transition-colors flex items-center'
+                className='text-xs md:text-sm primary-color primary-color-hover transition-colors flex items-center'
               >
                 View more about your roles
               </button>
               {moreOpen ? (
-                <ChevronUp className='w-4 h-4 text-blue-600' />
+                <ChevronUp className='w-4 h-4 primary-color' />
               ) : (
-                <ChevronDown className='w-4 h-4 text-blue-600' />
+                <ChevronDown className='w-4 h-4 primary-color' />
               )}
             </div>
           )}
@@ -294,7 +294,7 @@ export function UserProfile() {
               {isOwner && (
                 <button
                   onClick={() => setOpenActiionsPopup(prev => !prev)}
-                  className="flex justify-center items-center text-blue-600 hover:text-blue-400 border-2 border-blue-600 hover:border-blue-400 bg-blue-50 rounded-lg py-1 px-4 font-medium"
+                  className="flex justify-center items-center primary-color primary-color-hover border-2 primary-border primary-border-hover primary-soft-bg rounded-lg py-1 px-4 font-medium"
                 >
                   +
                   <span className='hidden md:block'>Create page</span>
@@ -318,7 +318,7 @@ export function UserProfile() {
                 {isOwner && (
                   <Link
                     to="/create"
-                    className="inline-block not-md:text-sm bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition-colors font-medium"
+                    className="inline-block not-md:text-sm primary-bg text-white px-6 py-3 rounded-full primary-bg-hover transition-colors font-medium"
                   >
                     Create Your First Business Page
                   </Link>
@@ -341,7 +341,7 @@ export function UserProfile() {
                 {isOwner && (
                   <Link
                     to="/mentorship/create"
-                    className="inline-block not-md:text-sm bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition-colors font-medium"
+                    className="inline-block not-md:text-sm primary-bg text-white px-6 py-3 rounded-full primary-bg-hover transition-colors font-medium"
                   >
                     Create Your First Mentorship Page
                   </Link>
