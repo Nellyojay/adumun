@@ -43,7 +43,7 @@ export function Catalog() {
             {isOwner && startupId && (
               <Link
                 to={`/startup/${startupId}/catalog/create`}
-                className="inline-flex items-center justify-center rounded-full bg-cyan-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-cyan-700"
+                className="inline-flex items-center justify-center rounded-full primary-bg px-5 py-3 text-sm font-semibold text-white shadow-sm transition"
               >
                 Create collection
               </Link>
@@ -66,7 +66,7 @@ export function Catalog() {
                       className="flex items-center rounded-3xl border border-slate-200 bg-white p-4 shadow-sm transition sm:hover:shadow-lg"
                     >
                       <div className="w-full">
-                        <div className="text-sm font-bold uppercase tracking-[0.24em] text-cyan-600">{collection.collection_name}</div>
+                        <div className="text-sm font-bold uppercase tracking-[0.24em] primary-color">{collection.collection_name}</div>
                         <h2 className="font-semibold text-slate-900">{collection.item_count || 0} item{collection.item_count === 1 ? '' : 's'}</h2>
                       </div>
 

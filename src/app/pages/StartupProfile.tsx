@@ -587,7 +587,7 @@ export function StartupProfile() {
                 setSelectedStartup(startup.id);
               }
             }}
-            className="inline-flex pt-8 -mt-6 items-center justify-center w-xs sm:w-lg rounded-b-2xl bg-linear-to-r from-blue-400 via-blue-500 to-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-500/20 transition-all duration-200 sm:hover:translate-y-1 hover:bg-linear-to-r hover:from-blue-600 hover:via-blue-700 hover:to-blue-800"
+            className="inline-flex pt-8 -mt-6 items-center justify-center w-xs sm:w-lg rounded-b-2xl primary-bg px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-500/20 transition-all duration-200 sm:hover:translate-y-1"
           >
             View Catalog
           </Link>

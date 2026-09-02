@@ -54,8 +54,34 @@
   }
 }
 
-@theme {
-  --color-primary: #016B61;
-  --color-secondary: #70B2B2;
-  --color-accent: #016b6032;
+.primary-bg {
+  background-color: var(--color-cyan-600);
+}
+
+.primary-color {
+  color: var(--color-cyan-600);
+}
+
+.secondary-bg {
+  background-color: var(--color-slate-900);
+}
+
+.secondary-color {
+  color: var(--color-slate-900);
+}
+
+.accent-bg {
+  background-color: var(--color-cyan-400);
+}
+
+.accent-color {
+  color: var(--color-cyan-400);
+}
+
+.primary-bg:hover {
+  background-color: var(--color-cyan-700);
+}
+
+.primary-color:hover {
+  color: var(--color-cyan-700);
 }
