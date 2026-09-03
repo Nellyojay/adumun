@@ -60,11 +60,11 @@
 }
 
 .primary-bg {
-  background-color: var(--color-cyan-600);
+  background-color: var(--color-cyan-700);
 }
 
 .primary-bg-hover:hover {
-  background-color: var(--color-cyan-700);
+  background-color: var(--color-cyan-600);
   color: white;
 }
 
@@ -90,11 +90,11 @@
 }
 
 .primary-color {
-  color: var(--color-cyan-600);
+  color: var(--color-cyan-700);
 }
 
 .primary-soft-color {
-  color: var(--color-cyan-700);
+  color: var(--color-cyan-600);
 }
 
 .primary-light-color {
@@ -102,7 +102,7 @@
 }
 
 .primary-color-hover:hover {
-  color: var(--color-cyan-700);
+  color: var(--color-cyan-600);
 }
 
 .primary-border {

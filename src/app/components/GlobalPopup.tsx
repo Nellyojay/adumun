@@ -6,13 +6,13 @@ export default function GlobalPopup() {
   if (!popup.visible) return null;
 
   return (
-    <div className="fixed bottom-16 md:bottom-0 left-0 right-0 z-50">
+    <div className="fixed bottom-12 md:bottom-0 left-0 right-0 z-50">
 
       <div
-        className={`px-2 py-1 rounded-sm flex justify-center items-center shadow-lg text-white text-sm font-medium
+        className={`px-2 py-1 opacity-80 rounded-sm flex justify-center items-center shadow-lg text-white text-sm font-medium
         ${popup.type === "error" && "bg-red-500"}
         ${popup.type === "success" && "bg-green-500"}
-        ${popup.type === "info" && "bg-blue-600"}
+        ${popup.type === "info" && "bg-blue-500"}
         `}
       >
         {popup.message}

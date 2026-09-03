@@ -370,11 +370,12 @@ export function EditStartup() {
               </label>
 
               <label className="block">
-                <span className="text-sm font-medium text-gray-700">X Username</span>
+                <span className="text-sm font-medium text-gray-700 disabled:text-gray-500">Username</span>
                 <input
                   value={formData.x_username}
+                  disabled
                   onChange={(e) => setFormData({ ...formData, x_username: e.target.value })}
-                  placeholder='e.g. x_example'
+                  placeholder='-- disabled --'
                   className="mt-1 w-full p-2 border border-gray-300 rounded-lg"
                 />
               </label>

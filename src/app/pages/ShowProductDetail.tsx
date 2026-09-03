@@ -168,7 +168,7 @@ const ShowProductDetail = () => {
               onClick={() => navigate(-1)}
               className="inline-flex w-full items-center justify-center rounded-3xl primary-bg px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-white transition primary-bg-hover"
             >
-              Back to catalogue
+              Back to collection
             </button>
           </div>
         </div>

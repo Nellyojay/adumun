@@ -23,8 +23,7 @@ import {
   AlertTriangle,
   Star
 } from 'lucide-react';
-import { FaFacebook, FaWhatsapp } from 'react-icons/fa';
-import { BsChevronDown, BsTwitterX } from 'react-icons/bs';
+import { BsChevronDown } from 'react-icons/bs';
 import { useAuth } from '../contexts/authContext';
 import { useStartup } from '../contexts/StartupProfileContext';
 import { formatDate } from '../constants/dateFormat';
@@ -545,7 +544,7 @@ export function StartupProfile() {
                     <div>
                       <h3 className="text-sm font-semibold text-gray-900 mb-2">Social Media</h3>
                       <div className="flex space-x-3">
-                        <a
+                        {/* <a
                           title='twitter'
                           href={`https://x.com/${startup?.x_username}`}
                           target='_blank'
@@ -570,6 +569,20 @@ export function StartupProfile() {
                           className="w-10 h-10 bg-green-100 text-green-500 rounded-full flex items-center justify-center hover:bg-green-200 transition-colors"
                         >
                           <FaWhatsapp className="w-6 h-6" />
+                        </a> */}
+
+                        <a
+                          href="https://nellyojay.github.io/vuma.com/#/download"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          title="Vuma App"
+                          className="w-10 h-10 flex items-center justify-center"
+                        >
+                          <img
+                            src="https://nellyojay.github.io/vuma.com/assets/vuma-app-icon-Pc0GhrEY.png"
+                            alt="Vuma App Icon"
+                            className='rounded-xl'
+                          />
                         </a>
                       </div>
                     </div>
