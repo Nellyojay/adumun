@@ -12,7 +12,7 @@ export default function GlobalPopup() {
         className={`px-2 py-1 rounded-sm flex justify-center items-center shadow-lg text-white text-sm font-medium
         ${popup.type === "error" && "bg-red-500"}
         ${popup.type === "success" && "bg-green-500"}
-        ${popup.type === "info" && "primary-soft-bg"}
+        ${popup.type === "info" && "primary-bg"}
         `}
       >
         {popup.message}
