@@ -7,7 +7,7 @@ import { useUserData } from '../contexts/userDataContext';
 import { useAuth } from '../contexts/authContext';
 import SuccessMessage from '../components/SuccessMessage';
 import ScrollToTop from '../constants/scrollToTop';
-import { BackButton } from '../components/buttons/reusableButtons';
+import { BackButton } from '../components/utils/reusableButtons';
 
 export function CreateStartup() {
   const navigate = useNavigate();

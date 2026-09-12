@@ -8,7 +8,7 @@ import SuccessMessage from "../components/SuccessMessage";
 import { FOLDER, imageHandlerService } from "../constants/imageHandler";
 import { useUserData } from "../contexts/userDataContext";
 import ScrollToTop from "../constants/scrollToTop";
-import { BackButton } from "../components/buttons/reusableButtons";
+import { BackButton } from "../components/utils/reusableButtons";
 
 export default function EditMentorship() {
   const navigate = useNavigate();

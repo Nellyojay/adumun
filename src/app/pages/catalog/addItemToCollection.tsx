@@ -8,7 +8,7 @@ import { useUserData } from '../../contexts/userDataContext';
 import SuccessMessage from '../../components/SuccessMessage';
 import supabase from '../../supabaseClient';
 import { FOLDER, imageHandlerService } from '../../constants/imageHandler';
-import { BackButton } from '../../components/buttons/reusableButtons';
+import { BackButton } from '../../components/utils/reusableButtons';
 
 export function AddItemToCollection() {
   const navigate = useNavigate();

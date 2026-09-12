@@ -5,7 +5,7 @@ import ScrollToTop from '../../constants/scrollToTop';
 import { useStartup } from '../../contexts/StartupProfileContext';
 import supabase from '../../supabaseClient';
 import SuccessMessage from '../../components/SuccessMessage';
-import { BackButton } from '../../components/buttons/reusableButtons';
+import { BackButton } from '../../components/utils/reusableButtons';
 
 export function CreateCollection() {
   const navigate = useNavigate();

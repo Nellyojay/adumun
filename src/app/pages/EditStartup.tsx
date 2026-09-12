@@ -8,7 +8,7 @@ import { useUserData } from '../contexts/userDataContext';
 import { Upload, X } from 'lucide-react';
 import { FOLDER, imageHandlerService } from '../constants/imageHandler';
 import SuccessMessage from '../components/SuccessMessage';
-import { BackButton } from '../components/buttons/reusableButtons';
+import { BackButton } from '../components/utils/reusableButtons';
 
 type FormData = {
   name: string;

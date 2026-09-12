@@ -6,7 +6,7 @@ import supabase from '../supabaseClient';
 import { useUserData } from '../contexts/userDataContext';
 import { usePopup } from '../contexts/EdgePopupContext';
 import { useAuth } from '../contexts/authContext';
-import { BackButton } from '../components/buttons/reusableButtons';
+import { BackButton } from '../components/utils/reusableButtons';
 
 export function ManageAccount() {
   const navigate = useNavigate();

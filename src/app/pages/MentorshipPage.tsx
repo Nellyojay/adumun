@@ -11,7 +11,7 @@ import { useAuth } from "../contexts/authContext";
 import { useUserData } from "../contexts/userDataContext";
 import Loader from "../constants/loader";
 import supabase from "../supabaseClient";
-import { BackButton } from "../components/buttons/reusableButtons";
+import { BackButton } from "../components/utils/reusableButtons";
 
 export default function MentorshipPage() {
 

@@ -7,7 +7,7 @@ import { useStartup } from '../../contexts/StartupProfileContext';
 import { useEffect } from 'react';
 import { usePageDataOwner } from '../../constants/ownerTag';
 import { ChevronRight } from 'lucide-react';
-import { BackButton } from '../../components/buttons/reusableButtons';
+import { BackButton } from '../../components/utils/reusableButtons';
 
 export function Catalog() {
   const { collections } = useCatalog();

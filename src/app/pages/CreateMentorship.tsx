@@ -5,7 +5,7 @@ import ScrollToTop from "../constants/scrollToTop";
 import SuccessMessage from "../components/SuccessMessage";
 import supabase from "../supabaseClient";
 import { useUserData } from "../contexts/userDataContext";
-import { BackButton } from "../components/buttons/reusableButtons";
+import { BackButton } from "../components/utils/reusableButtons";
 
 export default function CreateMentorship() {
   const navigate = useNavigate();

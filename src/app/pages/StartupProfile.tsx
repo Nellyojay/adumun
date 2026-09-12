@@ -31,7 +31,7 @@ import { useUserData } from '../contexts/userDataContext';
 import { formatPhoneEA } from '../constants/phoneNumberormater';
 import { getImageUrl } from '../constants/imageHandler';
 import ScrollToTop from '../constants/scrollToTop';
-import { BackButton } from '../components/buttons/reusableButtons';
+import { BackButton } from '../components/utils/reusableButtons';
 import { usePopup } from '../contexts/EdgePopupContext';
 import { createNotification } from '../constants/notificationFns';
 

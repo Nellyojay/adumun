@@ -7,7 +7,7 @@ import { Upload } from 'lucide-react';
 import { FOLDER, imageHandlerService } from '../constants/imageHandler';
 import SuccessMessage from '../components/SuccessMessage';
 import { useUserData } from '../contexts/userDataContext';
-import { BackButton } from '../components/buttons/reusableButtons';
+import { BackButton } from '../components/utils/reusableButtons';
 
 export function EditProfile() {
   const navigate = useNavigate();

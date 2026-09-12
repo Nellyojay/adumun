@@ -6,7 +6,7 @@ import { useCatalog } from '../../contexts/catalogContext';
 import ScrollToTop from '../../constants/scrollToTop';
 import { useStartup } from '../../contexts/StartupProfileContext';
 import { usePageDataOwner } from '../../constants/ownerTag';
-import { BackButton } from '../../components/buttons/reusableButtons';
+import { BackButton } from '../../components/utils/reusableButtons';
 
 export function CatalogueItems() {
   const { collectionItems, collections, setSelectedCollection, selectedCollection } = useCatalog();

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { Eye, EyeOff, Lock } from 'lucide-react';
 import { useAuth } from '../contexts/authContext';
-import { BackButton } from '../components/buttons/reusableButtons';
+import { BackButton } from '../components/utils/reusableButtons';
 import SuccessMessage from '../components/SuccessMessage';
 import ScrollToTop from '../constants/scrollToTop';
 import supabase from '../supabaseClient';

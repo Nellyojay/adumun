@@ -5,7 +5,7 @@ import { useAuth } from '../contexts/authContext';
 import { useWebData } from '../contexts/webData';
 import ScrollToTop from '../constants/scrollToTop';
 import { HelpCircle, Mail, ShieldCheck, MessageSquare, Clock3 } from 'lucide-react';
-import { BackButton } from '../components/buttons/reusableButtons';
+import { BackButton } from '../components/utils/reusableButtons';
 
 export function HelpCenter() {
   const navigate = useNavigate();
