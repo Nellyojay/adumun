@@ -1,10 +1,12 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Bell, CheckCheck, Heart, MessageCircle, UserPlus } from 'lucide-react';
 import { Navbar } from '../components/Navbar';
 import { useAuth } from '../contexts/authContext';
 import { useUserData } from '../contexts/userDataContext';
 import { useWebData } from '../contexts/webData';
 import ScrollToTop from '../constants/scrollToTop';
+import supabase from '../supabaseClient';
+import { formatNotification, type NotificationAction } from '../constants/notificationFns';
 
 type NotificationFilter = 'all' | 'unread';
 type NotificationType = 'follow' | 'like' | 'comment';
@@ -18,53 +20,133 @@ type NotificationItem = {
   read: boolean;
 };
 
+type NotificationRow = {
+  id: string;
+  recipient_id: string | null;
+  actor_id: string | null;
+  action_type: NotificationAction;
+  post_id?: number | null;
+  opinion_id?: string | null;
+  business_id?: string | null;
+  mentorship_id?: string | null;
+  meta?: Record<string, unknown> | null;
+  created_at: string;
+  is_read?: boolean | null;
+  read?: boolean | null;
+};
+
+type Actor = {
+  id: string;
+  full_name?: string | null;
+  user_name?: string | null;
+};
+
 const notificationIcon = {
   follow: UserPlus,
   like: Heart,
   comment: MessageCircle,
 };
 
-const exampleNotifications: NotificationItem[] = [
-  {
-    id: 'notification-1',
-    type: 'follow',
-    title: 'New follower',
-    message: 'Amina Okafor started following your business profile.',
-    createdAt: '10 minutes ago',
-    read: false,
-  },
-  {
-    id: 'notification-2',
-    type: 'like',
-    title: 'Your post was liked',
-    message: 'Daniel Mensah liked your latest update about your product launch.',
-    createdAt: '1 hour ago',
-    read: false,
-  },
-  {
-    id: 'notification-3',
-    type: 'comment',
-    title: 'New comment on your post',
-    message: 'Sarah Williams commented: "This is a thoughtful approach. I would love to learn more."',
-    createdAt: 'Yesterday',
-    read: true,
-  },
-  {
-    id: 'notification-4',
-    type: 'follow',
-    title: 'New follower',
-    message: 'Michael Adeyemi started following your mentorship page.',
-    createdAt: '2 days ago',
-    read: true,
-  },
-];
+const getNotificationType = (action: NotificationAction): NotificationType => {
+  if (action === 'followed') return 'follow';
+  if (action.includes('comment') || action.includes('repl')) return 'comment';
+  return 'like';
+};
+
+const formatCreatedAt = (createdAt: string) => {
+  const date = new Date(createdAt);
+  if (Number.isNaN(date.getTime())) return '';
+
+  return new Intl.DateTimeFormat(undefined, {
+    dateStyle: 'medium',
+    timeStyle: 'short',
+  }).format(date);
+};
 
 export function Notifications() {
   const { session } = useAuth();
   const { currentUser } = useUserData();
   const { webName } = useWebData();
   const [filter, setFilter] = useState<NotificationFilter>('all');
-  const [notifications, setNotifications] = useState<NotificationItem[]>(exampleNotifications);
+  const [notifications, setNotifications] = useState<NotificationItem[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const userId = currentUser?.id;
+    if (!userId) {
+      setNotifications([]);
+      setLoading(false);
+      return;
+    }
+
+    let active = true;
+
+    const fetchNotifications = async () => {
+      setLoading(true);
+      setError(null);
+
+      const { data, error: notificationError } = await supabase
+        .from('notifications')
+        .select('*')
+        .eq('recipient_id', userId)
+        .order('created_at', { ascending: false });
+
+      if (notificationError) {
+        if (active) {
+          setError('Unable to load your notifications right now.');
+          setLoading(false);
+        }
+        return;
+      }
+
+      const rows = (data || []) as NotificationRow[];
+      const actorIds = [...new Set(rows.map((row) => row.actor_id).filter((id): id is string => Boolean(id)))];
+      let actors: Actor[] = [];
+
+      if (actorIds.length > 0) {
+        const { data: actorData } = await supabase
+          .from('users')
+          .select('id, full_name, user_name')
+          .in('id', actorIds);
+        actors = (actorData || []) as Actor[];
+      }
+
+      const actorById = new Map(actors.map((actor) => [actor.id, actor]));
+      const nextNotifications = rows.map((row): NotificationItem => {
+        const actor = row.actor_id ? actorById.get(row.actor_id) : undefined;
+        const actorName = actor?.full_name || actor?.user_name || 'Someone';
+        const formatted = formatNotification(row.action_type, {
+          recipient_id: row.recipient_id,
+          actor_id: row.actor_id,
+          action_type: row.action_type,
+          action_profile_name: actorName,
+          post_id: row.post_id,
+          opinion_id: row.opinion_id,
+          business_id: row.business_id,
+          mentorship_id: row.mentorship_id,
+          extra: row.meta,
+        });
+
+        return {
+          id: row.id,
+          type: getNotificationType(row.action_type),
+          title: formatted.title,
+          message: formatted.body,
+          createdAt: formatCreatedAt(row.created_at),
+          read: Boolean(row.is_read ?? row.read ?? false),
+        };
+      });
+
+      if (active) {
+        setNotifications(nextNotifications);
+        setLoading(false);
+      }
+    };
+
+    void fetchNotifications();
+
+  }, [currentUser?.id]);
 
   const unreadCount = notifications.filter((notification) => !notification.read).length;
   const visibleNotifications = useMemo(
@@ -74,17 +156,43 @@ export function Notifications() {
     [filter, notifications]
   );
 
-  const markAllAsRead = () => {
+  const markAllAsRead = async () => {
     setNotifications((currentNotifications) => currentNotifications.map((notification) => ({
       ...notification,
       read: true,
     })));
+
+    const { error } = await supabase
+      .from('notifications')
+      .update({ is_read: true })
+      .eq('recipient_id', currentUser?.id)
+      .eq('is_read', false);
+
+    if (error) {
+      console.error('Error marking notification as read:', error.message);
+      return;
+    }
+
   };
 
-  const markAsRead = (notificationId: string) => {
-    setNotifications((currentNotifications) => currentNotifications.map((notification) => (
-      notification.id === notificationId ? { ...notification, read: true } : notification
-    )));
+  const markAsRead = async (notificationId: string) => {
+    setNotifications((currentNotifications) => currentNotifications.map((notification) => {
+      if (notification.id === notificationId) {
+        return { ...notification, read: true };
+      }
+      return notification;
+    }));
+
+    const { error } = await supabase
+      .from('notifications')
+      .update({ is_read: true })
+      .eq('id', notificationId)
+
+    if (error) {
+      console.error('Error marking notification as read:', error.message);
+      return;
+    }
+
   };
 
   return (
@@ -134,7 +242,15 @@ export function Notifications() {
             <span className="text-xs text-gray-400">{currentUser?.full_name || webName}</span>
           </div>
 
-          {visibleNotifications.length > 0 ? (
+          {loading ? (
+            <div className="px-6 py-16 text-center text-sm text-gray-500">
+              Loading notifications...
+            </div>
+          ) : error ? (
+            <div className="px-6 py-16 text-center">
+              <p className="text-sm text-red-600">{error}</p>
+            </div>
+          ) : visibleNotifications.length > 0 ? (
             <div className="divide-y divide-gray-100">
               {visibleNotifications.map((notification) => {
                 const Icon = notificationIcon[notification.type];
