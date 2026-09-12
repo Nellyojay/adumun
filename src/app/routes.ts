@@ -29,6 +29,7 @@ import { ManageAccount } from "./pages/ManageAccount";
 import { ChangePassword } from "./pages/ChangePassword";
 import { RecoverAccount } from "./pages/RecoverAccount";
 import { ResetPassword } from "./pages/ResetPassword";
+import { Notifications } from "./pages/Notifications";
 
 export const router = createHashRouter([
   {
@@ -50,6 +51,10 @@ export const router = createHashRouter([
   {
     path: "/feedback",
     Component: Feedback,
+  },
+  {
+    path: "/notifications",
+    Component: Notifications,
   },
   {
     path: "/following",

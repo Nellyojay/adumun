@@ -16,7 +16,6 @@ import { ActionsPopup } from '../components/Popup';
 import MentorshipPageCard from '../components/MentorshipPageCard';
 import { useMentorshipData } from '../contexts/mentorshipContext';
 import { useWebData } from '../contexts/webData';
-import { BackButton } from '../components/buttons/reusableButtons';
 
 type Favorites = {
   startup_id: string
@@ -147,10 +146,9 @@ export function UserProfile() {
       <Navbar />
       <ScrollToTop />
 
-      <main className="max-w-6xl mx-auto px-2 sm:px-6 lg:px-8 pt-20 pb-20">
+      <main className="max-w-6xl mx-auto px-2 sm:px-6 lg:px-8 pt-14 pb-20">
         {/* Profile Header */}
-        <div className="relative bg-white rounded-2xl shadow-md pb-4 mb-8">
-          <BackButton />
+        <div className="bg-white rounded-2xl shadow-md pb-4 mb-8">
           {(!userData.is_active && !userData.deleted_at) && (
             <p className='text-red-600 text-center font-semibold border-2 border-red-600 bg-red-50 p-2 rounded-lg'>This User nolonger exists</p>
           )}

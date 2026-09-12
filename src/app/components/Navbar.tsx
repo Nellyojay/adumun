@@ -1,5 +1,5 @@
 import { Link, useNavigate, useLocation } from 'react-router';
-import { Search, Home, Compass, MessageCircle } from 'lucide-react';
+import { Search, Home, Compass, MessageCircle, Bell } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { useWebData } from '../contexts/webData';
 import { useAuth } from '../contexts/authContext';
@@ -137,6 +137,9 @@ export function Navbar({ showSearch = false, onSearch }: NavbarProps) {
                 <Link to="/feedback" className={`text-gray-500 hover:text-gray-800 transition-colors ${location.pathname === '/feedback' ? 'text-gray-800 border-b border-gray-800' : ''} hidden sm:block`}>
                   Feedback
                 </Link>
+                <Link to="/notifications" className={`text-gray-500 hover:text-gray-800 transition-colors ${location.pathname === '/notifications' ? 'text-gray-800 border-b border-gray-800' : ''} hidden sm:block`}>
+                  Notifications
+                </Link>
                 {(currentUserRoles.includes(BUSINESS_PERSONNEL_ROLE) || currentUserRoles.includes(MENTOR_ROLE)) && (
                   <button
                     onClick={() => { setOpenPopup(!openPopup) }}
@@ -181,28 +184,35 @@ export function Navbar({ showSearch = false, onSearch }: NavbarProps) {
             <Compass className="w-5 h-5" />
             <span className="text-xs">Explore</span>
           </Link>
-          {session && (
-            <Link
-              to="/feedback"
-              className={`flex flex-col items-center justify-center gap-1 rounded-md px-2 py-1 ${location.pathname === '/feedback' ? 'primary-soft-bg primary-color' : 'text-gray-600 primary-color-hover'}`}
-            >
-              <MessageCircle className="w-5 h-5" />
-              <span className="text-xs">Feedback</span>
-            </Link>
-          )}
           {session ? (
-            <Link
-              to={`/profile/${currentUser?.id}`}
-              onClick={() => setSelectedProfile(currentUser?.id)}
-              className={`flex flex-col items-center justify-center gap-1 rounded-md px-2 py-1 ${location.pathname.startsWith('/profile') ? 'primary-soft-bg primary-color' : 'text-gray-600 primary-color-hover'}`}
-            >
-              <img
-                src={getImageUrl(currentUser?.profile_image) || 'https://img.freepik.com/premium-vector/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-vector-illustration_561158-3467.jpg?semt=ais_incoming&w=740&q=80'}
-                alt={currentUser?.full_name}
-                className='w-6 h-6 rounded-full'
-              />
-              <span className="text-xs">Profile</span>
-            </Link>
+            <>
+              <Link
+                to="/feedback"
+                className={`flex flex-col items-center justify-center gap-1 rounded-md px-2 py-1 ${location.pathname === '/feedback' ? 'primary-soft-bg primary-color' : 'text-gray-600 primary-color-hover'}`}
+              >
+                <MessageCircle className="w-5 h-5" />
+                <span className="text-xs">Feedback</span>
+              </Link>
+              <Link
+                to="/notifications"
+                className={`flex flex-col items-center justify-center gap-1 rounded-md px-2 py-1 ${location.pathname === '/notifications' ? 'primary-soft-bg primary-color' : 'text-gray-600 primary-color-hover'}`}
+              >
+                <Bell className="w-5 h-5" />
+                <span className="text-xs">Notifications</span>
+              </Link>
+              <Link
+                to={`/profile/${currentUser?.id}`}
+                onClick={() => setSelectedProfile(currentUser?.id)}
+                className={`flex flex-col items-center justify-center gap-1 rounded-md px-2 py-1 ${location.pathname.startsWith('/profile') ? 'primary-soft-bg primary-color' : 'text-gray-600 primary-color-hover'}`}
+              >
+                <img
+                  src={getImageUrl(currentUser?.profile_image) || 'https://img.freepik.com/premium-vector/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-vector-illustration_561158-3467.jpg?semt=ais_incoming&w=740&q=80'}
+                  alt={currentUser?.full_name}
+                  className='w-6 h-6 rounded-full'
+                />
+                <span className="text-xs">Profile</span>
+              </Link>
+            </>
           ) : (
             <Link
               to="/login"
