@@ -10,6 +10,7 @@ import { getImageUrl } from '../constants/imageHandler';
 import type { Post } from '../contexts/StartupProfileContext';
 import { Link } from 'react-router-dom';
 import { usePopup } from '../contexts/EdgePopupContext';
+import { createNotification } from '../constants/notificationFns';
 
 interface PostCardProps {
   post: Post;
@@ -136,6 +137,20 @@ export function PostCard({ post, deletePost }: PostCardProps) {
       return;
     }
 
+    if (nextLiked) {
+      await createNotification(
+        'post_liked',
+        {
+          recipient_id: post.user_id,
+          action_type: 'post_liked',
+          action_profile_name: currentUser?.full_name || currentUser?.user_name || 'Someone',
+          actor_id: currentUser?.id,
+          post_id: post.id,
+          business_id: post.startups?.id || null,
+          mentorship_id: post.mentorship_page?.id || null,
+        }
+      )
+    }
     setSavingLike(false);
   };
 
@@ -176,6 +191,21 @@ export function PostCard({ post, deletePost }: PostCardProps) {
       setSaves(saves);
       setSavingSave(false);
       return;
+    }
+
+    if (nextSaved) {
+      await createNotification(
+        'post_saved',
+        {
+          recipient_id: post.user_id,
+          action_type: 'post_saved',
+          action_profile_name: currentUser?.full_name || currentUser?.user_name || 'Someone',
+          actor_id: currentUser?.id,
+          post_id: post.id,
+          business_id: post.startups?.id || null,
+          mentorship_id: post.mentorship_page?.id || null
+        }
+      )
     }
 
     setSavingSave(false);
@@ -332,6 +362,7 @@ export function PostCard({ post, deletePost }: PostCardProps) {
             <div className="h-full px-2 pb-6 pt-2">
               <CommentBox
                 postId={post.id}
+                startupId={startupId}
                 comments={comments}
                 loading={loadingComments}
                 setComments={setComments}

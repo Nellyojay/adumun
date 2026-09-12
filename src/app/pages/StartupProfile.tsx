@@ -32,6 +32,8 @@ import { formatPhoneEA } from '../constants/phoneNumberormater';
 import { getImageUrl } from '../constants/imageHandler';
 import ScrollToTop from '../constants/scrollToTop';
 import { BackButton } from '../components/buttons/reusableButtons';
+import { usePopup } from '../contexts/EdgePopupContext';
+import { createNotification } from '../constants/notificationFns';
 
 export function StartupProfile() {
   const navigate = useNavigate();
@@ -48,6 +50,7 @@ export function StartupProfile() {
   } = useStartup();
   const { id } = useParams();
   const { setSelectedStartup } = useStartup();
+  const { showPopup } = usePopup();
 
   const rawStartup = startupData?.find(s => s.id === id) || null;
   const isOwner = Boolean(rawStartup?.user_id === currentUser?.id && currentUser?.auth_id === user?.id);
@@ -176,7 +179,7 @@ export function StartupProfile() {
 
   const handleFollow = async () => {
     if (!session) {
-      alert("Please log in to follow startups.");
+      showPopup("Please log in to follow startups.", 'info');
       return;
     }
 
@@ -189,10 +192,23 @@ export function StartupProfile() {
       : await supabase.from('follows').delete().match({ startup_id: id, user_id: currentUser?.id }).select('id').single();
 
     if (error) {
-      alert("Failed to update follow status. Please try again.");
+      showPopup("Failed to update follow status. Please try again.", 'error');
       setFollowing(following);
     }
 
+    if (!following) {
+      await createNotification(
+        'followed',
+        {
+          recipient_id: startup?.user_id || null,
+          action_type: 'followed',
+          action_profile_name: currentUser?.full_name || currentUser?.user_name || 'Someone',
+          actor_id: currentUser?.id,
+          business_id: startup?.id || null,
+          extra: { businessName: startup?.name || 'this startup' }
+        }
+      );
+    }
   }
 
   const handleFavorites = async () => {

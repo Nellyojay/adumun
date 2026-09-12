@@ -4,6 +4,7 @@ import { useAuth } from '../contexts/authContext';
 import { useUserData } from '../contexts/userDataContext';
 import { BsX } from 'react-icons/bs';
 import supabase from '../supabaseClient';
+import { createNotification } from '../constants/notificationFns';
 
 export interface Comment {
   id: number;
@@ -21,6 +22,7 @@ interface CommentNode extends Comment {
 }
 
 interface CommentBoxProps {
+  mentorshipId?: string | null;
   startupId?: string | null;
   postId?: number | null;
   comments: Comment[];
@@ -30,7 +32,7 @@ interface CommentBoxProps {
   setShowComments: (show: boolean) => void;
 }
 
-export function CommentBox({ startupId, postId, comments, loading, setComments, setShowComments }: CommentBoxProps) {
+export function CommentBox({ startupId, mentorshipId, postId, comments, loading, setComments, setShowComments }: CommentBoxProps) {
   const { session } = useAuth();
   const { currentUser } = useUserData();
   const [newComment, setNewComment] = useState('');
@@ -92,6 +94,41 @@ export function CommentBox({ startupId, postId, comments, loading, setComments, 
   }, [startupId, postId, setComments]);
 
   const isAuthenticated = Boolean(session?.user);
+
+  const resolveNotificationRecipient = async (): Promise<string | null> => {
+
+    if (postId) {
+      const { data } = await supabase
+        .from('posts')
+        .select('user_id')
+        .eq('id', postId)
+        .maybeSingle();
+
+      if (data?.user_id) return data.user_id;
+    }
+
+    if (startupId) {
+      const { data } = await supabase
+        .from('startups')
+        .select('user_id')
+        .eq('id', startupId)
+        .maybeSingle();
+
+      if (data?.user_id) return data.user_id;
+    }
+
+    if (mentorshipId) {
+      const { data } = await supabase
+        .from('mentorship_page')
+        .select('user_id')
+        .eq('id', mentorshipId)
+        .maybeSingle();
+
+      if (data?.user_id) return data.user_id;
+    }
+
+    return null;
+  };
 
   const buildCommentTree = (): CommentNode[] => {
     const nodes = comments.map((comment) => ({ ...comment, children: [] }));
@@ -290,6 +327,39 @@ export function CommentBox({ startupId, postId, comments, loading, setComments, 
     if (error) {
       alert('Failed to post comment. Please try again.');
       return;
+    }
+
+    const notificationRecipient = await resolveNotificationRecipient();
+
+    if (data.parent_id === null) {
+      await createNotification(
+        'commented_on_your_post',
+        {
+          recipient_id: notificationRecipient,
+          action_type: 'commented_on_your_post',
+          action_profile_name: currentUser?.full_name || currentUser?.user_name || 'Someone',
+          actor_id: currentUser?.id,
+          post_id: postId || null,
+          business_id: startupId || null,
+          mentorship_id: mentorshipId || null,
+          extra: { commentId: data.id, commentContent: content }
+        }
+      );
+
+    } else {
+      await createNotification(
+        'replied_to_your_comment',
+        {
+          recipient_id: notificationRecipient,
+          action_type: 'replied_to_your_comment',
+          action_profile_name: currentUser?.full_name || currentUser?.user_name || 'Someone',
+          actor_id: currentUser?.id,
+          post_id: postId || null,
+          business_id: startupId || null,
+          mentorship_id: mentorshipId || null,
+          extra: { replyId: data.id, parentId: data.parent_id, commentContent: content }
+        }
+      );
     }
 
     setNewComment('');
