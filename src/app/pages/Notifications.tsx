@@ -260,7 +260,7 @@ export function Notifications() {
                     key={notification.id}
                     type="button"
                     onClick={() => markAsRead(notification.id)}
-                    className={`flex w-full items-start gap-2 px-4 py-5 text-left transition hover:bg-gray-50 sm:px-6 ${notification.read ? 'bg-white' : 'primary-soft-bg/40'}`}
+                    className={`flex w-full items-start gap-2 px-4 py-3 text-left transition hover:bg-gray-50 sm:px-6 ${notification.read ? 'bg-white' : 'primary-soft-bg/40'}`}
                   >
                     <span className={`mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-full ${notification.read ? 'bg-gray-100 text-gray-500' : 'primary-bg text-white'}`}>
                       <Icon className="h-5 w-5" />

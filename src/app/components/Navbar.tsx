@@ -7,6 +7,7 @@ import { BUSINESS_PERSONNEL_ROLE, MENTOR_ROLE, useUserData } from '../contexts/u
 import Loader from '../constants/loader';
 import { getImageUrl } from '../constants/imageHandler';
 import { ActionsPopup } from './Popup';
+import { NotificationTag } from './utils/notificationTag';
 
 interface NavbarProps {
   showSearch?: boolean;
@@ -112,7 +113,7 @@ export function Navbar({ showSearch = false, onSearch }: NavbarProps) {
             </div>
           )}
 
-          {/* Navigation Links */}
+          {/* Desktop Navigation bar */}
           <div ref={actionsRef} className="hidden md:flex items-center space-x-6 transition-all">
             {!session ? (
               <>
@@ -137,8 +138,9 @@ export function Navbar({ showSearch = false, onSearch }: NavbarProps) {
                 <Link to="/feedback" className={`text-gray-500 hover:text-gray-800 transition-colors ${location.pathname === '/feedback' ? 'text-gray-800 border-b border-gray-800' : ''} hidden sm:block`}>
                   Feedback
                 </Link>
-                <Link to="/notifications" className={`text-gray-500 hover:text-gray-800 transition-colors ${location.pathname === '/notifications' ? 'text-gray-800 border-b border-gray-800' : ''} hidden sm:block`}>
+                <Link to="/notifications" className={`relative text-gray-500 hover:text-gray-800 transition-colors ${location.pathname === '/notifications' ? 'text-gray-800 border-b border-gray-800' : ''} hidden sm:block`}>
                   Notifications
+                  <NotificationTag />
                 </Link>
                 {(currentUserRoles.includes(BUSINESS_PERSONNEL_ROLE) || currentUserRoles.includes(MENTOR_ROLE)) && (
                   <button
@@ -195,10 +197,11 @@ export function Navbar({ showSearch = false, onSearch }: NavbarProps) {
               </Link>
               <Link
                 to="/notifications"
-                className={`flex flex-col items-center justify-center gap-1 rounded-md px-2 py-1 ${location.pathname === '/notifications' ? 'primary-soft-bg primary-color' : 'text-gray-600 primary-color-hover'}`}
+                className={`relative flex flex-col items-center justify-center gap-1 rounded-md px-2 py-1 ${location.pathname === '/notifications' ? 'primary-soft-bg primary-color' : 'text-gray-600 primary-color-hover'}`}
               >
                 <Bell className="w-5 h-5" />
                 <span className="text-xs">Notifications</span>
+                <NotificationTag />
               </Link>
               <Link
                 to={`/profile/${currentUser?.id}`}
