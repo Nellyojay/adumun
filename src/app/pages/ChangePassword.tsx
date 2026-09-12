@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router';
-import { ChevronLeft, Eye, EyeOff, Lock } from 'lucide-react';
+import { Eye, EyeOff, Lock } from 'lucide-react';
 import { useAuth } from '../contexts/authContext';
+import { BackButton } from '../components/buttons/reusableButtons';
 import SuccessMessage from '../components/SuccessMessage';
 import ScrollToTop from '../constants/scrollToTop';
 import supabase from '../supabaseClient';
@@ -84,13 +85,7 @@ export function ChangePassword() {
 
       <main className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex items-center gap-4 mb-6">
-          <button
-            title="back"
-            onClick={() => navigate(-1)}
-            className="p-2 md:hover:bg-gray-200 active:bg-gray-200 rounded-full transition-colors"
-          >
-            <ChevronLeft className="w-6 h-6 text-gray-700" />
-          </button>
+          <BackButton className="static" />
           <div>
             <h1 className="text-2xl font-bold text-gray-900">Change Password</h1>
             <p className="text-sm text-gray-500">Secure your account by updating your password.</p>

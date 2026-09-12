@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 import { Navbar } from '../../components/Navbar';
 import ScrollToTop from '../../constants/scrollToTop';
 import { useStartup } from '../../contexts/StartupProfileContext';
 import supabase from '../../supabaseClient';
 import SuccessMessage from '../../components/SuccessMessage';
+import { BackButton } from '../../components/buttons/reusableButtons';
 
 export function CreateCollection() {
   const navigate = useNavigate();
@@ -79,6 +80,7 @@ export function CreateCollection() {
       <ScrollToTop />
 
       <main className="mx-auto max-w-3xl px-4 pt-24 pb-20 sm:px-6 lg:px-8">
+        <BackButton className="static mb-4" />
         <div className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200 sm:p-8">
           <div className="mb-8 flex items-center justify-between gap-3">
             <div>
@@ -91,12 +93,7 @@ export function CreateCollection() {
               )}
             </div>
 
-            <Link
-              to={selectedStartup ? `/startup/${selectedStartup}/catalog` : '/'}
-              className="text-sm font-medium text-slate-500 hover:text-slate-800"
-            >
-              Back to catalog
-            </Link>
+            <BackButton className="static shrink-0" />
           </div>
 
           {!selectedStartup && (

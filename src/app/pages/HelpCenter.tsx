@@ -4,7 +4,8 @@ import { Navbar } from '../components/Navbar';
 import { useAuth } from '../contexts/authContext';
 import { useWebData } from '../contexts/webData';
 import ScrollToTop from '../constants/scrollToTop';
-import { HelpCircle, ChevronLeft, Mail, ShieldCheck, MessageSquare, Clock3 } from 'lucide-react';
+import { HelpCircle, Mail, ShieldCheck, MessageSquare, Clock3 } from 'lucide-react';
+import { BackButton } from '../components/buttons/reusableButtons';
 
 export function HelpCenter() {
   const navigate = useNavigate();
@@ -78,15 +79,7 @@ export function HelpCenter() {
 
       <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12">
         <div className="flex items-center gap-4 mb-6">
-          <button
-            type="button"
-            onClick={() => navigate(-1)}
-            aria-label="Go back"
-            title="Go back"
-            className="p-2 rounded-full bg-white shadow-sm hover:bg-gray-100 transition-colors"
-          >
-            <ChevronLeft className="w-6 h-6 text-gray-700" />
-          </button>
+          <BackButton className="static" />
           <div>
             <p className="text-sm primary-color font-semibold uppercase tracking-wide">Help Center</p>
             <h1 className="text-3xl font-bold text-gray-900">How can we help you?</h1>

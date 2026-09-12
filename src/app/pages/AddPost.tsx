@@ -5,8 +5,8 @@ import { useUserData } from '../contexts/userDataContext';
 import supabase from '../supabaseClient';
 import { FOLDER, imageHandlerService } from '../constants/imageHandler';
 import SuccessMessage from '../components/SuccessMessage';
-import { BiArrowBack } from 'react-icons/bi';
 import { usePopup } from '../contexts/EdgePopupContext';
+import { BackButton } from '../components/buttons/reusableButtons';
 
 export function AddPost() {
   const navigate = useNavigate();
@@ -122,13 +122,7 @@ export function AddPost() {
       <main className="max-w-3xl mx-auto pt-20 pb-20 px-4">
         <div className="mb-6 flex justify-between items-center">
           <h1 className="text-lg md:text-xl font-bold">Add Post</h1>
-          <button
-            onClick={() => navigate(-1)}
-            className="primary-color primary-color-hover flex gap-2 items-center"
-          >
-            <BiArrowBack />
-            Back to page
-          </button>
+          <BackButton className="static" />
         </div>
 
         <div className="bg-white p-6 rounded-2xl shadow-md">

@@ -7,6 +7,7 @@ import { useUserData } from '../contexts/userDataContext';
 import { useAuth } from '../contexts/authContext';
 import SuccessMessage from '../components/SuccessMessage';
 import ScrollToTop from '../constants/scrollToTop';
+import { BackButton } from '../components/buttons/reusableButtons';
 
 export function CreateStartup() {
   const navigate = useNavigate();
@@ -77,7 +78,8 @@ export function CreateStartup() {
       <Navbar showAuth={false} />
       <ScrollToTop />
 
-      <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-20">
+      <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-20">
+        <BackButton className="static mb-4" />
         <div className="bg-white rounded-2xl shadow-md p-8">
           <h1 className="text-xl md:text-3xl font-bold text-gray-900 mb-2">Create Your Business Page</h1>
           <p className="text-gray-600 mb-8">Share your business with the {webName} community</p>

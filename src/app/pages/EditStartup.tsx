@@ -8,6 +8,7 @@ import { useUserData } from '../contexts/userDataContext';
 import { Upload, X } from 'lucide-react';
 import { FOLDER, imageHandlerService } from '../constants/imageHandler';
 import SuccessMessage from '../components/SuccessMessage';
+import { BackButton } from '../components/buttons/reusableButtons';
 
 type FormData = {
   name: string;
@@ -176,9 +177,13 @@ export function EditStartup() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar />
-      <main className="max-w-6xl mx-auto pt-24 pb-12">
+      <main className="max-w-6xl mx-auto pt-14 pb-12">
         <div className="bg-white rounded-3xl shadow-lg p-8">
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">Edit Business profile</h1>
+          <div className="mb-6 flex items-center gap-3">
+            <BackButton className="static" />
+            <h1 className="text-2xl font-bold text-gray-900">Edit Business profile</h1>
+          </div>
+
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <label className="block">

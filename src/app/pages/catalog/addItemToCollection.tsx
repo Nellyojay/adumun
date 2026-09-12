@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import { Navbar } from '../../components/Navbar';
 import ScrollToTop from '../../constants/scrollToTop';
 import { useCatalog } from '../../contexts/catalogContext';
@@ -8,6 +8,7 @@ import { useUserData } from '../../contexts/userDataContext';
 import SuccessMessage from '../../components/SuccessMessage';
 import supabase from '../../supabaseClient';
 import { FOLDER, imageHandlerService } from '../../constants/imageHandler';
+import { BackButton } from '../../components/buttons/reusableButtons';
 
 export function AddItemToCollection() {
   const navigate = useNavigate();
@@ -149,6 +150,7 @@ export function AddItemToCollection() {
       <ScrollToTop />
 
       <main className="mx-auto max-w-3xl px-4 pb-20 pt-24 sm:px-6 lg:px-8">
+        <BackButton className="static mb-4" />
         <div className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200 sm:p-8">
           <div className="mb-8 flex items-center justify-between gap-3">
             <div>
@@ -165,13 +167,7 @@ export function AddItemToCollection() {
               )}
             </div>
 
-            <Link
-              to={startupId ? `/ startup / ${startupId} / catalog / ${encodeURIComponent(collection || selectedCollectionId)
-                }` : '/'}
-              className="text-sm font-medium text-slate-500 hover:text-slate-800"
-            >
-              Back to collection
-            </Link>
+            <BackButton className="static shrink-0" />
           </div>
 
           {!startupId || !selectedCollectionId ? (

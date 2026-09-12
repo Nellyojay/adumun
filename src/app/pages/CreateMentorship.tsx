@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import { ArrowLeft, X } from "lucide-react";
+import { X } from "lucide-react";
 import ScrollToTop from "../constants/scrollToTop";
 import SuccessMessage from "../components/SuccessMessage";
 import supabase from "../supabaseClient";
 import { useUserData } from "../contexts/userDataContext";
+import { BackButton } from "../components/buttons/reusableButtons";
 
 export default function CreateMentorship() {
   const navigate = useNavigate();
@@ -72,23 +73,15 @@ export default function CreateMentorship() {
       <ScrollToTop />
 
       {/* Header */}
-      <div className="primary-bg text-white py-6 px-4">
+      <div className="primary-bg text-white py-2 px-4">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-2xl md:text-3xl">Create Mentorship Page</h1>
+          <h1 className="text-xl md:text-3xl">Create Mentorship Page</h1>
         </div>
       </div>
 
       {/* Form Content */}
-      <div className="max-w-4xl mx-auto px-4 py-6 md:py-8">
-        <div className="mb-6">
-          <button
-            onClick={() => navigate(-1)}
-            className="flex items-center gap-2 primary-color primary-color-hover transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            <span>Back to Home</span>
-          </button>
-        </div>
+      <div className="max-w-4xl mx-auto px-4 py- md:py-6">
+        <BackButton className="static" />
 
         <form
           onSubmit={handleSubmit}

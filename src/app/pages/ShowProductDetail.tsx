@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router';
+import { Link, useParams } from 'react-router';
 import { Navbar } from '../components/Navbar';
 import { CircleDot, MapPin } from 'lucide-react';
 import { useCatalog } from '../contexts/catalogContext';
@@ -9,7 +9,6 @@ import ScrollToTop from '../constants/scrollToTop';
 import supabase from '../supabaseClient';
 
 const ShowProductDetail = () => {
-  const navigate = useNavigate();
   const { collectionItems } = useCatalog();
   const { startupId, collection, productId } = useParams<{ startupId?: string; collection?: string; productId?: string }>();
   const [resolvedItem, setResolvedItem] = useState<any | null>(null);
@@ -163,13 +162,6 @@ const ShowProductDetail = () => {
                 </p>
               </div>
             </div>
-            <button
-              type="button"
-              onClick={() => navigate(-1)}
-              className="inline-flex w-full items-center justify-center rounded-3xl primary-bg px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-white transition primary-bg-hover"
-            >
-              Back to collection
-            </button>
           </div>
         </div>
       </div>

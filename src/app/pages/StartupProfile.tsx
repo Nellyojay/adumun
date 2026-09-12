@@ -31,6 +31,7 @@ import { useUserData } from '../contexts/userDataContext';
 import { formatPhoneEA } from '../constants/phoneNumberormater';
 import { getImageUrl } from '../constants/imageHandler';
 import ScrollToTop from '../constants/scrollToTop';
+import { BackButton } from '../components/buttons/reusableButtons';
 
 export function StartupProfile() {
   const navigate = useNavigate();
@@ -293,6 +294,8 @@ export function StartupProfile() {
         {/* Profile Header Section */}
         <div className="flex flex-col items-center">
           <div className="bg-white -mt-8 sm:min-w-lg mx-4 rounded-3xl shadow-lg p-6 relative z-10">
+            <BackButton />
+
             {/* Logo overlapping banner */}
             <div className="flex flex-col items-center md:flex-row md:items-start gap-4">
               <div className="w-28 h-28 rounded-full shadow-xl -mt-14 bg-gray-200 flex items-center justify-center border border-gray-300">

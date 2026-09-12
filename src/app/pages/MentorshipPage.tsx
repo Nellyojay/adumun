@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { MentorHeader } from "../components/mentor-header";
 import { MentorProfile } from "../components/mentor-profile";
-import { ArrowLeft, Edit, Plus } from "lucide-react";
+import { Edit, Plus } from "lucide-react";
 import ScrollToTop from "../constants/scrollToTop";
 import { useMentorshipData } from "../contexts/mentorshipContext";
 import { PostCard } from "../components/PostCard";
@@ -11,6 +11,7 @@ import { useAuth } from "../contexts/authContext";
 import { useUserData } from "../contexts/userDataContext";
 import Loader from "../constants/loader";
 import supabase from "../supabaseClient";
+import { BackButton } from "../components/buttons/reusableButtons";
 
 export default function MentorshipPage() {
 
@@ -120,13 +121,7 @@ export default function MentorshipPage() {
       />
 
       <div className="flex justify-between items-center px-4 pt-4">
-        <button
-          onClick={() => navigate(-1)}
-          className="flex items-center gap-2 primary-color primary-color-hover transition-colors"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          <span>Back</span>
-        </button>
+        <BackButton className="static" />
 
         {isOwner && (
           <button

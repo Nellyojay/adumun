@@ -7,6 +7,7 @@ import { Upload } from 'lucide-react';
 import { FOLDER, imageHandlerService } from '../constants/imageHandler';
 import SuccessMessage from '../components/SuccessMessage';
 import { useUserData } from '../contexts/userDataContext';
+import { BackButton } from '../components/buttons/reusableButtons';
 
 export function EditProfile() {
   const navigate = useNavigate();
@@ -150,9 +151,12 @@ export function EditProfile() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar />
-      <main className="max-w-3xl mx-auto p-4 pt-24 pb-20">
+      <main className="max-w-3xl mx-auto p-4 pt-16 pb-20">
         <div className="bg-white rounded-2xl shadow-md p-8">
-          <h1 className="text-3xl font-bold mb-6">Edit Profile</h1>
+          <div className="mb-6 flex items-center gap-3">
+            <BackButton className="static m-0 shrink-0" />
+            <h1 className="text-3xl font-bold">Edit Profile</h1>
+          </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             {profileImage ? (

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import { ArrowLeft, Save, Upload, X } from "lucide-react";
+import { Save, Upload, X } from "lucide-react";
 import { useMentorshipData } from "../contexts/mentorshipContext";
 import { useAuth } from "../contexts/authContext";
 import supabase from "../supabaseClient";
@@ -8,6 +8,7 @@ import SuccessMessage from "../components/SuccessMessage";
 import { FOLDER, imageHandlerService } from "../constants/imageHandler";
 import { useUserData } from "../contexts/userDataContext";
 import ScrollToTop from "../constants/scrollToTop";
+import { BackButton } from "../components/buttons/reusableButtons";
 
 export default function EditMentorship() {
   const navigate = useNavigate();
@@ -131,13 +132,7 @@ export default function EditMentorship() {
       {/* Form Content */}
       <div className="max-w-4xl mx-auto px-4 py-6 md:py-8">
         <div className="mb-6">
-          <button
-            onClick={() => navigate(-1)}
-            className="flex items-center gap-2 primary-color primary-color-hover transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            <span>Back to Mentorship</span>
-          </button>
+          <BackButton className="static" />
         </div>
 
         <form

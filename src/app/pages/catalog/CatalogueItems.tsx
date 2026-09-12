@@ -1,4 +1,4 @@
-import { Link, useNavigate, useParams } from 'react-router';
+import { Link, useParams } from 'react-router';
 import { useEffect } from 'react';
 import { Navbar } from '../../components/Navbar';
 import { CircleDot } from 'lucide-react';
@@ -6,11 +6,11 @@ import { useCatalog } from '../../contexts/catalogContext';
 import ScrollToTop from '../../constants/scrollToTop';
 import { useStartup } from '../../contexts/StartupProfileContext';
 import { usePageDataOwner } from '../../constants/ownerTag';
+import { BackButton } from '../../components/buttons/reusableButtons';
 
 export function CatalogueItems() {
   const { collectionItems, collections, setSelectedCollection, selectedCollection } = useCatalog();
   const { startupData } = useStartup();
-  const navigate = useNavigate();
   const { startupId, collection: collectionParam } = useParams<{ startupId?: string; collection?: string }>();
   const collection = decodeURIComponent(collectionParam || '');
   const normalizedCollection = collection.toLowerCase();
@@ -50,12 +50,7 @@ export function CatalogueItems() {
       <Navbar />
       <ScrollToTop />
       <div className="pt-16 pb-20">
-        <button
-          onClick={() => navigate(-1)}
-          className="mb-4 ml-8 flex items-center rounded-full bg-gray-200 px-4 py-2 transition-colors hover:bg-gray-300 md:ml-16"
-        >
-          <p className="text-sm font-semibold">Back</p>
-        </button>
+        <BackButton className="static mb-4 ml-8 md:ml-16" />
 
         <div className="mx-auto max-w-6xl sm:px-8">
           <div className="mb-6 px-4 sm:px-0">
