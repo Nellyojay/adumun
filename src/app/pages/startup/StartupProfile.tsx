@@ -31,7 +31,7 @@ import { useUserData } from '../../contexts/userDataContext';
 import { formatPhoneEA } from '../../constants/phoneNumberormater';
 import { getImageUrl } from '../../constants/imageHandler';
 import ScrollToTop from '../../constants/scrollToTop';
-import { BackButton } from '../../components/utils/reusableButtons';
+import { BackButton, ScrollToTopButton } from '../../components/utils/reusableButtons';
 import { usePopup } from '../../contexts/EdgePopupContext';
 import { createNotification } from '../../constants/notificationFns';
 
@@ -296,6 +296,7 @@ export function StartupProfile() {
     <div className="min-h-screen bg-gray-50 ">
       <Navbar showAuth={false} />
       <ScrollToTop />
+      <ScrollToTopButton />
 
       <main className="max-w-6xl mx-auto pt-12 pb-20">
         {/* Banner Image */}
@@ -310,7 +311,7 @@ export function StartupProfile() {
         {/* Profile Header Section */}
         <div className="flex flex-col items-center">
           <div className="bg-white -mt-8 sm:min-w-lg mx-4 rounded-3xl shadow-lg p-6 relative z-10">
-            <BackButton />
+            <BackButton className='md:right-0 md:mr-4 md:top-2' />
 
             {/* Logo overlapping banner */}
             <div className="flex flex-col items-center md:flex-row md:items-start gap-4">
