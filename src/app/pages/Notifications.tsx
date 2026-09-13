@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Bell, CheckCheck, Heart, MessageCircle, UserPlus } from 'lucide-react';
+import { Bell, Bookmark, CheckCheck, Heart, MessageCircle, Reply, UserPlus } from 'lucide-react';
 import { Navbar } from '../components/Navbar';
 import { useAuth } from '../contexts/authContext';
 import { useUserData } from '../contexts/userDataContext';
@@ -9,7 +9,12 @@ import supabase from '../supabaseClient';
 import { formatNotification, type NotificationAction } from '../constants/notificationFns';
 
 type NotificationFilter = 'all' | 'unread';
-type NotificationType = 'follow' | 'like' | 'comment';
+type NotificationType =
+  'follow'
+  | 'like'
+  | 'comment'
+  | 'saved'
+  | 'replied';
 
 type NotificationItem = {
   id: string;
@@ -45,11 +50,15 @@ const notificationIcon = {
   follow: UserPlus,
   like: Heart,
   comment: MessageCircle,
+  saved: Bookmark,
+  replied: Reply,
 };
 
 const getNotificationType = (action: NotificationAction): NotificationType => {
-  if (action === 'followed') return 'follow';
-  if (action.includes('comment') || action.includes('repl')) return 'comment';
+  if (action.includes('followed')) return 'follow';
+  if (action.includes('commented')) return 'comment';
+  if (action.includes('replied')) return 'replied';
+  if (action.includes('saved')) return 'saved';
   return 'like';
 };
 
@@ -254,6 +263,7 @@ export function Notifications() {
             <div className="divide-y divide-gray-100">
               {visibleNotifications.map((notification) => {
                 const Icon = notificationIcon[notification.type];
+                console.log(notification)
 
                 return (
                   <button
