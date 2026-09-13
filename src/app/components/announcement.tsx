@@ -1,0 +1,163 @@
+import { useCallback, useEffect, useState } from 'react';
+import { ArrowLeft, ArrowRight, BellRing, CalendarDays, X } from 'lucide-react';
+import { Navbar } from './Navbar';
+import ScrollToTop from '../constants/scrollToTop';
+import { localAnnouncements, type Announcement } from '../data/announcements';
+import { useWebData } from '../contexts/webData';
+
+type AnnouncementModalProps = {
+  isOpen: boolean;
+  announcement: Announcement | null;
+  announcements?: Announcement[];
+  onClose: () => void;
+  onSelect?: (announcement: Announcement) => void;
+};
+
+export function AnnouncementModal({
+  isOpen,
+  announcement,
+  announcements = localAnnouncements,
+  onClose,
+  onSelect,
+}: AnnouncementModalProps) {
+  const selectedIndex = announcement
+    ? Math.max(announcements.findIndex((item) => item.id === announcement.id), 0)
+    : 0;
+
+  const moveTo = useCallback((index: number) => {
+    const nextIndex = (index + announcements.length) % announcements.length;
+    onSelect?.(announcements[nextIndex]);
+  }, [announcements, onSelect]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') onClose();
+      if (event.key === 'ArrowLeft') moveTo(selectedIndex - 1);
+      if (event.key === 'ArrowRight') moveTo(selectedIndex + 1);
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, moveTo, onClose, selectedIndex]);
+
+  if (!isOpen || !announcement) return null;
+
+  return (
+    <div
+      className="fixed inset-0 z-70 flex items-center justify-center bg-slate-950/60 px-4 py-8 backdrop-blur-sm"
+      role="presentation"
+      onMouseDown={(event) => {
+        if (event.target === event.currentTarget) onClose();
+      }}
+    >
+      <article
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="announcement-title"
+        className="relative w-full max-w-lg overflow-hidden rounded-2xl bg-white shadow-2xl"
+      >
+        <div className={`h-2 bg-linear-to-r ${announcement.accent}`} />
+        <div className="p-6 sm:p-8">
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close announcement"
+            className="absolute right-4 top-4 rounded-full p-2 text-slate-400 transition hover:bg-slate-100 hover:text-slate-700"
+          >
+            <X className="h-5 w-5" />
+          </button>
+          <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-slate-100 text-slate-700">
+            <BellRing className="h-6 w-6" />
+          </div>
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-slate-500">{announcement.eyebrow}</p>
+          <h2 id="announcement-title" className="mt-2 pr-8 text-2xl font-bold leading-tight text-slate-950">{announcement.title}</h2>
+          <p className="mt-4 text-base leading-7 text-slate-600">{announcement.content}</p>
+          <div className="mt-6 flex items-center gap-2 text-xs font-medium text-slate-400">
+            <CalendarDays className="h-4 w-4" />
+            {announcement.date}
+          </div>
+          <div className="mt-8 flex items-center justify-between border-t border-slate-100 pt-5">
+            <button
+              type="button"
+              onClick={() => moveTo(selectedIndex - 1)}
+              aria-label="Previous announcement"
+              className="rounded-full p-2 text-slate-500 transition hover:bg-slate-100 hover:text-slate-900"
+            >
+              <ArrowLeft className="h-5 w-5" />
+            </button>
+            <div className="flex gap-1.5" aria-label={`${selectedIndex + 1} of ${announcements.length} announcements`}>
+              {announcements.map((item, index) => (
+                <button
+                  key={item.id}
+                  type="button"
+                  aria-label={`Show announcement ${index + 1}`}
+                  onClick={() => moveTo(index)}
+                  className={`h-2 rounded-full transition-all ${index === selectedIndex ? 'w-6 bg-slate-900' : 'w-2 bg-slate-200 hover:bg-slate-300'}`}
+                />
+              ))}
+            </div>
+            <button
+              type="button"
+              onClick={() => moveTo(selectedIndex + 1)}
+              aria-label="Next announcement"
+              className="rounded-full p-2 text-slate-500 transition hover:bg-slate-100 hover:text-slate-900"
+            >
+              <ArrowRight className="h-5 w-5" />
+            </button>
+          </div>
+        </div>
+      </article>
+    </div>
+  );
+}
+
+export function AnnouncementsPage() {
+  const { webName } = useWebData();
+  const [selectedAnnouncement, setSelectedAnnouncement] = useState<Announcement | null>(null);
+
+  return (
+    <div className="min-h-screen bg-slate-50">
+      <Navbar />
+      <ScrollToTop />
+      <main className="mx-auto max-w-4xl px-4 pb-16 pt-16 sm:px-6 lg:px-8">
+        <header className="mb-8 max-w-2xl">
+          <p className="text-sm font-bold uppercase tracking-[0.18em] text-sky-600">From the team</p>
+          <h1 className="mt-2 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">Announcements</h1>
+          <p className="mt-3 text-base leading-7 text-slate-600">The latest news, community updates, and product notes from {webName || 'our team'}.</p>
+        </header>
+
+        <section className="grid gap-4 sm:grid-cols-2" aria-label="Announcements">
+          {localAnnouncements.map((item, index) => (
+            <button
+              key={item.id}
+              type="button"
+              onClick={() => setSelectedAnnouncement(item)}
+              className={`group text-left ${index === 0 ? 'sm:col-span-2' : ''}`}
+            >
+              <article className="h-full overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition duration-200 group-hover:-translate-y-1 group-hover:shadow-lg">
+                <div className={`h-2 bg-linear-to-r ${item.accent}`} />
+                <div className="p-5 sm:p-6">
+                  <div className="flex items-center justify-between gap-4">
+                    <span className="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">{item.eyebrow}</span>
+                    <span className="text-xs text-slate-400">{item.date}</span>
+                  </div>
+                  <h2 className="mt-4 text-xl font-bold text-slate-950">{item.title}</h2>
+                  <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600">{item.summary}</p>
+                  <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-sky-700">Read announcement <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" /></span>
+                </div>
+              </article>
+            </button>
+          ))}
+        </section>
+      </main>
+      <AnnouncementModal
+        isOpen={selectedAnnouncement !== null}
+        announcement={selectedAnnouncement}
+        onClose={() => setSelectedAnnouncement(null)}
+        onSelect={setSelectedAnnouncement}
+      />
+    </div>
+  );
+}

@@ -31,6 +31,7 @@ import { RecoverAccount } from "./pages/RecoverAccount";
 import { ResetPassword } from "./pages/ResetPassword";
 import { Notifications } from "./pages/Notifications";
 import PostPage from "./pages/PostPage";
+import { AnnouncementsPage } from "./components/announcement";
 
 export const router = createHashRouter([
   {
@@ -56,6 +57,10 @@ export const router = createHashRouter([
   {
     path: "/notifications",
     Component: Notifications,
+  },
+  {
+    path: "/announcements",
+    Component: AnnouncementsPage,
   },
   {
     path: "/post/:id",
