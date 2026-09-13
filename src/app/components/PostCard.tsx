@@ -15,9 +15,10 @@ import { createNotification } from '../constants/notificationFns';
 interface PostCardProps {
   post: Post;
   deletePost: () => void;
+  fitViewport?: boolean;
 }
 
-export function PostCard({ post, deletePost }: PostCardProps) {
+export function PostCard({ post, deletePost, fitViewport = false }: PostCardProps) {
   const { session, user } = useAuth();
   const { currentUser } = useUserData();
   const { showPopup } = usePopup();
@@ -47,7 +48,9 @@ export function PostCard({ post, deletePost }: PostCardProps) {
     window.localStorage.setItem('postcard-viewport-height', String(initialHeight));
     return initialHeight;
   })[0];
-  const maxImageHeight = Math.min(viewportHeight * 0.8, 720);
+  const maxImageHeight = fitViewport
+    ? Math.min(viewportHeight * 0.8, 7200)
+    : Math.min(viewportHeight * 0.8, 720);
 
   const startupId = post.startups?.id;
   const canComment = Boolean(startupId);
@@ -234,7 +237,7 @@ export function PostCard({ post, deletePost }: PostCardProps) {
   }, [showCommentModal, startupId]);
 
   return (
-    <div className="gallery-card bg-white border border-gray-300 rounded-sm shadow-sm overflow-hidden">
+    <div className="gallery-card bg-white border border-gray-300 rounded-sm shadow-sm">
 
       {/* Post Image */}
       {post.image_url && (
@@ -318,20 +321,22 @@ export function PostCard({ post, deletePost }: PostCardProps) {
         </div>
 
         {/* Timestamp */}
-        <div className='flex justify-between items-center'>
-          <p className="text-xs text-gray-400 uppercase">{formatDate(post.created_at, false)}</p>
+        <div className='flex justify-between items-center gap-3'>
+          <div className="flex items-center gap-3">
+            <p className="text-xs text-gray-400 uppercase">{formatDate(post.created_at, false)}</p>
+          </div>
 
           <div className="flex items-center space-x-4">
             {canComment && (
-              <button
+              <Link
+                to={`/post/${post.id}`}
                 title='Comment'
-                onClick={() => setShowCommentModal(true)}
-                disabled={!canComment}
                 className={`flex items-center space-x-1 transition-colors ${canComment ? 'text-gray-500' : 'text-gray-300 cursor-not-allowed'}`}
               >
                 <MessageCircle className="w-5 h-5" />
                 <p className="text-gray-500">{post.comments || 0}</p>
-              </button>)}
+              </Link>
+            )}
             <button
               title='Like'
               onClick={handleLike}

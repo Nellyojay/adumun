@@ -172,7 +172,7 @@ export function CommentBox({ startupId, mentorshipId, postId, comments, loading,
         {visibleNodes.map((node) => (
           <div
             key={node.id}
-            className={`bg-white p-1 rounded-xl ${level > 0 ? 'ml-4' : 'border border-gray-200'}`}
+            className={`bg-white py-1 ${level > 0 ? 'ml-4' : 'border-b border-gray-200'}`}
           >
             <div className="flex gap-1">
               <div>
@@ -255,7 +255,7 @@ export function CommentBox({ startupId, mentorshipId, postId, comments, loading,
                     </div>
                   </>
                 ) : (
-                  <p className="text-gray-800">{node.content}</p>
+                  <p className="text-gray-800 text-sm">{node.content}</p>
                 )}
 
                 {node.children.length > 0 && level < REPLY_DEPTH_LIMIT - 1 && (
@@ -421,13 +421,13 @@ export function CommentBox({ startupId, mentorshipId, postId, comments, loading,
 
 
   return (
-    <div className="flex flex-col gap-4 mt-2 h-full min-h-0">
+    <div className="flex flex-col gap-2 h-full min-h-0">
       <div className='flex gap-2 items-center justify-between'>
         <h2 className="text-lg font-semibold text-gray-900">Comments ({comments.length})</h2>
         <button
           title='close'
           onClick={() => setShowComments(false)}
-          className="text-gray-500 hover:text-gray-700 transition-colors"
+          className="text-gray-500 hidden hover:text-gray-700 transition-colors"
         >
           <BsX className="w-6 h-6" />
         </button>
@@ -435,7 +435,7 @@ export function CommentBox({ startupId, mentorshipId, postId, comments, loading,
 
       {loading && <div className="text-sm text-gray-500">Loading comments...</div>}
 
-      <div className="flex-1 min-h-0 overflow-y-auto space-y-3 pr-1 scrollbar-hide">
+      <div className="flex-1 min-h-0 overflow-y-auto pr-1 scrollbar-hide">
         {renderComments(buildCommentTree(), 0, 'root')}
       </div>
 
@@ -452,7 +452,7 @@ export function CommentBox({ startupId, mentorshipId, postId, comments, loading,
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="flex items-center space-x-2">
+      <form onSubmit={handleSubmit} className="flex items-center space-x-2 sticky bottom-0 bg-white border-t border-gray-300 px-2 pt-2 pb-14 md:pb-4">
         <input
           type="text"
           value={newComment}

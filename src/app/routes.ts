@@ -30,6 +30,7 @@ import { ChangePassword } from "./pages/ChangePassword";
 import { RecoverAccount } from "./pages/RecoverAccount";
 import { ResetPassword } from "./pages/ResetPassword";
 import { Notifications } from "./pages/Notifications";
+import PostPage from "./pages/PostPage";
 
 export const router = createHashRouter([
   {
@@ -55,6 +56,10 @@ export const router = createHashRouter([
   {
     path: "/notifications",
     Component: Notifications,
+  },
+  {
+    path: "/post/:id",
+    Component: PostPage,
   },
   {
     path: "/following",
