@@ -172,7 +172,7 @@ export function CommentBox({ startupId, mentorshipId, postId, comments, loading,
         {visibleNodes.map((node) => (
           <div
             key={node.id}
-            className={`bg-white py-1 ${level > 0 ? 'ml-4' : 'border-b border-gray-200'}`}
+            className={`bg-white py-1 ${level > 0 ? 'ml-4 px-2' : 'border-b border-gray-200'}`}
           >
             <div className="flex gap-1">
               <div>
