@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
-import { Navbar } from '../components/Navbar';
-import supabase from '../supabaseClient';
-import { useAuth } from '../contexts/authContext';
-import { useStartup } from '../contexts/StartupProfileContext';
-import { useUserData } from '../contexts/userDataContext';
+import { Navbar } from '../../components/Navbar';
+import supabase from '../../supabaseClient';
+import { useAuth } from '../../contexts/authContext';
+import { useStartup } from '../../contexts/StartupProfileContext';
+import { useUserData } from '../../contexts/userDataContext';
 import { Upload, X } from 'lucide-react';
-import { FOLDER, imageHandlerService } from '../constants/imageHandler';
-import SuccessMessage from '../components/SuccessMessage';
-import { BackButton } from '../components/utils/reusableButtons';
+import { FOLDER, imageHandlerService } from '../../constants/imageHandler';
+import SuccessMessage from '../../components/SuccessMessage';
+import { BackButton } from '../../components/utils/reusableButtons';
 
 type FormData = {
   name: string;

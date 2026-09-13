@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
-import { Navbar } from '../components/Navbar';
-import { useWebData } from '../contexts/webData';
-import supabase from '../supabaseClient';
-import { useUserData } from '../contexts/userDataContext';
-import { useAuth } from '../contexts/authContext';
-import SuccessMessage from '../components/SuccessMessage';
-import ScrollToTop from '../constants/scrollToTop';
-import { BackButton } from '../components/utils/reusableButtons';
+import { Navbar } from '../../components/Navbar';
+import { useWebData } from '../../contexts/webData';
+import supabase from '../../supabaseClient';
+import { useUserData } from '../../contexts/userDataContext';
+import { useAuth } from '../../contexts/authContext';
+import SuccessMessage from '../../components/SuccessMessage';
+import ScrollToTop from '../../constants/scrollToTop';
+import { BackButton } from '../../components/utils/reusableButtons';
 
 export function CreateStartup() {
   const navigate = useNavigate();

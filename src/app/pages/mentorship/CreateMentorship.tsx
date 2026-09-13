@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { X } from "lucide-react";
-import ScrollToTop from "../constants/scrollToTop";
-import SuccessMessage from "../components/SuccessMessage";
-import supabase from "../supabaseClient";
-import { useUserData } from "../contexts/userDataContext";
-import { BackButton } from "../components/utils/reusableButtons";
+import ScrollToTop from "../../constants/scrollToTop";
+import SuccessMessage from "../../components/SuccessMessage";
+import supabase from "../../supabaseClient";
+import { useUserData } from "../../contexts/userDataContext";
+import { BackButton } from "../../components/utils/reusableButtons";
 
 export default function CreateMentorship() {
   const navigate = useNavigate();

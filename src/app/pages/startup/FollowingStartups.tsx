@@ -1,12 +1,12 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router';
-import { Navbar } from '../components/Navbar';
-import { useAuth } from '../contexts/authContext';
-import { useUserData } from '../contexts/userDataContext';
-import supabase from '../supabaseClient';
-import Loader from '../constants/loader';
-import { useStartup } from '../contexts/StartupProfileContext';
-import { getImageUrl } from '../constants/imageHandler';
+import { Navbar } from '../../components/Navbar';
+import { useAuth } from '../../contexts/authContext';
+import { useUserData } from '../../contexts/userDataContext';
+import supabase from '../../supabaseClient';
+import Loader from '../../constants/loader';
+import { useStartup } from '../../contexts/StartupProfileContext';
+import { getImageUrl } from '../../constants/imageHandler';
 import { Search } from 'lucide-react';
 
 export function FollowingStartups() {

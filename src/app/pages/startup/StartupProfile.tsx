@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router';
-import { Navbar } from '../components/Navbar';
-import { PostCard } from '../components/PostCard';
-import { Modal } from '../components/Modal';
-import { CommentBox } from '../components/CommentBox';
-import type { Comment, Comment as StartupComment } from '../components/CommentBox';
-import supabase from '../supabaseClient';
+import { Navbar } from '../../components/Navbar';
+import { PostCard } from '../../components/PostCard';
+import { Modal } from '../../components/Modal';
+import { CommentBox } from '../../components/CommentBox';
+import type { Comment, Comment as StartupComment } from '../../components/CommentBox';
+import supabase from '../../supabaseClient';
 import {
   GraduationCap,
   Mail,
@@ -24,16 +24,16 @@ import {
   Star
 } from 'lucide-react';
 import { BsChevronDown } from 'react-icons/bs';
-import { useAuth } from '../contexts/authContext';
-import { useStartup } from '../contexts/StartupProfileContext';
-import { formatDate } from '../constants/dateFormat';
-import { useUserData } from '../contexts/userDataContext';
-import { formatPhoneEA } from '../constants/phoneNumberormater';
-import { getImageUrl } from '../constants/imageHandler';
-import ScrollToTop from '../constants/scrollToTop';
-import { BackButton } from '../components/utils/reusableButtons';
-import { usePopup } from '../contexts/EdgePopupContext';
-import { createNotification } from '../constants/notificationFns';
+import { useAuth } from '../../contexts/authContext';
+import { useStartup } from '../../contexts/StartupProfileContext';
+import { formatDate } from '../../constants/dateFormat';
+import { useUserData } from '../../contexts/userDataContext';
+import { formatPhoneEA } from '../../constants/phoneNumberormater';
+import { getImageUrl } from '../../constants/imageHandler';
+import ScrollToTop from '../../constants/scrollToTop';
+import { BackButton } from '../../components/utils/reusableButtons';
+import { usePopup } from '../../contexts/EdgePopupContext';
+import { createNotification } from '../../constants/notificationFns';
 
 export function StartupProfile() {
   const navigate = useNavigate();

@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { Save, Upload, X } from "lucide-react";
-import { useMentorshipData } from "../contexts/mentorshipContext";
-import { useAuth } from "../contexts/authContext";
-import supabase from "../supabaseClient";
-import SuccessMessage from "../components/SuccessMessage";
-import { FOLDER, imageHandlerService } from "../constants/imageHandler";
-import { useUserData } from "../contexts/userDataContext";
-import ScrollToTop from "../constants/scrollToTop";
-import { BackButton } from "../components/utils/reusableButtons";
+import { useMentorshipData } from "../../contexts/mentorshipContext";
+import { useAuth } from "../../contexts/authContext";
+import supabase from "../../supabaseClient";
+import SuccessMessage from "../../components/SuccessMessage";
+import { FOLDER, imageHandlerService } from "../../constants/imageHandler";
+import { useUserData } from "../../contexts/userDataContext";
+import ScrollToTop from "../../constants/scrollToTop";
+import { BackButton } from "../../components/utils/reusableButtons";
 
 export default function EditMentorship() {
   const navigate = useNavigate();

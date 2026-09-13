@@ -1,17 +1,17 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { MentorHeader } from "../components/mentor-header";
-import { MentorProfile } from "../components/mentor-profile";
+import { MentorHeader } from "../../components/mentor-header";
+import { MentorProfile } from "../../components/mentor-profile";
 import { Edit, Plus } from "lucide-react";
-import ScrollToTop from "../constants/scrollToTop";
-import { useMentorshipData } from "../contexts/mentorshipContext";
-import { PostCard } from "../components/PostCard";
-import { useStartup } from "../contexts/StartupProfileContext";
+import ScrollToTop from "../../constants/scrollToTop";
+import { useMentorshipData } from "../../contexts/mentorshipContext";
+import { PostCard } from "../../components/PostCard";
+import { useStartup } from "../../contexts/StartupProfileContext";
 import { useEffect, useState } from "react";
-import { useAuth } from "../contexts/authContext";
-import { useUserData } from "../contexts/userDataContext";
-import Loader from "../constants/loader";
-import supabase from "../supabaseClient";
-import { BackButton } from "../components/utils/reusableButtons";
+import { useAuth } from "../../contexts/authContext";
+import { useUserData } from "../../contexts/userDataContext";
+import Loader from "../../constants/loader";
+import supabase from "../../supabaseClient";
+import { BackButton } from "../../components/utils/reusableButtons";
 
 export default function MentorshipPage() {
 
