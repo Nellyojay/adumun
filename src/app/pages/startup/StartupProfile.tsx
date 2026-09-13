@@ -130,6 +130,7 @@ export function StartupProfile() {
         .from('opinions')
         .select('id, content, created_at, user_id, startup_id, parent_id, user_name')
         .eq('startup_id', id)
+        .is('post_id', null)
         .order('created_at', { ascending: false });
 
       setLoading(false);
