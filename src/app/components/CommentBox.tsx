@@ -44,6 +44,12 @@ export function CommentBox({ startupId, mentorshipId, postId, comments, loading,
   const REPLY_DEPTH_LIMIT = 3;
 
   const getVisibleCount = (parentKey: string) => visibleCountByParent[parentKey] ?? 3;
+  const replyTarget = replyToCommentId === null
+    ? null
+    : comments.find((comment) => comment.id === replyToCommentId);
+  const replySnippet = replyTarget?.content
+    ? `${replyTarget.content.trim().slice(0, 80)}${replyTarget.content.trim().length > 80 ? '...' : ''}`
+    : 'this comment';
 
   const showMore = (parentKey: string, total: number) => {
     setVisibleCountByParent((prev) => ({
@@ -172,7 +178,7 @@ export function CommentBox({ startupId, mentorshipId, postId, comments, loading,
         {visibleNodes.map((node) => (
           <div
             key={node.id}
-            className={`bg-white py-1 ${level > 0 ? 'ml-4 px-2' : 'border-b border-gray-200'}`}
+            className={`bg-white pt-1 ${level > 0 ? 'ml-4 px-2' : 'border-t border-gray-200'}`}
           >
             <div className="flex gap-1">
               <div>
@@ -439,38 +445,40 @@ export function CommentBox({ startupId, mentorshipId, postId, comments, loading,
         {renderComments(buildCommentTree(), 0, 'root')}
       </div>
 
-      {replyToCommentId && (
-        <div className="flex items-center justify-between primary-soft-bg border primary-border rounded-lg px-3 py-2 text-sm primary-soft-color">
-          <span>Replying to comment #{replyToCommentId}</span>
-          <button
-            type="button"
-            onClick={() => setReplyToCommentId(null)}
-            className="primary-color hover:underline"
-          >
-            Cancel
-          </button>
-        </div>
-      )}
+      <div className="sticky bottom-0">
+        {replyToCommentId && (
+          <div className="flex items-center justify-between primary-soft-bg border-t border-x primary-border rounded-t-lg px-3 py-2 text-sm primary-soft-color">
+            <span>Replying to <strong className="font-semibold">“{replySnippet.slice(0, 25)}{replySnippet.length >= 25 && "..."}”</strong></span>
+            <button
+              type="button"
+              onClick={() => setReplyToCommentId(null)}
+              className="primary-color hover:underline"
+            >
+              Cancel
+            </button>
+          </div>
+        )}
 
-      <form onSubmit={handleSubmit} className="flex items-center space-x-2 sticky bottom-0 bg-white border-t border-gray-300 px-2 pt-2 pb-14 md:pb-4">
-        <input
-          type="text"
-          value={newComment}
-          onChange={(e) => setNewComment(e.target.value)}
-          disabled={!session}
-          autoFocus={replyToCommentId !== null}
-          placeholder={session ? 'Add a comment...' : 'Log in to comment'}
-          className="flex-1 px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 primary-focus focus:border-transparent"
-        />
-        <button
-          title='Submit'
-          type='submit'
-          className='primary-bg text-white p-2 rounded-full primary-bg-hover transition-colors disabled:opacity-50 disabled:cursor-not-allowed'
-          disabled={!session || !newComment.trim()}
-        >
-          <Send className='w-5 h-5' />
-        </button>
-      </form>
+        <form onSubmit={handleSubmit} className="flex items-center space-x-2 bg-white border-t border-gray-300 px-2 pt-2 pb-14 md:pb-4">
+          <input
+            type="text"
+            value={newComment}
+            onChange={(e) => setNewComment(e.target.value)}
+            disabled={!session}
+            autoFocus={replyToCommentId !== null}
+            placeholder={session ? 'Add a comment...' : 'Log in to comment'}
+            className="flex-1 px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 primary-focus focus:border-transparent"
+          />
+          <button
+            title='Submit'
+            type='submit'
+            className='primary-bg text-white p-2 rounded-full primary-bg-hover transition-colors disabled:opacity-50 disabled:cursor-not-allowed'
+            disabled={!session || !newComment.trim()}
+          >
+            <Send className='w-5 h-5' />
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
