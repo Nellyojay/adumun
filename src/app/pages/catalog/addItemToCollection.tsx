@@ -78,7 +78,7 @@ export function AddItemToCollection() {
     e.preventDefault();
 
     if (!startupId || !selectedCollectionId) {
-      setErrorMessage('This item is missing its startup or collection context.');
+      setErrorMessage('This item is missing its business or listing context.');
       return;
     }
 
@@ -153,7 +153,7 @@ export function AddItemToCollection() {
         <div className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200 sm:p-8">
           <div className="mb-8 flex items-center justify-between gap-3">
             <div>
-              <h1 className="mt-2 text-3xl font-semibold text-slate-900">Add item to collection</h1>
+              <h1 className="mt-2 text-3xl font-semibold text-slate-900">Add item to listing</h1>
               {activeStartup && (
                 <p className="mt-2 text-sm text-slate-600">
                   Adding to <span className="font-semibold text-slate-800">{activeStartup.name}</span>
@@ -161,7 +161,7 @@ export function AddItemToCollection() {
               )}
               {matchedCollection && (
                 <p className="mt-1 text-sm text-slate-500">
-                  Collection: <span className="font-medium text-slate-700">{matchedCollection.collection_name}</span>
+                  Listing: <span className="font-medium text-slate-700">{matchedCollection.collection_name}</span>
                 </p>
               )}
             </div>
@@ -171,7 +171,7 @@ export function AddItemToCollection() {
 
           {!startupId || !selectedCollectionId ? (
             <div className="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
-              This page needs a valid startup and collection to add an item.
+              This page needs a valid startup and listing to add an item.
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -242,7 +242,7 @@ export function AddItemToCollection() {
               {submitted ? (
                 <SuccessMessage
                   header="Item added successfully!"
-                  message="You will be redirected back to the collection shortly."
+                  message="You will be redirected back to the listing shortly."
                   error={false}
                 />
               ) : (

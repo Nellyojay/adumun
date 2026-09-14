@@ -171,16 +171,16 @@ export function StartupProfile() {
       .eq('id', id);
 
     if (error) {
-      alert("Failed to delete startup. Please try again.");
+      alert("Failed to delete business. Please try again.");
     } else {
-      alert("Startup deleted successfully.");
+      alert("Business deleted successfully.");
       navigate(-1)
     }
   };
 
   const handleFollow = async () => {
     if (!session) {
-      showPopup("Please log in to follow startups.", 'info');
+      showPopup("Please log in to follow businesses.", 'info');
       return;
     }
 
@@ -206,7 +206,7 @@ export function StartupProfile() {
           action_profile_name: currentUser?.full_name || currentUser?.user_name || 'Someone',
           actor_id: currentUser?.id,
           business_id: startup?.id || null,
-          extra: { businessName: startup?.name || 'this startup' }
+          extra: { businessName: startup?.name || 'this business' }
         }
       );
     }
@@ -284,7 +284,7 @@ export function StartupProfile() {
       <div className="min-h-screen bg-gray-50">
         <Navbar showAuth={false} />
         <div className="pt-24 text-center">
-          <h1 className="text-2xl text-gray-900">Startup not found</h1>
+          <h1 className="text-2xl text-gray-900">Business not found</h1>
           <Link to="/feed" className="primary-color hover:underline mt-4 inline-block">
             Back to Feed
           </Link>
@@ -405,7 +405,7 @@ export function StartupProfile() {
                     className='flex items-center justify-center space-x-2 px-4 py-3 rounded-xl font-medium transition-all primary-bg primary-bg-hover text-white hover:shadow-lg'
                   >
                     <Edit className="w-5 h-5" />
-                    <span>Edit startup</span>
+                    <span>Edit business</span>
                   </Link>
 
                   <button
@@ -413,7 +413,7 @@ export function StartupProfile() {
                     className="flex items-center justify-center gap-1 px-4 py-3 rounded-xl font-medium transition-all bg-red-600 text-white hover:bg-red-700"
                   >
                     <Trash2 className="w-5 h-5" />
-                    <span>Delete startup</span>
+                    <span>Delete business</span>
                   </button>
                 </>
               ) : (
@@ -668,12 +668,12 @@ export function StartupProfile() {
 
         <Modal
           isOpen={openDeleteModal}
-          title="Delete startup permanently"
+          title="Delete business permanently"
           subTitle="This operation is irreversible. Please proceed with caution."
-          message="All startup data, posts, and associated content will be permanently deleted."
+          message="All business data, posts, and associated content will be permanently deleted."
           icon={<AlertTriangle className="w-5 h-5 text-red-600" />}
           confirmText="Yes, delete forever"
-          cancelText="Keep startup"
+          cancelText="Keep business"
           onConfirm={handleDeleteStartup}
           onCancel={() => setOpenDeleteModal(false)}
           confirmClassName="px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700"

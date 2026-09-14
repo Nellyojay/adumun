@@ -16,7 +16,7 @@ export function Footer() {
               <span className="text-xl font-semibold text-gray-900">{webName}</span>
             </div>
             <p className="text-gray-600 max-w-md">
-              Empowering entrepreneurs to showcase their startups and businesses and connect with supporters worldwide.
+              Empowering entrepreneurs to showcase their businesses and connect with supporters worldwide.
             </p>
           </div>
 

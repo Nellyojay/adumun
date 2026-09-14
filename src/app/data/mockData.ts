@@ -92,7 +92,7 @@ export const mockStartups: Startup[] = [
     id: 8,
     name: 'ProConsult',
     founder: 'James Anderson',
-    description: 'Business consulting services for startups. Helping young entrepreneurs turn ideas into successful businesses.',
+    description: 'Business consulting services for growing companies. Helping young entrepreneurs turn ideas into successful businesses.',
     image: 'https://images.unsplash.com/photo-1769636929132-e4e7b50cfac0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx5b3VuZyUyMGVudHJlcHJlbmV1ciUyMGJ1c2luZXNzJTIwb3duZXJ8ZW58MXx8fHwxNzczNDQwODY0fDA&ixlib=rb-4.1.0&q=80&w=1080',
     category: 'Services',
     likes: 401,
@@ -125,7 +125,7 @@ export const startupExtendedData: Record<number, {
       {
         id: 1,
         image: 'https://images.unsplash.com/photo-1769946797489-e99b2a5c1dfc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmYXNoaW9uJTIwY2xvdGhpbmclMjBwcm9kdWN0JTIwZGlzcGxheXxlbnwxfHx8fDE3NzM4NzkwNTh8MA&ixlib=rb-4.1.0&q=80&w=1080',
-        caption: 'New spring collection just dropped! 🌸 Made from 100% organic cotton and recycled materials. #SustainableFashion',
+        caption: 'New spring listing just dropped! 🌸 Made from 100% organic cotton and recycled materials. #SustainableFashion',
         likes: 342,
         comments: 28,
         timestamp: '2 hours ago'
@@ -141,7 +141,7 @@ export const startupExtendedData: Record<number, {
       {
         id: 3,
         image: 'https://images.unsplash.com/photo-1769946797489-e99b2a5c1dfc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmYXNoaW9uJTIwY2xvdGhpbmclMjBwcm9kdWN0JTIwZGlzcGxheXxlbnwxfHx8fDE3NzM4NzkwNTh8MA&ixlib=rb-4.1.0&q=80&w=1080',
-        caption: 'Fashion should never cost the earth 🌍 Shop our eco-friendly collection now',
+        caption: 'Fashion should never cost the earth 🌍 Shop our eco-friendly listing now',
         likes: 451,
         comments: 34,
         timestamp: '3 days ago'
@@ -281,7 +281,7 @@ export const startupExtendedData: Record<number, {
       {
         id: 2,
         image: 'https://images.unsplash.com/photo-1759150467548-5a97257e583a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhcnQlMjBkZXNpZ24lMjBjcmVhdGl2ZSUyMHN0dWRpb3xlbnwxfHx8fDE3NzM0NDA4NjR8MA&ixlib=rb-4.1.0&q=80&w=1080',
-        caption: 'Creating magic in the studio ✨ New collection coming soon',
+        caption: 'Creating magic in the studio ✨ New listing coming soon',
         likes: 478,
         comments: 65,
         timestamp: '1 day ago'
@@ -301,7 +301,7 @@ export const startupExtendedData: Record<number, {
       {
         id: 1,
         image: 'https://images.unsplash.com/photo-1767476106226-ff48f2e12286?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoYW5kbWFkZSUyMGNyYWZ0cyUyMGFydGlzYW58ZW58MXx8fHwxNzczMzUyNzI5fDA&ixlib=rb-4.1.0&q=80&w=1080',
-        caption: 'Handcrafted with love 💍 New collection available now',
+        caption: 'Handcrafted with love 💍 New listing available now',
         likes: 278,
         comments: 43,
         timestamp: '8 hours ago'
@@ -316,7 +316,7 @@ export const startupExtendedData: Record<number, {
     location: 'Boston, MA',
     year: '2023',
     address: '258 Business Park, Boston, MA 02101',
-    fullDescription: 'ProConsult offers business consulting services for startups. We help young entrepreneurs turn ideas into successful businesses with strategic planning, mentorship, and expert guidance.',
+    fullDescription: 'ProConsult offers business consulting services for growing companies. We help young entrepreneurs turn ideas into successful businesses with strategic planning, mentorship, and expert guidance.',
     posts: [
       {
         id: 1,

@@ -66,7 +66,7 @@ export function CatalogueItems() {
                 to={`/startup/${startupId}/catalog/${encodeURIComponent(collection || '')}/add-item`}
                 className="inline-flex items-center justify-center rounded-full bg-cyan-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-cyan-700"
               >
-                Add item to collection
+                Add item to listing
               </Link>
             </div>
           )}

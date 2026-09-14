@@ -209,7 +209,7 @@ export function Feed() {
           ) : (
             <div className="text-center py-20">
               <p className="text-gray-500 text-lg">
-                {searchQuery ? `No startups found matching "${searchQuery}"` : 'No startups found in this category.'}
+                {searchQuery ? `No businesses found matching "${searchQuery}"` : 'No businesses found in this category.'}
               </p>
             </div>
           )
@@ -227,7 +227,7 @@ export function Feed() {
           ) : (
             <div className="text-center py-20">
               <p className="text-gray-500 text-lg">
-                {searchQuery ? `No startups found matching "${searchQuery}"` : 'No startups found in this category.'}
+                {searchQuery ? `No businesses found matching "${searchQuery}"` : 'No businesses found in this category.'}
               </p>
             </div>
           )

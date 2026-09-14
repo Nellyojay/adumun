@@ -49,7 +49,7 @@ export function CreateStartup() {
         founder_name: formData.founder,
         cartegory: formData.category,
         intro_description: formData.introDescription ?? "Introduction",
-        description: formData.description ?? "The full description of the startup",
+        description: formData.description ?? "The full description of the business",
         phone: formData.phone ?? "",
         email: formData.email ?? "",
         address: formData.address ?? "",

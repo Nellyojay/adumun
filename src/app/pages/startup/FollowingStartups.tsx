@@ -44,7 +44,7 @@ export function FollowingStartups() {
         .eq('user_id', userId);
 
       if (error) {
-        setError(error.message || 'Failed to load followed startups.');
+        setError(error.message || 'Failed to load followed businesses.');
         setLoading(false);
         return;
       }

@@ -127,7 +127,7 @@ export function AddPost() {
 
         <div className="bg-white p-6 rounded-2xl shadow-md">
           {!id ? (
-            <p className="text-red-600">No startup selected. Go back to the profile and choose a startup first.</p>
+            <p className="text-red-600">No business selected. Go back to the profile and choose a business first.</p>
           ) : (
             <form onSubmit={handlePostSubmit} className="space-y-4">
 

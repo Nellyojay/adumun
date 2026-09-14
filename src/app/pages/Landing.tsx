@@ -45,7 +45,7 @@ export function Landing() {
               <span className="block primary-color text-transparent mt-2 pb-2">Grow your business.</span>
             </h1>
             <p className="md:text-xl text-gray-600 max-w-2xl mx-auto mb-10">
-              {webName} is a platform where entrepreneurs, startups and business owners showcase their ideas, products and growing to the world.
+              {webName} is a platform where entrepreneurs and business owners showcase their ideas, products and growth to the world.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
@@ -83,7 +83,7 @@ export function Landing() {
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">Launching a business?</h3>
                 <p className="text-gray-600">
-                  Get discovered by potential customers and investors and grow your startup business strategically with customer's or investor's opinions as building bricks.
+                  Get discovered by potential customers and investors and grow your business strategically with customer and investor opinions as building blocks.
                 </p>
               </div>
 
@@ -137,7 +137,7 @@ export function Landing() {
                 <div className="w-16 h-16 bg-linear-to-br from-purple-600 to-pink-600 text-white rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold shadow-lg">
                   2
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">Post Your Startup</h3>
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">Post Your Business</h3>
                 <p className="text-gray-600">
                   Share your business story, products, and services with beautiful images.
                 </p>
@@ -152,7 +152,7 @@ export function Landing() {
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">Get Discovered</h3>
                 <p className="text-gray-600">
-                  Connect with customers and grow your startup community
+                  Connect with customers and grow your business community
                 </p>
               </div>
             </div>
@@ -173,7 +173,7 @@ export function Landing() {
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-2">Entrepreneurs</h3>
               <p className="text-gray-600">
-                People building new startups and ideas
+                People building new businesses and ideas
               </p>
             </div>
             <div className="text-center border border-gray-300 p-8 m-2 rounded-xl shadow-md md:hover:shadow-xl">
@@ -212,7 +212,7 @@ export function Landing() {
             <ul className="space-y-3 text-sm text-gray-700">
               <li className="flex items-start space-x-2">
                 <CheckCircle className="w-5 h-5 text-green-600 shrink-0 mt-0.5" />
-                <span>Create a profile for your business or startup and introduce your brand to the community.</span>
+                <span>Create a profile for your business and introduce your brand to the community.</span>
               </li>
               <li className="flex items-start space-x-2">
                 <CheckCircle className="w-5 h-5 text-green-600 shrink-0 mt-0.5" />

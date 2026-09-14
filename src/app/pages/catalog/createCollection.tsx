@@ -38,7 +38,7 @@ export function CreateCollection() {
     e.preventDefault();
 
     if (!formData.collection_name.trim()) {
-      setErrorMessage('Please fill in the collection name.');
+      setErrorMessage('Please fill in the listing name.');
       return;
     }
 
@@ -79,33 +79,30 @@ export function CreateCollection() {
       <Navbar />
       <ScrollToTop />
 
-      <main className="mx-auto max-w-3xl px-4 pt-24 pb-20 sm:px-6 lg:px-8">
-        <BackButton className="static mb-4" />
+      <main className="mx-auto max-w-3xl px-4 pt-12 pb-20 sm:px-6 lg:px-8">
+        <BackButton className="static mb-2" />
         <div className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200 sm:p-8">
           <div className="mb-8 flex items-center justify-between gap-3">
             <div>
-              <p className="text-sm uppercase tracking-[0.25em] text-cyan-600">Catalog</p>
-              <h1 className="mt-2 text-3xl font-semibold text-slate-900">Create collection</h1>
+              <h1 className="mt-2 text-3xl font-semibold text-slate-900">Create listing</h1>
               {activeStartup && (
                 <p className="mt-2 text-sm text-slate-600">
                   Creating for <span className="font-semibold text-slate-800">{activeStartup.name}</span>
                 </p>
               )}
             </div>
-
-            <BackButton className="static shrink-0" />
           </div>
 
           {!selectedStartup && (
             <div className="mb-6 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
-              No startup is selected yet. Open a startup profile and choose “View Catalogue” to attach this collection to a business.
+              No Business is selected yet. Open a business profile and choose “View Listings” to attach this listing to a business.
             </div>
           )}
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label htmlFor="collection_name" className="mb-2 block text-sm font-medium text-slate-700">
-                Collection name
+                Listing name
               </label>
               <input
                 id="collection_name"
@@ -129,7 +126,7 @@ export function CreateCollection() {
                 rows={5}
                 value={formData.description}
                 onChange={handleChange}
-                placeholder="Describe the collection..."
+                placeholder="Describe the listing..."
                 className="w-full resize-none rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:border-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-100"
               />
             </div>
@@ -140,8 +137,8 @@ export function CreateCollection() {
 
             {submitted ? (
               <SuccessMessage
-                header="Collection created successfully!"
-                message="You will be redirected to the catalog shortly."
+                header="Listing created successfully!"
+                message="You will be redirected to the listings shortly."
                 error={false}
               />
             ) : (
@@ -159,7 +156,7 @@ export function CreateCollection() {
                   disabled={loading}
                   className="rounded-full bg-cyan-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-cyan-700 disabled:cursor-not-allowed disabled:opacity-60"
                 >
-                  {loading ? 'Creating...' : 'Create collection'}
+                  {loading ? 'Creating...' : 'Create listing'}
                 </button>
               </div>
             )}

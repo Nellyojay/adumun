@@ -58,7 +58,7 @@ export function formatNotification(action: NotificationAction, data: Notificatio
     'comment_liked': () => ({ title: 'Comment liked', body: `${actor} liked your comment.` }),
     'post_replied': () => ({ title: 'New reply', body: `${actor} replied to your post.` }),
     'comment_replied': () => ({ title: 'Reply', body: `${actor} replied to a comment.` }),
-    'followed': () => ({ title: 'New follower', body: `${actor} followed ${data.extra?.businessName || 'this startup'}.` }),
+    'followed': () => ({ title: 'New follower', body: `${actor} followed ${data.extra?.businessName || 'this business'}.` }),
     'mentioned_you_in_a_post': () => ({ title: 'Mentioned', body: `${actor} mentioned you in a post.` }),
     'mentioned_you_in_a_comment': () => ({ title: 'Mentioned', body: `${actor} mentioned you in a comment.` }),
     'friend_request': () => ({ title: 'Friend request', body: `${actor} wants to be your friend.` }),

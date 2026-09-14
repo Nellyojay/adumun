@@ -147,7 +147,7 @@ export function Signup() {
           <div className="bg-white rounded-2xl shadow-xl p-8">
             <div className="text-center mb-8">
               <h1 className="text-3xl font-bold text-gray-900 mb-2">Create Account</h1>
-              <p className="text-gray-600">Join {webName} and showcase your startup</p>
+              <p className="text-gray-600">Join {webName} and showcase your business</p>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-5">
