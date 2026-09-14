@@ -214,7 +214,7 @@ export function CommentBox({ startupId, mentorshipId, postId, comments, loading,
                           type="button"
                           title="Edit this comment"
                           onClick={() => beginEdit(node)}
-                          className="p-1 text-gray-500 primary-color-hover"
+                          className="p-1 hidden text-gray-500 primary-color-hover"
                         >
                           <Edit2 className="w-4 h-4" />
                         </button>
