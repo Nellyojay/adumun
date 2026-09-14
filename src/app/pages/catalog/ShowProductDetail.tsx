@@ -105,7 +105,7 @@ const ShowProductDetail = () => {
             <div className="flex max-h-screen items-center justify-center overflow-hidden rounded-lg shadow-lg">
               <img
                 src={selectedItem.image}
-                alt={selectedItem.name}
+                alt="Product"
                 className="max-h-[calc(100vh-8rem)] max-w-[calc(100vw-2rem)] rounded-lg object-contain"
               />
             </div>
@@ -113,7 +113,6 @@ const ShowProductDetail = () => {
             <div className="absolute top-0 hidden w-full px-2 py-1 not-sm:block">
               <div className="flex items-center justify-between rounded-md bg-linear-to-r from-gray-300/80 to-transparent px-2 text-xs">
                 <div>
-                  <span className="uppercase tracking-widest text-gray-700">{selectedItem.name}</span>
                   <p className="font-semibold text-gray-700">UGX {selectedItem.price}</p>
                 </div>
                 <div>
@@ -128,16 +127,15 @@ const ShowProductDetail = () => {
 
           <div className="space-y-6 rounded-lg bg-white p-4 lg:p-8">
             <div className="hidden w-full rounded-lg px-4 py-2 shadow-sm sm:block">
-              <div className="flex flex-col gap-2">
+              <div className="flex items-center justify-between gap-2">
+                <div>
+                  <p className="text-md font-semibold text-gray-700">UGX {selectedItem.price?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') || "Price not specified"}</p>
+                </div>
                 <div className="flex items-center justify-between gap-4">
-                  <span className="text-sm uppercase tracking-widest text-gray-700">{selectedItem.name}</span>
                   <span className={`inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-semibold uppercase ${itemStatusStyle}`}>
                     <CircleDot className="h-2.5 w-2.5" />
                     {selectedItem.status}
                   </span>
-                </div>
-                <div>
-                  <p className="text-md font-semibold text-gray-700">UGX {selectedItem.price?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') || "Price not specified"}</p>
                 </div>
               </div>
             </div>

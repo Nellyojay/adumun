@@ -98,7 +98,7 @@ export function CatalogueItems() {
                   >
                     <img
                       src={item.image}
-                      alt={item.name}
+                      alt="Product"
                       className="h-56 w-full object-cover transition duration-700 group-hover:scale-105 sm:h-64 md:h-80"
                     />
                     <div className="absolute inset-x-2 top-0 flex items-center justify-between py-2 not-sm:h-full not-sm:flex-col">
@@ -113,9 +113,6 @@ export function CatalogueItems() {
                       </span>
                     </div>
 
-                    <div className="absolute w-full bottom-2 hidden rounded-2xl bg-gray-900/60 px-3 py-1 text-gray-400 shadow-md backdrop-blur-sm sm:block">
-                      <h2 className="text-sm not-sm:text-xs line-clamp-1">{item.name}</h2>
-                    </div>
                   </Link>
                 );
               })}

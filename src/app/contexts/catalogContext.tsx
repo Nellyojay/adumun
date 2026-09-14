@@ -19,7 +19,6 @@ export type CatalogueItem = {
 
 export type CollectionItems = {
   id: string;
-  name: string;
   price: string;
   status: 'Available' | 'Sold' | 'Booked';
   units: string;

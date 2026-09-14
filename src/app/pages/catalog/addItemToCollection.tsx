@@ -94,7 +94,6 @@ export function AddItemToCollection() {
       .from('collection_items')
       .insert([
         {
-          name: imageFile?.name ? imageFile.name.replace(/\.[^/.]+$/, '') : 'Collection item',
           price: formData.price,
           status: formData.status || 'Available',
           collection_id: selectedCollectionId,
