@@ -24,7 +24,7 @@ import { Catalog } from "./pages/catalog/Catalog";
 import { CatalogueItems } from "./pages/catalog/CatalogueItems";
 import { CreateCollection } from "./pages/catalog/createCollection";
 import { AddItemToCollection } from "./pages/catalog/addItemToCollection";
-import ShowProductDetail from "./pages/ShowProductDetail";
+import ShowProductDetail from "./pages/catalog/ShowProductDetail";
 import { ManageAccount } from "./pages/ManageAccount";
 import { ChangePassword } from "./pages/ChangePassword";
 import { RecoverAccount } from "./pages/RecoverAccount";

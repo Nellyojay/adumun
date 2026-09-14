@@ -27,15 +27,14 @@ export function Catalog() {
       <Navbar />
       <ScrollToTop />
 
-      <div className="pt-16 pb-20">
+      <div className="pt-12 pb-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
 
-          <BackButton className="static mb-4" />
+          <BackButton className="static" />
 
           <div className="mb-4 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
-              <p className="text-sm uppercase tracking-[0.28em] text-cyan-600">Collections</p>
-              <h1 className="mt-3 text-4xl font-semibold tracking-tight text-slate-900">Shop by collection</h1>
+              <p className="text-sm uppercase tracking-[0.28em] text-cyan-600">Listings</p>
             </div>
 
             {isOwner && startupId && (
@@ -43,7 +42,7 @@ export function Catalog() {
                 to={`/startup/${startupId}/catalog/create`}
                 className="inline-flex items-center justify-center rounded-full primary-bg px-5 py-3 text-sm font-semibold text-white shadow-sm transition"
               >
-                Create collection
+                Create Listing
               </Link>
             )}
           </div>
@@ -75,7 +74,7 @@ export function Catalog() {
               </div>
             ) : (
               <div className="rounded-3xl border border-dashed border-slate-300 bg-white p-8 text-center text-slate-700">
-                No collections available.
+                No listings available.
               </div>
             )}
         </div>

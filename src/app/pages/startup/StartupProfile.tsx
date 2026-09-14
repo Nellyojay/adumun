@@ -623,7 +623,7 @@ export function StartupProfile() {
             }}
             className="inline-flex pt-8 -mt-6 items-center justify-center w-xs sm:w-lg rounded-b-2xl primary-bg primary-bg-hover px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-primary transition-all duration-200 sm:hover:translate-y-1"
           >
-            View Catalog
+            View Listings
           </Link>
         </div>
 

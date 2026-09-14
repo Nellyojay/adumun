@@ -49,13 +49,13 @@ export function CatalogueItems() {
     <div className="min-h-screen bg-gray-50">
       <Navbar />
       <ScrollToTop />
-      <div className="pt-16 pb-20">
-        <BackButton className="static mb-4 ml-8 md:ml-16" />
+      <div className="pt-12 pb-20 sm:px-6">
+        <BackButton className="static not-sm:mx-6" />
 
-        <div className="mx-auto max-w-6xl sm:px-8">
+        <div className="mx-auto max-w-6xl">
           <div className="mb-6 px-4 sm:px-0">
-            <h1 className="mt-2 text-3xl font-semibold text-slate-900">
-              {displayCollectionName ? `${displayCollectionName} collection` : 'All catalogue items'}
+            <h1 className="mt-2 text-2xl font-semibold text-slate-900">
+              {displayCollectionName ? `${displayCollectionName}` : 'All Items'}
               <span className="text-slate-500"> - {startupName}</span>
             </h1>
           </div>
@@ -103,7 +103,7 @@ export function CatalogueItems() {
                     />
                     <div className="absolute inset-x-2 top-0 flex items-center justify-between py-2 not-sm:h-full not-sm:flex-col">
                       <span
-                        className={`inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-widest shadow-[0_10px_30px_rgba(0,0,0,0.35)] ${itemStatusStyle}`}
+                        className={`inline-flex items-center gap-2 rounded-full px-3 py-1 text-[8px] sm:text-xs font-semibold uppercase tracking-widest shadow-[0_10px_30px_rgba(0,0,0,0.35)] ${itemStatusStyle}`}
                       >
                         <CircleDot className="h-2.5 w-2.5" />
                         {item.status}

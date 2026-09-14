@@ -1,12 +1,12 @@
 
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router';
-import { Navbar } from '../components/Navbar';
+import { Navbar } from '../../components/Navbar';
 import { CircleDot, MapPin } from 'lucide-react';
-import { useCatalog } from '../contexts/catalogContext';
-import '../css/productDetail.css';
-import ScrollToTop from '../constants/scrollToTop';
-import supabase from '../supabaseClient';
+import { useCatalog } from '../../contexts/catalogContext';
+import '../../css/productDetail.css';
+import ScrollToTop from '../../constants/scrollToTop';
+import supabase from '../../supabaseClient';
 
 const ShowProductDetail = () => {
   const { collectionItems } = useCatalog();
@@ -76,12 +76,12 @@ const ShowProductDetail = () => {
         <Navbar />
         <div className="mx-auto max-w-5xl px-4 py-20 text-center">
           <p className="text-xl font-semibold text-gray-900">Product not found</p>
-          <p className="mt-3 text-gray-600">The selected catalogue item does not exist.</p>
+          <p className="mt-3 text-gray-600">The selected item does not exist.</p>
           <Link
             to={startupId && collection ? `/startup/${startupId}/catalog/${encodeURIComponent(collection)}` : '/'}
             className="mt-6 inline-flex rounded-full primary-bg px-6 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-white transition primary-bg-hover"
           >
-            Back to catalogue
+            Back to Listings
           </Link>
         </div>
       </div>
@@ -110,14 +110,14 @@ const ShowProductDetail = () => {
               />
             </div>
 
-            <div className="absolute top-0 hidden w-full rounded-t-lg px-4 py-2 not-sm:block">
-              <div className="flex items-center justify-between rounded-sm bg-gray-300/70 px-2">
+            <div className="absolute top-0 hidden w-full px-2 py-1 not-sm:block">
+              <div className="flex items-center justify-between rounded-md bg-linear-to-r from-gray-300/80 to-transparent px-2 text-xs">
                 <div>
-                  <span className="text-sm uppercase tracking-widest text-gray-700">{selectedItem.name}</span>
-                  <p className="text-sm font-semibold text-gray-700">UGX {selectedItem.price}</p>
+                  <span className="uppercase tracking-widest text-gray-700">{selectedItem.name}</span>
+                  <p className="font-semibold text-gray-700">UGX {selectedItem.price}</p>
                 </div>
                 <div>
-                  <span className={`inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-semibold uppercase ${itemStatusStyle}`}>
+                  <span className={`inline-flex items-center gap-2 rounded-full px-3 py-1 font-semibold uppercase ${itemStatusStyle}`}>
                     <CircleDot className="h-2.5 w-2.5" />
                     {selectedItem.status}
                   </span>
