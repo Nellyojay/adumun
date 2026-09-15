@@ -1,19 +1,30 @@
 import { Link, useParams } from 'react-router';
 import { useEffect, useState } from 'react';
 import { Navbar } from '../../components/Navbar';
-import { CircleDot, MapPin, X } from 'lucide-react';
+import { CircleDot, Edit, MapPin, X } from 'lucide-react';
 import { useCatalog } from '../../contexts/catalogContext';
 import ScrollToTop from '../../constants/scrollToTop';
 import { useStartup } from '../../contexts/StartupProfileContext';
 import { usePageDataOwner } from '../../constants/ownerTag';
 import { BackButton } from '../../components/utils/reusableButtons';
 import { ListModal } from '../../components/Modal';
+import supabase from '../../supabaseClient';
 
 export function CatalogueItems() {
-  const { collectionItems, collections, setSelectedCollection, selectedCollection } = useCatalog();
+  const { collectionItems, collections, setSelectedCollection, selectedCollection, updateCollectionItem } = useCatalog();
   const { startupData } = useStartup();
   const { startupId, collection: collectionParam } = useParams<{ startupId?: string; collection?: string }>();
   const [selectedItem, setSelectedItem] = useState<typeof collectionItems[number] | null>(null);
+  const [isEditing, setIsEditing] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [saveMessage, setSaveMessage] = useState<string | null>(null);
+  const [formData, setFormData] = useState({
+    price: '',
+    status: 'Available',
+    description: '',
+    location: '',
+    units: '',
+  });
   const collection = decodeURIComponent(collectionParam || '');
   const normalizedCollection = collection.toLowerCase();
   const activeStartup = startupData?.find((startup) => startup.id === startupId);
@@ -33,6 +44,66 @@ export function CatalogueItems() {
     const nextCollection = matchedCollection?.id || collection || null;
     setSelectedCollection(nextCollection);
   }, [matchedCollection?.id, collection, setSelectedCollection]);
+
+  useEffect(() => {
+    if (!selectedItem) return;
+
+    setFormData({
+      price: selectedItem.price?.toString() || '',
+      status: selectedItem.status || 'Available',
+      description: selectedItem.description || '',
+      location: selectedItem.location || '',
+      units: selectedItem.units?.toString() || '',
+    });
+    setIsEditing(false);
+    setSaveMessage(null);
+  }, [selectedItem]);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = event.target;
+    setFormData((current) => ({ ...current, [name]: value }));
+    setSaveMessage(null);
+  };
+
+  const handleCancelEdit = () => {
+    if (!selectedItem) return;
+
+    setFormData({
+      price: selectedItem.price?.toString() || '',
+      status: selectedItem.status || 'Available',
+      description: selectedItem.description || '',
+      location: selectedItem.location || '',
+      units: selectedItem.units?.toString() || '',
+    });
+    setSaveMessage(null);
+    setIsEditing(false);
+  };
+
+  const handleSave = async (event: React.FormEvent) => {
+    event.preventDefault();
+    if (!selectedItem || !isOwner) return;
+
+    setSaving(true);
+    setSaveMessage(null);
+
+    const { data, error } = await supabase
+      .from('collection_items')
+      .update(formData)
+      .eq('id', selectedItem.id)
+      .select('*')
+      .single();
+
+    if (error || !data) {
+      setSaveMessage('Unable to save changes. Please try again.');
+    } else {
+      updateCollectionItem(data);
+      setSelectedItem(data);
+      setSaveMessage('Changes saved.');
+      setIsEditing(false);
+    }
+
+    setSaving(false);
+  };
 
   const filteredItems = !activeCollectionId
     ? collectionItems
@@ -139,7 +210,7 @@ export function CatalogueItems() {
 
           return (
             <div className="relative max-h-[calc(100vh-8rem)] overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:flex md:items-stretch">
-              <div className="md:flex md:w-1/2 md:items-center md:justify-center md:bg-gray-100">
+              <div className="md:flex md:w-1/2 md:items-center md:justify-center">
                 <button
                   type="button"
                   onClick={() => setSelectedItem(null)}
@@ -156,37 +227,91 @@ export function CatalogueItems() {
                 />
               </div>
 
-              <div className="relative px-2 space-y-4 rounded-lg bg-white pt-4 md:w-1/2 md:overflow-y-auto">
-                <div className="flex items-center justify-between gap-2 rounded-lg px-4 py-2 mx-2 shadow-sm">
-                  <p id="catalog-item-title" className="text-md font-semibold text-gray-700">
-                    UGX {selectedItem.price?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') || 'Price not specified'}
-                  </p>
-                  <span className={`inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-semibold uppercase ${itemStatusStyle}`}>
-                    <CircleDot className="h-2.5 w-2.5" />
-                    {selectedItem.status}
-                  </span>
-                </div>
+              <div className="relative md:px-4 pb-2 space-y-2 rounded-lg bg-white pt-4 md:w-1/2 md:overflow-y-auto">
 
-                <div className="min-h-28">
-                  <p className="leading-8 text-gray-600">{selectedItem.description || '-- No description available --'}</p>
-                </div>
+                {isOwner && isEditing ? (
+                  <form onSubmit={handleSave} className="space-y-5 px-2 pb-2">
+                    <div className="grid gap-4 sm:grid-cols-2">
+                      <label className="space-y-2 text-sm font-semibold text-gray-700">
+                        Price
+                        <input name="price" value={formData.price} onChange={handleChange} placeholder="Price not specified" className="w-full rounded-xl border-2 border-cyan-400 bg-cyan-50/40 px-4 py-3 text-gray-900 outline-none" />
+                      </label>
+                      <label className="space-y-2 text-sm font-semibold text-gray-700">
+                        Status
+                        <select name="status" value={formData.status} onChange={handleChange} className="w-full rounded-xl border-2 border-cyan-400 bg-cyan-50/40 px-4 py-3 text-gray-900 outline-none">
+                          <option value="Available">Available</option>
+                          <option value="Booked">Booked</option>
+                          <option value="Sold">Sold</option>
+                        </select>
+                      </label>
+                    </div>
+                    <label className="block space-y-2 text-sm font-semibold text-gray-700">
+                      Description
+                      <textarea name="description" value={formData.description} onChange={handleChange} placeholder="No description available" rows={4} className="w-full resize-y rounded-xl border-2 border-cyan-400 bg-cyan-50/40 px-4 py-3 text-gray-900 outline-none" />
+                    </label>
+                    <div className="grid gap-4 sm:grid-cols-2">
+                      <label className="rounded-3xl border-2 border-cyan-400 bg-cyan-50/40 p-5 text-sm font-semibold text-gray-700">
+                        Location
+                        <input name="location" value={formData.location} onChange={handleChange} placeholder="Location not specified" className="mt-3 w-full bg-transparent text-gray-900 outline-none" />
+                      </label>
+                      <label className="rounded-3xl border-2 border-cyan-400 bg-cyan-50/40 p-5 text-sm font-semibold text-gray-700">
+                        Stock
+                        <input name="units" value={formData.units} onChange={handleChange} placeholder="Stock value not specified" className="mt-3 w-full bg-transparent text-gray-900 outline-none" />
+                      </label>
+                    </div>
+                    <div className="flex flex-wrap items-center justify-between gap-3 border-t border-gray-200 pt-4">
+                      <p className="text-sm text-gray-600" aria-live="polite">{saveMessage}</p>
+                      <div className="flex gap-3">
+                        <button type="button" onClick={handleCancelEdit} disabled={saving} className="rounded-xl border-2 border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-gray-700 disabled:opacity-60">Cancel</button>
+                        <button type="submit" disabled={saving} className="rounded-xl border-2 border-cyan-500 bg-cyan-500 px-4 py-2 text-sm font-semibold text-white disabled:opacity-60">{saving ? 'Saving...' : 'Save Changes'}</button>
+                      </div>
+                    </div>
+                  </form>
+                ) : (
+                  <>
+                    <div className="flex items-center justify-between gap-2 rounded-lg px-4 py-1 mx-2 shadow-sm">
+                      <p id="catalog-item-title" className="text-md font-semibold text-gray-700">
+                        UGX {selectedItem.price?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') || 'Price not specified'}
+                      </p>
+                      <span className={`inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-semibold uppercase ${itemStatusStyle}`}>
+                        <CircleDot className="h-2.5 w-2.5" />
+                        {selectedItem.status}
+                      </span>
+                    </div>
 
-                <div className="grid mb-2 gap-4 mx-1 sm:grid-cols-2">
-                  <div className="rounded-3xl border border-gray-200 bg-gray-50 p-5 shadow-sm">
-                    <p className="text-sm uppercase tracking-[0.28em] text-gray-500">Location</p>
-                    <p className="mt-3 flex items-center gap-2 text-sm font-semibold text-gray-900">
-                      <MapPin className="h-4 w-4 primary-color" />
-                      {selectedItem.location || 'Location not specified'}
-                    </p>
-                  </div>
-                  <div className="rounded-3xl border border-gray-200 bg-gray-50 p-5 shadow-sm">
-                    <p className="text-sm uppercase tracking-[0.28em] text-gray-500">Stock</p>
-                    <p className="mt-3 text-lg font-semibold text-gray-900">{selectedItem.units || 'Stock value not specified'}</p>
-                    <p className="mt-2 text-sm text-gray-500">
-                      {selectedItem.status === 'Available' ? 'Ready for purchase' : selectedItem.status === 'Booked' ? 'Booked' : 'Out of stock'}
-                    </p>
-                  </div>
-                </div>
+                    <div className="min-h-28 md:px-2">
+                      <p className="whitespace-pre-wrap leading-8 text-gray-600">{selectedItem.description || '-- No description available --'}</p>
+                    </div>
+
+                    <div className="grid mb-2 gap-4 mx-1 sm:grid-cols-2">
+                      <div className="rounded-3xl border border-gray-200 bg-gray-50 p-5 shadow-sm">
+                        <p className="text-sm uppercase tracking-[0.28em] text-gray-500">Location</p>
+                        <p className="mt-3 flex items-center gap-2 text-sm font-semibold text-gray-900">
+                          <MapPin className="h-4 w-4 primary-color" />
+                          {selectedItem.location || 'Location not specified'}
+                        </p>
+                      </div>
+                      <div className="rounded-3xl border border-gray-200 bg-gray-50 p-5 shadow-sm">
+                        <p className="text-sm uppercase tracking-[0.28em] text-gray-500">Stock</p>
+                        <p className="mt-3 text-sm font-semibold text-gray-900">{selectedItem.units || 'Stock value not specified'}</p>
+                        <p className="mt-2 text-sm text-gray-500">
+                          {selectedItem.status === 'Available' ? 'Ready for purchase' : selectedItem.status === 'Booked' ? 'Booked' : 'Out of stock'}
+                        </p>
+                      </div>
+                    </div>
+                  </>
+                )}
+
+                {isOwner && !isEditing && (
+                  <button
+                    type="button"
+                    onClick={() => setIsEditing(true)}
+                    className="flex items-center justify-center w-full gap-2 primary-bg text-white primary-bg-hover rounded-lg py-2"
+                  >
+                    Edit content
+                    <Edit className="h-4 w-4" />
+                  </button>
+                )}
               </div>
             </div>
           );

@@ -44,6 +44,7 @@ export type CatalogContextType = {
   getCollectionItemById: (id: string) => CollectionItems | undefined;
   collections: Collection[];
   collectionItems: CollectionItems[];
+  updateCollectionItem: (item: CollectionItems) => void;
   selectedCollection: string | null;
   setSelectedCollection: React.Dispatch<React.SetStateAction<string | null>>;
 };
@@ -157,6 +158,9 @@ export const CatalogProvider = ({ children }: { children: React.ReactNode }) => 
   const { selectedStartup } = useStartup();
 
   const getCollectionItemById = (id: string) => collectionItems.find((item) => item.id === id);
+  const updateCollectionItem = (updatedItem: CollectionItems) => {
+    setCollectionItems((items) => items.map((item) => item.id === updatedItem.id ? updatedItem : item));
+  };
 
   useEffect(() => {
     if (!selectedStartup) {
@@ -212,6 +216,7 @@ export const CatalogProvider = ({ children }: { children: React.ReactNode }) => 
       getCollectionItemById,
       collections,
       collectionItems,
+      updateCollectionItem,
       selectedCollection,
       setSelectedCollection,
     }}>
@@ -230,6 +235,7 @@ export const useCatalog = () => {
       getCollectionItemById: () => undefined,
       collections: [],
       collectionItems: [],
+      updateCollectionItem: () => undefined,
       selectedCollection: null,
       setSelectedCollection: () => undefined,
     } as CatalogContextType;
