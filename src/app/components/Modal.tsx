@@ -72,6 +72,7 @@ type ListModalProps<T extends ListModalItem> = {
   children: ReactNode;
   ariaLabelledBy?: string;
   itemLabel?: string;
+  className?: string;
 };
 
 export function ListModal<T extends ListModalItem>({
@@ -83,6 +84,7 @@ export function ListModal<T extends ListModalItem>({
   children,
   ariaLabelledBy,
   itemLabel = 'item',
+  className = 'max-w-lg',
 }: ListModalProps<T>) {
   const selectedIndex = selectedItem
     ? Math.max(contentArray.findIndex((item) => item.id === selectedItem.id), 0)
@@ -122,9 +124,9 @@ export function ListModal<T extends ListModalItem>({
         role="dialog"
         aria-modal="true"
         aria-labelledby={ariaLabelledBy}
-        className="relative w-full max-w-lg overflow-hidden rounded-2xl bg-white shadow-2xl"
+        className={`relative w-full overflow-hidden rounded-2xl bg-white shadow-2xl ${className}`}
       >
-        <div className="p-6 sm:p-8">
+        <div className="p-4 sm:p-6">
           {children}
 
           {contentArray.length > 1 && (
