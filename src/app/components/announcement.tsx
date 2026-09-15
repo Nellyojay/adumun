@@ -1,6 +1,7 @@
-import { useCallback, useEffect, useState } from 'react';
-import { ArrowLeft, ArrowRight, BellRing, CalendarDays, X } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { ArrowRight, BellRing, CalendarDays, X } from 'lucide-react';
 import { Navbar } from './Navbar';
+import { ListModal } from './Modal';
 import ScrollToTop from '../constants/scrollToTop';
 import type { Announcement } from '../data/announcements';
 import { useWebData } from '../contexts/webData';
@@ -21,45 +22,18 @@ export function AnnouncementModal({
   onClose,
   onSelect,
 }: AnnouncementModalProps) {
-  const selectedIndex = announcement
-    ? Math.max(announcements.findIndex((item) => item.id === announcement.id), 0)
-    : 0;
-
-  const moveTo = useCallback((index: number) => {
-    const nextIndex = (index + announcements.length) % announcements.length;
-    onSelect?.(announcements[nextIndex]);
-  }, [announcements, onSelect]);
-
-  useEffect(() => {
-    if (!isOpen) return;
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') onClose();
-      if (event.key === 'ArrowLeft') moveTo(selectedIndex - 1);
-      if (event.key === 'ArrowRight') moveTo(selectedIndex + 1);
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, moveTo, onClose, selectedIndex]);
-
-  if (!isOpen || !announcement) return null;
-
   return (
-    <div
-      className="fixed inset-0 z-70 flex items-center justify-center bg-slate-950/60 px-4 py-8 backdrop-blur-sm"
-      role="presentation"
-      onMouseDown={(event) => {
-        if (event.target === event.currentTarget) onClose();
-      }}
+    <ListModal
+      isOpen={isOpen}
+      selectedItem={announcement}
+      contentArray={announcements}
+      onClose={onClose}
+      onSelect={onSelect}
+      ariaLabelledBy="announcement-title"
+      itemLabel="announcement"
     >
-      <article
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="announcement-title"
-        className="relative w-full max-w-lg overflow-hidden rounded-2xl bg-white shadow-2xl"
-      >
-        <div className="p-6 sm:p-8">
+      {announcement && (
+        <div className="relative">
           <button
             type="button"
             onClick={onClose}
@@ -83,42 +57,13 @@ export function AnnouncementModal({
               ))}
             </div>
           )}
-          <div className="mt-6 flex items-center gap-2 text-xs font-medium text-slate-400">
+          <div className="my-6 flex items-center gap-2 text-xs font-medium text-slate-400">
             <CalendarDays className="h-4 w-4" />
             {announcement.date}
           </div>
-          <div className="mt-8 flex items-center justify-between border-t border-slate-100 pt-5">
-            <button
-              type="button"
-              onClick={() => moveTo(selectedIndex - 1)}
-              aria-label="Previous announcement"
-              className="rounded-full p-2 text-slate-500 transition hover:bg-slate-100 hover:text-slate-900"
-            >
-              <ArrowLeft className="h-5 w-5" />
-            </button>
-            <div className="flex gap-1.5" aria-label={`${selectedIndex + 1} of ${announcements.length} announcements`}>
-              {announcements.map((item, index) => (
-                <button
-                  key={item.id}
-                  type="button"
-                  aria-label={`Show announcement ${index + 1}`}
-                  onClick={() => moveTo(index)}
-                  className={`h-2 rounded-full transition-all ${index === selectedIndex ? 'w-6 bg-slate-900' : 'w-2 bg-slate-200 hover:bg-slate-300'}`}
-                />
-              ))}
-            </div>
-            <button
-              type="button"
-              onClick={() => moveTo(selectedIndex + 1)}
-              aria-label="Next announcement"
-              className="rounded-full p-2 text-slate-500 transition hover:bg-slate-100 hover:text-slate-900"
-            >
-              <ArrowRight className="h-5 w-5" />
-            </button>
-          </div>
         </div>
-      </article>
-    </div>
+      )}
+    </ListModal>
   );
 }
 
