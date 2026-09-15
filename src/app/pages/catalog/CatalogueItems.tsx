@@ -12,7 +12,7 @@ import supabase from '../../supabaseClient';
 
 export function CatalogueItems() {
   const { collectionItems, collections, setSelectedCollection, selectedCollection, updateCollectionItem } = useCatalog();
-  const { startupData } = useStartup();
+  const { setSelectedStartup, startupData } = useStartup();
   const { startupId, collection: collectionParam } = useParams<{ startupId?: string; collection?: string }>();
   const [selectedItem, setSelectedItem] = useState<typeof collectionItems[number] | null>(null);
   const [isEditing, setIsEditing] = useState(false);
@@ -37,8 +37,14 @@ export function CatalogueItems() {
     return collectionId === normalizedCollection || collectionName === normalizedCollection;
   });
 
-  const displayCollectionName = matchedCollection?.collection_name || collection;
+  const displayCollectionName = matchedCollection?.collection_name || 'Listing';
   const activeCollectionId = matchedCollection?.id || selectedCollection || collection || '';
+
+  useEffect(() => {
+    if (startupId) {
+      setSelectedStartup(startupId);
+    }
+  }, [startupId, setSelectedStartup]);
 
   useEffect(() => {
     const nextCollection = matchedCollection?.id || collection || null;
